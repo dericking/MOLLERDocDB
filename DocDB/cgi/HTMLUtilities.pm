@@ -127,35 +127,40 @@ sub DocDBHeader {
   print '<meta http-equiv="Content-Type" content="text/html; charset='.$HTTP_ENCODING.'" />',"\n";
   print "<title>$Title</title>\n";
 
-  # Include DocDB style sheets
+  # Include W3CSS v4
+  print '<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">',"\n";
 
-  my @PublicCSS = ("");
-  if ($Public) {
-    @PublicCSS = ("","Public");
-  }
-
-  my $TableSorterCSS = $CSSURLPath."/theme.default.css";
-  print "<link rel=\"stylesheet\" href=\"$TableSorterCSS\" type=\"text/css\" />\n";
-
-  foreach my $ScriptCSS ("",$ScriptName) {
-    foreach my $ProjectCSS ("",$ShortProject) {
-      foreach my $PublicCSS (@PublicCSS) {
-        foreach my $BrowserCSS ("","_IE") {
-          my $CSSFile = $CSSDirectory."/".$ProjectCSS.$PublicCSS."DocDB".$ScriptCSS.$BrowserCSS.".css";
-          my $CSSURL  =   $CSSURLPath."/".$ProjectCSS.$PublicCSS."DocDB".$ScriptCSS.$BrowserCSS.".css";
-          if (-e $CSSFile) {
-            if ($BrowserCSS eq "_IE") { # Use IE format for including. Hopefully we can not give these to IE7
-              print "<!--[if IE]>\n";
-              print "<link rel=\"stylesheet\" href=\"$CSSURL\" type=\"text/css\" />\n";
-              print "<![endif]-->\n";
-            } else {
-              print "<link rel=\"stylesheet\" href=\"$CSSURL\" type=\"text/css\" />\n";
-            }
-          }
-        }
-      }
-    }
-  }
+  # Include DocDB style sheets (DISABLED - using W3CSS exclusively)
+  # Custom CSS files are no longer loaded as we're using W3CSS exclusively
+  # Uncomment the section below if custom CSS needs to be re-enabled
+  #
+  # my @PublicCSS = ("");
+  # if ($Public) {
+  #   @PublicCSS = ("","Public");
+  # }
+  #
+  # my $TableSorterCSS = $CSSURLPath."/theme.default.css";
+  # print "<link rel=\"stylesheet\" href=\"$TableSorterCSS\" type=\"text/css\" />\n";
+  #
+  # foreach my $ScriptCSS ("",$ScriptName) {
+  #   foreach my $ProjectCSS ("",$ShortProject) {
+  #     foreach my $PublicCSS (@PublicCSS) {
+  #       foreach my $BrowserCSS ("","_IE") {
+  #         my $CSSFile = $CSSDirectory."/".$ProjectCSS.$PublicCSS."DocDB".$ScriptCSS.$BrowserCSS.".css";
+  #         my $CSSURL  =   $CSSURLPath."/".$ProjectCSS.$PublicCSS."DocDB".$ScriptCSS.$BrowserCSS.".css";
+  #         if (-e $CSSFile) {
+  #           if ($BrowserCSS eq "_IE") { # Use IE format for including. Hopefully we can not give these to IE7
+  #             print "<!--[if IE]>\n";
+  #             print "<link rel=\"stylesheet\" href=\"$CSSURL\" type=\"text/css\" />\n";
+  #             print "<![endif]-->\n";
+  #           } else {
+  #             print "<link rel=\"stylesheet\" href=\"$CSSURL\" type=\"text/css\" />\n";
+  #           }
+  #         }
+  #       }
+  #     }
+  #   }
+  # }
 
   # Include javascript links
 
@@ -212,6 +217,59 @@ sub DocDBFooter ($$;%) {
     }
   }
   print "</body></html>\n";
+}
+
+sub DocDBHomeHeader {
+  
+# This routine prints the HeaderMessages section for homepage scripts.
+# It handles certificate status checking and calls the project-specific
+# PrintHeader3Col function if it exists, otherwise prints a default header.
+# Only generates the div if there's content to display.
+
+  my $CertificateStatus = "";
+  if ($UserValidation eq "certificate") {
+    require "CertificateUtilities.pm";
+    $CertificateStatus = CertificateStatus();
+  }
+
+  # Check if we have any content to display
+  my $HasContent = 0;
+  if ($UserValidation eq "certificate" && $CertificateStatus ne "verified") {
+    $HasContent = 1;
+  }
+  if (defined $WelcomeMessage && $WelcomeMessage ne "" && $WelcomeMessage =~ /\S/) {
+    $HasContent = 1;
+  }
+
+  # Only proceed if there's content
+  unless ($HasContent) {
+    return;
+  }
+
+  if (defined &PrintHeader3Col) {
+    &PrintHeader3Col($CertificateStatus);
+  } else {
+    # Default implementation if project-specific function doesn't exist
+    print "<div id=\"HeaderMessages\" class=\"w3-container\">\n";
+    if ($UserValidation eq "certificate" && $CertificateStatus ne "verified") {
+      print "<div class=\"w3-panel w3-red\">\n";
+      print "<h3 class=\"Warning\">\n";
+      print "You have presented a valid certificate, but are not yet authorized to access the DocDB.</h3>\n";
+      print "<h2 class=\"AccessApplyLink\">\n";
+      print "<a href=\"$CertificateApplyForm\">Apply for access or get more information.</a></h2>\n";
+      print "<h3>You will be redirected here in 5 seconds.</h3>\n";
+      print "</div>\n";
+      print "\n";
+    }
+    if (defined $WelcomeMessage && $WelcomeMessage ne "" && $WelcomeMessage =~ /\S/) {
+      print "<div class=\"w3-panel\">\n";
+      print "<h4>\n";
+      print "$WelcomeMessage\n";
+      print "</h4>\n";
+      print "</div>\n";
+    }
+    print "</div><!-- Closing div id HeaderMessages -->\n";
+  }
 }
 
 1;

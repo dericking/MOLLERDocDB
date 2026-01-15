@@ -91,5 +91,4 @@ print "<b>Your preferences have been saved.</b>
           browser is  accepting cookies.";
 print "<p>";
 
-&DocDBNavBar;
 &DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

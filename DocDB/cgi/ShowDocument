@@ -125,7 +125,6 @@ if ($OutFormat eq 'XML') {
 }
 
 if ($OutFormat eq 'HTML') {
-  DocDBNavBar();
   DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
 } elsif ($OutFormat eq 'XML') {
   print GetXMLOutput();

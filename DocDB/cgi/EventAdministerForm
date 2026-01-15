@@ -236,5 +236,4 @@ print "</tr>\n";
 print "</table>\n";
 print $query -> end_multipart_form;
 
-&DocDBNavBar();
 &DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

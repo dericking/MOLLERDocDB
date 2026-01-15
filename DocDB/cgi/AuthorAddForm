@@ -72,5 +72,4 @@ print "<h3>Existing Authors:</h3>\n";
 
 AuthorsTable();
 
-DocDBNavBar();
 DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

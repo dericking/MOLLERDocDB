@@ -144,5 +144,4 @@ if ($CertificateStatus eq "verified") {
   print "<b>You didn't present a certificate. Make sure your browser is supplying one and contact an administrator if are supplying one.</b><p/>";
 }
 
-&DocDBNavBar();
 &DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

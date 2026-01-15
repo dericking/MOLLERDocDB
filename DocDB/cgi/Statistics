@@ -160,5 +160,4 @@ print "</tbody>\n";
 
 print "</table>\n";
 
-&DocDBNavBar;
 &DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

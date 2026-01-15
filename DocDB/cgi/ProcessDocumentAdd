@@ -603,5 +603,4 @@ if ($UseSignoffs) {
 
 $EndTime  = new Benchmark;
 
-DocDBNavBar();
 DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

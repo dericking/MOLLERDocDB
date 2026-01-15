@@ -236,7 +236,6 @@ if ($Action eq "Delete") { # Delete user
 EndPage();
 WarnPage();
 
-DocDBNavBar();
 DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
 
 exit;

@@ -59,7 +59,6 @@ LocalSearch( {-cgiparams => \%CGIParams} );
 $EndTime  = new Benchmark;
 
 if ($OutFormat eq 'HTML') {
-  DocDBNavBar();
   DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
 } elsif ($OutFormat eq 'XML') {
   print GetXMLOutput();

@@ -60,29 +60,28 @@ my $PersonalAccountLink = PersonalAccountLink();
 
 EndPage(@ErrorStack);
 
-print "<div id=\"AdministerHomeBody\">\n";
+print "<div id=\"AdministerHomeBody\" class=\"w3-container w3-row\">\n";
 
-print "<div id=\"Header3Col\">\n";
-print "<h4>\n";
-print "Administration Functions.\n";
-print "</h4>\n";
-print "</div>\n";  # Header3Col
+DocDBHomeHeader();
 
-print "<div id=\"LeftColumn3Col\">\n";
-print "<p><strong><a href=\"$MainPage\">Main Menu</a></strong></p>\n";
-print "<p><strong><a href=\"$ModifyHome\">Add Documents</a></strong></p>\n";
-print "<p><strong><a href=\"$DocDBInstructions\">Instructions</a></strong></p>\n";
-print "<p><strong><a href=\"$DocDBInstructions?set=admin\">Administrator Instructions</strong></p>\n";
+print "<div id=\"LeftColumn3Col\" class=\"w3-quarter w3-light-gray w3-border w3-border-black\">\n";
+print "<div class=\"w3-bar-block\">\n";
+print "<div class=\"w3-bar-item\"><strong><a href=\"$MainPage\">Main Menu</a></strong></div>\n";
+print "<div class=\"w3-bar-item\"><strong><a href=\"$ModifyHome\">Add Documents</a></strong></div>\n";
+print "<div class=\"w3-bar-item\"><strong><a href=\"$DocDBInstructions\">Instructions</a></strong></div>\n";
+print "<div class=\"w3-bar-item\"><strong><a href=\"$DocDBInstructions?set=admin\">Administrator Instructions</strong></div>\n";
 if ($PersonalAccountLink) {
-  print "<p><strong>$PersonalAccountLink</strong></p>\n";
+  print "<div class=\"w3-bar-item\"><strong>$PersonalAccountLink</strong></div>\n";
 }
 foreach my $Text (@{ $ProjectMessages{Homepage}{LeftColumn} }) {
-  print "<p><strong>$Text</strong></p>\n";
+  print "<div class=\"w3-bar-item\"><strong>$Text</strong></div>\n";
 }
-print "<p><strong><a href=\"$DocDBHome\">About DocDB</a></strong></p>\n";
-print "</div>\n";  # LeftColumn3Col
+print "<div class=\"w3-bar-item\"><strong><a href=\"$DocDBHome\">About DocDB</a></strong></div>\n";
+print "</div><!-- Closing div w3-bar-block -->\n";
 
-print "<div id=\"MainColumn3Col\">\n";
+print "</div><!-- Closing div id LeftColumn3Col -->\n";
+
+print "<div id=\"MainColumn3Col\" class=\"w3-threequarter\">\n";
 print "<strong>Document management:</strong>";
 
 ### New upload short form
@@ -126,12 +125,9 @@ if (CanAdminister()) {
 print "<hr/>\n";
 
 
-print "</div>\n";  # MainColumn3Col
+print "</div><!-- Closing div id MainColumn3Col -->\n";
 
-print "<div id=\"Footer3Col\">\n"; # Must have to keep NavBar on true bottom
-print "</div>\n";  # Footer3Col
-print "</div>\n";  # ModifyHomeBody
+print "</div><!-- Closing div id AdministerHomeBody -->\n";
 
-DocDBNavBar();
 DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
 

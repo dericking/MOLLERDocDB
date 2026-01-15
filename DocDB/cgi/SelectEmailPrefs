@@ -530,6 +530,5 @@ print "</td></tr></table></div>\n";
 print $query -> end_form;
 print "<hr/>\n";
 
-DocDBNavBar();
 DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
 

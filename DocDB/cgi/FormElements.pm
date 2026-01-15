@@ -35,7 +35,8 @@ sub DaysPulldown (;$) {
   }
   my @Days = (1,2,3,5,7,10,14,20,30,45,60,90,120,180 );
   print $query -> popup_menu (-name    => 'days', -values   => \@Days,
-                              -default => $DefaultDays,  -onChange => "submit()");
+                              -default => $DefaultDays,  -onChange => "submit()",
+                              -class   => "w3-select w3-border");
 }
 
 sub DateTimePulldown (%) { # Note capitalization

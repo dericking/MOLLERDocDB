@@ -217,5 +217,4 @@ if ($MailInstalled) {
   SendEmail(-body => $Body, -to => \@To, -subject => $Subject);
 }
 
-DocDBNavBar();
 DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

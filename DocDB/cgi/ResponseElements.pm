@@ -89,7 +89,6 @@ sub EndPage (;%) {  # Fatal errors, aborts page if present
       DocDBHeader("Fatal Error");
     }
     ErrorPage();
-    DocDBNavBar();
     DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
     exit;
   }

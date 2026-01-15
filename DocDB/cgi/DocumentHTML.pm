@@ -71,7 +71,7 @@ sub DocumentTable (%) {
   my @Fields = sort FieldsByColumn keys %FieldList;
   %SortFields = ();
 
-  print qq(<table id="DocumentTable" class="Alternating DocumentList tablesorter">\n);
+  print qq(<table id="DocumentTable" class="w3-table w3-striped w3-bordered Alternating DocumentList tablesorter">\n);
 
   print "<thead><tr>\n";
   my $LastRow = 1;

@@ -195,5 +195,4 @@ if ($CertificateStatus eq "verified") {
 
 }
 
-&DocDBNavBar();
 &DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

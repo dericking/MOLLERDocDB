@@ -575,7 +575,6 @@ if ($ConferenceID) { # Only put modify link in if meeting already exists
   $NavBarURL  = "$DisplayMeeting?conferenceid=$ConferenceID";
 }
 
-DocDBNavBar($NavBarText,$NavBarURL);
 DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
 
 exit;

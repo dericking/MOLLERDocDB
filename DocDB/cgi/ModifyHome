@@ -55,31 +55,30 @@ if ($Public || !&CanCreate()) {
 
 my $PersonalAccountLink = PersonalAccountLink();
 
-print "<div id=\"ModifyHomeBody\">\n";
+print "<div id=\"ModifyHomeBody\" class=\"w3-container w3-row\">\n";
 
 EndPage(@ErrorStack);
 
-print "<div id=\"Header3Col\">\n";
-print "<h4>\n";
-print "Click any <span class=\"Help\">highlighted link</span> for quick help.\n";
-print "</h4>\n";
-print "</div>\n";  # Header3Col
+DocDBHomeHeader();
 
-print "<div id=\"LeftColumn3Col\">\n";
-print "<p><strong><a href=\"$MainPage\">Main Menu</a></strong></p>\n";
-print "<p><strong><a href=\"$DocDBInstructions\">Instructions</a></strong></p>\n";
+print "<div id=\"LeftColumn3Col\" class=\"w3-quarter w3-light-gray w3-border w3-border-black\">\n";
+print "<div class=\"w3-bar-block\">\n";
+print "<div class=\"w3-bar-item\"><strong><a href=\"$MainPage\">Main Menu</a></strong></div>\n";
+print "<div class=\"w3-bar-item\"><strong><a href=\"$DocDBInstructions\">Instructions</a></strong></div>\n";
 if ($PersonalAccountLink) {
-  print "<p><strong>$PersonalAccountLink</strong></p>\n";
+  print "<div class=\"w3-bar-item\"><strong>$PersonalAccountLink</strong></div>\n";
 }
-print "<p><strong><a href=\"#customcreate\">Customized<br/>Create/Modify</a></strong></p>\n";
-print "<p><strong><a href=\"#addform\">Customized<br/>Add Files</a></strong></p>\n";
+print "<div class=\"w3-bar-item\"><strong><a href=\"#customcreate\">Customized<br/>Create/Modify</a></strong></div>\n";
+print "<div class=\"w3-bar-item\"><strong><a href=\"#addform\">Customized<br/>Add Files</a></strong></div>\n";
 foreach my $Text (@{ $ProjectMessages{Homepage}{LeftColumn} }) {
-  print "<p><strong>$Text</strong></p>\n";
+  print "<div class=\"w3-bar-item\"><strong>$Text</strong></div>\n";
 }
-print "<p><strong><a href=\"$DocDBHome\">About DocDB</a></strong></p>\n";
-print "</div>\n";  # LeftColumn3Col
+print "<div class=\"w3-bar-item\"><strong><a href=\"$DocDBHome\">About DocDB</a></strong></div>\n";
+print "</div><!-- Closing div w3-bar-block -->\n";
 
-print "<div id=\"MainColumn3Col\">\n";
+print "</div><!-- Closing div id LeftColumn3Col -->\n";
+
+print "<div id=\"MainColumn3Col\" class=\"w3-threequarter\">\n";
 print "<strong>Document Management: ";
 print "(".FormElementTitle(-helplink => "modifytypes", -helptext => "Which option do I choose?",
                            -nobold => $TRUE, -nocolon  => $TRUE,         -nobreak  => $TRUE).")</strong>";
@@ -89,9 +88,9 @@ print "(".FormElementTitle(-helplink => "modifytypes", -helptext => "Which optio
 print "<ul>\n";
 print "<li>";
 print "\n",$query -> start_form('POST',$DocumentAddForm),"<div>\n";
-print $query -> submit (-class => "Action", -value => "Create a new");
+print $query -> submit (-class => "w3-button w3-blue", -value => "Create a new");
 print " document from ";
-print $query -> textfield(-name => "numfile", -size => 2, -maxlength => 2);
+print $query -> textfield(-name => "numfile", -size => 2, -maxlength => 2, -class => 'w3-input w3-border');
 print " file(s) on your ";
 print FormElementTitle(-helplink => "uploadmethod", -helptext => "local computer",
                        -nocolon  => $TRUE,          -nobreak  => $TRUE);
@@ -104,9 +103,9 @@ print "</li>";
 
 print "<li>";
 print "\n",$query -> start_form('POST',$DocumentAddForm),"<div>\n";
-print $query -> submit (-class => "Action", -value => "Create a new");
+print $query -> submit (-class => "w3-button w3-blue", -value => "Create a new");
 print " document from ";
-print $query -> textfield(-name => "numfile", -size => 2, -maxlength => 2);
+print $query -> textfield(-name => "numfile", -size => 2, -maxlength => 2, -class => 'w3-input w3-border');
 print " file(s) on the ";
 print FormElementTitle(-helplink => "uploadmethod", -helptext => "web",
                        -nocolon  => $TRUE,          -nobreak  => $TRUE);
@@ -119,7 +118,7 @@ print "</li>";
 
 print "<li>";
 print "\n",$query -> start_form('POST',$DocumentAddForm),"<div>\n";
-print $query -> submit (-class => "Action", -value => "Reserve");
+print $query -> submit (-class => "w3-button w3-blue", -value => "Reserve");
 print " a document number\n";
 print "(if you don't yet have a draft of your document).\n";
 print $query -> hidden(-name => 'mode',    -default => 'reserve');
@@ -130,9 +129,9 @@ print "</li>";
 
 print "<li>";
 print "\n",$query -> start_form('POST',$DocumentAddForm),"<div>\n";
-print $query -> submit (-class => "Action", -value => "Update");
+print $query -> submit (-class => "w3-button w3-blue", -value => "Update");
 print " document # ";
-print $query -> textfield(-name => "docid", -size => 6, -maxlength => 6);
+print $query -> textfield(-name => "docid", -size => 6, -maxlength => 6, -class => 'w3-input w3-border');
 print $query -> hidden(-name => 'mode',    -default => 'update');
 print "\n</div>\n",$query -> end_form,"\n\n";
 print "</li>";
@@ -141,9 +140,9 @@ print "</li>";
 
 print "<li>";
 print "\n",$query -> start_form('POST',$DocumentAddForm),"<div>\n";
-print $query -> submit (-class => "Action", -value => "Update Metadata");
+print $query -> submit (-class => "w3-button w3-blue", -value => "Update Metadata");
 print " for document # ";
-print $query -> textfield(-name => "docid", -size => 6, -maxlength => 6);
+print $query -> textfield(-name => "docid", -size => 6, -maxlength => 6, -class => 'w3-input w3-border');
 print $query -> hidden(-name => 'mode',    -default => 'updatedb');
 print "\n</div>\n",$query -> end_form,"\n\n";
 print "</li>";
@@ -152,11 +151,11 @@ print "</li>";
 
 print "<li>";
 print "\n",$query -> start_form('POST',$AddFilesForm),"<div>\n";
-print $query -> submit (-class => "Action", -value => "Add");
+print $query -> submit (-class => "w3-button w3-blue", -value => "Add");
 print " ";
-print $query -> textfield(-name => "numfile", -size => 3, -maxlength => 2);
+print $query -> textfield(-name => "numfile", -size => 3, -maxlength => 2, -class => 'w3-input w3-border');
 print " file(s) to document # ";
-print $query -> textfield(-name => "docid", -size => 6, -maxlength => 6);
+print $query -> textfield(-name => "docid", -size => 6, -maxlength => 6, -class => 'w3-input w3-border');
 #print $query -> hidden(-name => 'mode',    -default => 'updatedb');
 print "\n</div>\n",$query -> end_form,"\n\n";
 print "</li>";
@@ -164,9 +163,9 @@ print "</li>";
 if (CanAdminister()) { # Delete Form
   print "<li>";
   print "\n",$query -> start_form('POST',$DeleteConfirm),"<div>\n";
-  print $query -> submit (-class => "Action", -value => "Delete");
+  print $query -> submit (-class => "w3-button w3-red", -value => "Delete");
   print " document # ";
-  print $query -> textfield(-name => "docid", -size => 6, -maxlength => 6);
+  print $query -> textfield(-name => "docid", -size => 6, -maxlength => 6, -class => 'w3-input w3-border');
   print "\n</div>\n",$query -> end_form,"\n\n";
   print "</li>";
 }
@@ -182,7 +181,7 @@ if (CanCreateMeeting()) {
     print "<li>\n";
     print $query -> start_form('POST',$MeetingModify),"<div>\n";
     print $query -> hidden(-name => 'dummy', -default => 1);
-    print $query -> submit (-class => "Action", -value => "Create");
+    print $query -> submit (-class => "w3-button w3-blue", -value => "Create");
     print " a new event with multiple sessions";
     print "\n</div>\n",$query -> end_form,"\n\n";
     print "</li>\n";
@@ -193,7 +192,7 @@ if (CanCreateMeeting()) {
     print $query -> start_form('POST',$SessionModify),"<div>\n";
     print $query -> hidden(-name => 'singlesession', -default => 1);
     print $query -> hidden(-name => 'mode', -default => "new");
-    print $query -> submit (-class => "Action", -value => "Create");
+    print $query -> submit (-class => "w3-button w3-blue", -value => "Create");
     print " a new event with only one session";
     print "\n</div>\n",$query -> end_form,"\n\n";
     print "</li>\n";
@@ -265,7 +264,7 @@ print "<tr><th colspan=\"2\"><big>Customized Insert/Modify</big><br/>
        Use this form to produce a
        customized document creation or update form.<br/> Make a selection from each
        group.</th></tr>\n";
-print "<tr><td class=\"LeftHeader\">\n";
+print "<tr><td class=\"w3-right-align\">\n";
 print FormElementTitle(-helplink => "modifytypes", -helptext => "Type of modification",
                        -nobreak  => $TRUE);
 print "</td>\n";
@@ -276,13 +275,13 @@ print "<td>\n";
  print "</td></tr>\n";
  print "<tr><td>\n";
  print "<b>Update Doc #:</b>\n";
- print $query -> textfield(-name => "docid", -size => 6, -maxlength => 6);
+ print $query -> textfield(-name => "docid", -size => 6, -maxlength => 6, -class => 'w3-input w3-border');
  print "&nbsp;&nbsp;&nbsp;\n";
  print "</td></tr>\n";
  print "</table>\n";
 print "</td></tr>\n";
 
-print "<tr><td class=\"LeftHeader\">\n";
+print "<tr><td class=\"w3-right-align\">\n";
 print FormElementTitle(-helplink => "uploadtype", -helptext => "Upload type",
                        -nobreak  => $TRUE);
 print "</td>\n";
@@ -291,12 +290,12 @@ print "<td>\n";
  print $query -> radio_group(-name => "archive", -values => \@archives, -default => $UploadTypePref, -labels
                              => \%archives, -columns => 1);
  print "</td><td>\n";
- print $query -> textfield(-name => "numfile", -default => $NumFilesPref, -size => 2, -maxlength => 2);
+ print $query -> textfield(-name => "numfile", -default => $NumFilesPref, -size => 2, -maxlength => 2, -class => 'w3-input w3-border');
  print "<b># of files</b>\n";
  print "</td></tr></table>\n";
 print "</td></tr>\n";
 
-print "<tr><td class=\"LeftHeader\">\n";
+print "<tr><td class=\"w3-right-align\">\n";
 print FormElementTitle(-helplink => "uploadmethod", -helptext => "Upload method",
                        -nobreak  => $TRUE);
 print "</td>\n";
@@ -304,7 +303,7 @@ print "<td>\n";
 print $query -> radio_group(-name => "upload", -values => \@uploads, -default => $UploadMethodPref, -labels => \%uploads);
 print "</td></tr>\n";
 
-print "<tr><td class=\"LeftHeader\">\n";
+print "<tr><td class=\"w3-right-align\">\n";
 print FormElementTitle(-helplink => "topicoption", -helptext => "Topic Selection",
                        -nobreak  => $TRUE);
 print "</td>\n";
@@ -312,7 +311,7 @@ print "<td>\n";
 print $query -> radio_group(-name => "topicmode", -values => \@topicmodes, -default => $TopicModePref, -labels => \%topicmodes);
 print "</td></tr>\n";
 
-print "<tr><td class=\"LeftHeader\">\n";
+print "<tr><td class=\"w3-right-align\">\n";
 print FormElementTitle(-helplink => "authoroption", -helptext => "Author Selection",
                        -nobreak  => $TRUE);
 print "</td>\n";
@@ -320,7 +319,7 @@ print "<td>\n";
 print $query -> radio_group(-name => "authormode", -values => \@authormodes, -default => $AuthorModePref, -labels => \%authormodes);
 print "</td></tr>\n";
 
-print "<tr><td class=\"LeftHeader\">\n";
+print "<tr><td class=\"w3-right-align\">\n";
 print FormElementTitle(-helplink => "dateoverride", -helptext => "Override creation date",
                        -nobreak  => $TRUE);
 print "</td>\n";
@@ -351,15 +350,15 @@ print "<tr><th colspan=\"2\">\n";
 print "<big>Customized Add/Replace Files</big><br/>\n";
 print "Use this form to produce a customized file addition form.<br/>Make a
        selection from each group.</th></tr>\n";
-print "<tr><td class=\"LeftHeader\">\n";
+print "<tr><td class=\"w3-right-align\">\n";
 print FormElementTitle(-helplink => "docnumber", -helptext => "Update Doc #",
                        -nobreak  => $TRUE);
 print "</td>\n";
 print "<td>\n";
-print $query -> textfield(-name => "docid", -size => 6, -maxlength => 6);
+print $query -> textfield(-name => "docid", -size => 6, -maxlength => 6, -class => 'w3-input w3-border');
 print "</td></tr>\n";
 
-print "<tr><td class=\"LeftHeader\">\n";
+print "<tr><td class=\"w3-right-align\">\n";
 print FormElementTitle(-helplink => "uploadtype", -helptext => "Upload type",
                        -nobreak  => $TRUE);
 print "</td>\n";
@@ -368,12 +367,12 @@ print "<table class=\"CustomButtons\"><tr><td>\n";
 print $query -> radio_group(-name => "archive", -values => \@addarchives, -labels
                             => \%addarchives, -columns => 1);
 print "</td><td>\n";
-print $query -> textfield(-name => "numfile", -size => 2, -maxlength => 2);
+print $query -> textfield(-name => "numfile", -size => 2, -maxlength => 2, -class => 'w3-input w3-border');
 print "<b># of files</b>\n";
 print "</td></tr></table>\n";
 print "</td></tr>\n";
 
-print "<tr><td class=\"LeftHeader\">\n";
+print "<tr><td class=\"w3-right-align\">\n";
 print FormElementTitle(-helplink => "uploadmethod", -helptext => "Upload method",
                        -nobreak  => $TRUE);
 print "</td>\n";
@@ -394,12 +393,9 @@ print "\n\n";
 #print "<div id=\"RightColumn3Col\">\n";
 #print "</div>\n";  # RightColumn3Col
 
-print "</div>\n";  # MainColumn3Col
+print "</div><!-- Closing div id MainColumn3Col -->\n";
 
-print "<div id=\"Footer3Col\">\n"; # Must have to keep NavBar on true bottom
-print "</div>\n";  # Footer3Col
-print "</div>\n";  # ModifyHomeBody
+print "</div><!-- Closing div id ModifyHomeBody -->\n";
 
-&DocDBNavBar;
 &DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
 

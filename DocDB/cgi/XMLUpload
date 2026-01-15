@@ -318,6 +318,5 @@ if ($OutFormat eq 'XML') {
     PrintRevisionInfo($NewDocRevID);
   }
   EndPage();
-  DocDBNavBar();
   DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
 }

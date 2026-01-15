@@ -142,7 +142,6 @@ if ($Version) {
   print "<b>Document $DocumentID has been deleted.</b><p>";
 }
 
-&DocDBNavBar;
 &DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
 
 

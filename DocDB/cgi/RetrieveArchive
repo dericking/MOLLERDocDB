@@ -136,7 +136,6 @@ if (@ErrorStack || @WarnStack) { # There was a problem. Warn the user.
   DocDBHeader("File Retrieve Results");
   EndPage(@ErrorStack);
 
-  DocDBNavBar();
   DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
 } else {
   StreamFile(-file => $TmpFile);

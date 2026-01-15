@@ -138,6 +138,5 @@ if ($MailInstalled) {
   &NotifySignees($DocRevID);
 }
 
-&DocDBNavBar;
 &DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
 

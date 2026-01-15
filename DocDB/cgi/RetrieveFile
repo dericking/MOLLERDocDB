@@ -168,6 +168,5 @@ if ($FullFile && ($UserValidation eq "certificate" || $UserValidation eq "shibbo
 
   PrintRevisionInfo($DocRevID);
 
-  DocDBNavBar();
   DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
 }

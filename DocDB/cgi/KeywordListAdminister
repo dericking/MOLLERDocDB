@@ -173,7 +173,6 @@ print "<p>\n";
 &WarnPage(@WarnStack);
 &EndPage(@ErrorStack);
 
-&DocDBNavBar;
 &DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
 
 exit;

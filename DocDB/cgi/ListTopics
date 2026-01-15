@@ -41,5 +41,4 @@ EndPage();
 
 TopicsTable();
 
-DocDBNavBar();
 DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

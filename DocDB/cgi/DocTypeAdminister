@@ -109,7 +109,6 @@ if      ($Action eq "Delete") { # Delete institutions
 ActionReport();
 EndPage();
 
-DocDBNavBar();
 DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
 
 exit;

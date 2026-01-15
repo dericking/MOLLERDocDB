@@ -50,5 +50,4 @@ foreach my $GroupID (keys %SecurityGroups) {
 print "</table>\n";
 
 
-DocDBNavBar();
 DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

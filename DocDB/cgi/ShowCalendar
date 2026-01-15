@@ -213,5 +213,4 @@ if ($FutureEventTable || $MonthEventTable) {
 
 $EndTime  = new Benchmark;
 
-DocDBNavBar();
 DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

@@ -63,6 +63,5 @@ print "<p/>\n";
 &NewEmailUserForm;
 print "<p/>\n";
 
-&DocDBNavBar;
 &DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
 

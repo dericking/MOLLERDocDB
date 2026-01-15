@@ -157,5 +157,4 @@ if (@OldSignatureDocumentIDs) {
 
 $EndTime  = new Benchmark;
 
-DocDBNavBar();
 DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

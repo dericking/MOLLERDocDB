@@ -155,5 +155,4 @@ print "</table>\n";
 
 print "<hr/>\n";
 
-DocDBNavBar();
 DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

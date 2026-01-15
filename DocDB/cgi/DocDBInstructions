@@ -87,16 +87,12 @@ if ($InstructionSet eq "general") {
 print $query->header( -charset => $HTTP_ENCODING );
 &DocDBHeader($HTMLTitle,$PageTitle);
 
-print "<div id=\"DocDBHomeBody\">\n";
-
-### Header info
-
-print "<div id=\"Header3Col\">\n";
-print "</div>\n";  # Header3Col
+print "<div id=\"DocDBHomeBody\" class=\"w3-container w3-row\">\n";
 
 ### Left Column
 
-print "<div id=\"LeftColumn3Col\">\n";
+print "<div id=\"LeftColumn3Col\" class=\"w3-quarter w3-light-gray w3-border w3-border-black\">\n";
+print "<div class=\"w3-bar-block\">\n";
 if ($InstructionSet eq "general") {
   require "GeneralInstructions.pm";
   GeneralInstructionsSidebar();
@@ -132,11 +128,13 @@ if (CanAdminister()) {
   print "<b><a href=\"$DocDBInstructions?set=admin\">Administrator Instructions</a></b><br/>\n";
 }
 print "</p>\n";
-print "</div>\n";  # LeftColumn3Col
+print "</div><!-- Closing div w3-bar-block -->\n";
+
+print "</div><!-- Closing div id LeftColumn3Col -->\n";
 
 ### Main Column
 
-print "<div id=\"MainColumn3Col\">\n";
+print "<div id=\"MainColumn3Col\" class=\"w3-threequarter\">\n";
 if ($InstructionSet eq "general") {
   require "GeneralInstructions.pm";
   GeneralInstructionsBody();
@@ -177,11 +175,8 @@ if ($InstructionSet eq "general") {
 #print "<div id=\"RightColumn3Col\">\n";
 #print "</div>\n";  # RightColumn3Col
 
-print "</div>\n";  # MainColumn3Col
+print "</div><!-- Closing div id MainColumn3Col -->\n";
 
-print "<div id=\"Footer3Col\">\n"; # Must have to keep NavBar on true bottom
-print "</div>\n";  # Footer3Col
-print "</div>\n";  # DocDBHomeBody
+print "</div><!-- Closing div id DocDBHomeBody -->\n";
 
-&DocDBNavBar;
 &DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

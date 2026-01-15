@@ -113,5 +113,4 @@ print "</center><p>";
 
 &PrintRevisionInfo($DocRevID,1);
 
-&DocDBNavBar;
 &DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

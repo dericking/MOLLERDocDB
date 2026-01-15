@@ -45,5 +45,4 @@ print "</h3>\n";
 
 AuthorsTable();
 
-DocDBNavBar();
 DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

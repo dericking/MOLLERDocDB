@@ -67,5 +67,4 @@ print "<center><form>\n";
 print " <input type=\"button\" value=\"Close Window\" onclick=\"window.close()\">\n";
 print "</form></center>";
 
-&DocDBNavBar();
 &DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

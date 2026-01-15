@@ -85,6 +85,5 @@ print "<p/>\n";
 
 &InsertEmailDocumentImmediate(-emailuserid => $EmailUserID, -docid => $DocumentID);
 
-&DocDBNavBar;
 &DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
 

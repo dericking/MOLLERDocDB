@@ -277,5 +277,4 @@ if ($EmailUserID) {
   }
 }
 
-DocDBNavBar();
 DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

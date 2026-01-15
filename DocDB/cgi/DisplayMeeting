@@ -148,41 +148,41 @@ my @AllRevisionIDs = FetchRevisionsByEventID($EventID);
 my @AllDocIDs      = RevisionToDocumentIDs({-revisionids => \@AllRevisionIDs});
 my @UnusedDocIDs   = RemoveArray(\@AllDocIDs,@AgendaDocIDs);
 
-print "<div id=\"EventInfo\">\n";
+print "<div id=\"EventInfo\" class=\"w3-container w3-row\">\n";
 
-### Header info
-
-#print "<div id=\"Header3Col\">\n";
-#print "</div>\n";  # Header3Col
+### Column Layout
 
 ### Left Column
 
-print "<div id=\"LeftColumn3Col\">\n";
+print "<div id=\"LeftColumn3Col\" class=\"w3-quarter w3-light-gray w3-border w3-border-black\">\n";
+print "<div class=\"w3-bar-block\">\n";
 PrintEventLeftSidebar({ -sessionid   => $SessionID,          -eventid => $EventID,
                         -separatorid => $SessionSeparatorID, -displaymode => $DisplayMode,
                         -nextradocs  => scalar(@UnusedDocIDs),
                      });
-print "</div>\n";  # LeftColumn3Col
+print "</div><!-- Closing div w3-bar-block -->\n";
+
+print "</div><!-- Closing div id LeftColumn3Col -->\n";
 
 ### Main Column
 
-print "<div id=\"MainColumn3Col\">\n";
+print "<div id=\"MainColumn3Col\" class=\"w3-threequarter\">\n";
 
 ### Right column (wrapped around by middle column)
 
-print "<div id=\"RightColumn3Col\">\n";
+print "<div id=\"RightColumn3Col\" class=\"w3-sidebar w3-light-gray w3-bar-block\" style=\"float:right;margin-left:1em\">\n";
 push @DebugStack,"Starting to print sidebar";
 PrintEventRightSidebar( {-sessionid => $SessionID, -eventid => $EventID, -separatorid => $SessionSeparatorID, -displaymode => $DisplayMode} );
-print "</div>\n";  # RightColumn3Col
+print "</div><!-- Closing div id RightColumn3Col -->\n";
 
 ### Main column content starts here
 
 print EventHeader( {-sessionid => $SessionID, -eventid => $EventID, -separatorid => $SessionSeparatorID, -displaymode => $DisplayMode} );
-print "</div>\n";  # MainColumn3Col
+print "</div><!-- Closing div id MainColumn3Col -->\n";
 
 ### Footer
 
-print "<div id=\"Footer3Col\">\n"; # Must have to keep NavBar on true bottom
+print "<div id=\"MeetingFooter\" class=\"w3-center w3-light-gray w3-border-top w3-border-black\">\n"; # Must have to keep NavBar on true bottom
 
 if ($DisplayMode eq "Session" || $DisplayMode eq "SingleSession") { # Display a single session
   PrintSession(-sessionid => $SessionID, -skipheader => $TRUE);
@@ -205,7 +205,7 @@ if ($DisplayMode eq "Session" || $DisplayMode eq "SingleSession") { # Display a 
       }
     }
   } else { # Display links to sessions and info on separators
-    my $SummaryTableHeader  = '<table class="MedPaddedTable CenteredTable Alternating" id="SessionList">';
+    my $SummaryTableHeader  = '<table class="w3-table w3-striped w3-bordered w3-center" id="SessionList">';
        $SummaryTableHeader .= "<tr><th>Date &amp; Time</th><th>Session</th><th>Session Information</th>\n";
        $SummaryTableHeader .= "<th>Location</th><th>Topic(s)</th><th>Moderator(s)</th></tr>\n";
 
@@ -253,12 +253,11 @@ if ($DisplayMode eq "Event" || $DisplayMode eq "SingleSession") {
   }
 }
 
-print "</div>\n";  # Footer3Col
-print "</div>\n"; # EventInfo
+print "</div><!-- Closing div id MeetingFooter -->\n";
+print "</div><!-- Closing div id EventInfo -->\n";
 
 $EndTime  = new Benchmark;
 
-DocDBNavBar();
 DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
 
 exit;

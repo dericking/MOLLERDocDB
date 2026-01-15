@@ -129,7 +129,7 @@ sub DocTypeButtons (%) {
                                        -required  => $Required,
                                        -errormsg  => 'You must choose a document type.');
 
-  print "<div class=\"LowPaddedTable\">\n";
+  print "<div class=\"w3-container\">\n";
   print $ElementTitle,"\n";
   my %FieldParams = (-columns => 3,            -name    => "doctype",
                      -values  => \%ShortTypes, -default => $Default);
@@ -172,11 +172,11 @@ sub PrintRevisionInfo {
     @ModifyIDs     = GetRevisionModifyGroups($DocRevID);
   }
 
-  print "<div id=\"RevisionInfo\">\n";
+  print "<div id=\"RevisionInfo\" class=\"w3-container w3-row\">\n";
 
   ### Header info
 
-  print "<div id=\"Header3Col\">\n";
+  print "<div id=\"HeaderRevision3Col\">\n";
 
   print "<div id=\"DocTitle\">\n";
    &PrintTitle($DocRevisions{$DocRevID}{Title});
@@ -187,21 +187,24 @@ sub PrintRevisionInfo {
        print "<h5>(Document Status: $ApprovalStatus)</h5>\n";
      }
    }
-  print "</div>\n";  # DocTitle
-  print "</div>\n";  # Header3Col
+  print "</div><!-- Closing div id DocTitle -->\n";
+  print "</div><!-- Closing div id HeaderRevision3Col -->\n";
+
+  ### Column Layout
 
   ### Left Column
 
-  print "<div id=\"LeftColumn3Col\">\n";
+  print "<div id=\"LeftColumn3Col\" class=\"w3-quarter w3-light-gray w3-border w3-border-black\">\n";
+  print "<div class=\"w3-bar-block\">\n";
 
-  print "<div id=\"BasicDocInfo\">\n";
+  print "<div id=\"BasicDocInfo\" class=\"w3-bar-item\">\n";
   print "<dl>\n";
    &PrintDocNumber($DocRevID);
    &RequesterByID($Documents{$DocumentID}{Requester});
    &SubmitterByID($DocRevisions{$DocRevID}{Submitter});
    &PrintModTimes;
   print "</dl>\n";
-  print "</div>\n";  # BasicDocInfo
+  print "</div><!-- Closing div id BasicDocInfo -->\n";
 
   if (CanModify($DocumentID) && !$HideButtons) {
     print "<div id=\"UpdateButtons\">\n";
@@ -211,7 +214,7 @@ sub PrintRevisionInfo {
       AddFilesButton($DocumentID,$Version);
     }
     CloneButton($DocumentID);
-    print "</div>\n";
+    print "</div><!-- Closing div id UpdateButtons -->\n";
   }
 
   unless ($Public || $HideButtons) {
@@ -219,15 +222,17 @@ sub PrintRevisionInfo {
     &DocNotifySignup(-docid => $DocumentID);
   }
 
-  print "</div>\n";  # LeftColumn3Col
+  print "</div><!-- Closing div w3-bar-block -->\n";
+
+  print "</div><!-- Closing div id LeftColumn3Col -->\n";
 
   ### Main Column
 
-  print "<div id=\"MainColumn3Col\">\n";
+  print "<div id=\"MainColumn3Col\" class=\"w3-threequarter\">\n";
 
   ### Right column (wrapped around by middle column)
 
-  print "<div id=\"RightColumn3Col\">\n";
+  print "<div id=\"RightColumn3Col\" class=\"w3-sidebar w3-light-gray w3-bar-block\" style=\"float:right;margin-left:1em\">\n";
 
   &SecurityListByID(@GroupIDs);
   &ModifyListByID(@ModifyIDs);
@@ -235,7 +240,7 @@ sub PrintRevisionInfo {
     &OtherVersionLinks($DocumentID,$Version);
   }
 
-  print "</div>\n";  # RightColumn3Col
+  print "</div><!-- Closing div id RightColumn3Col -->\n";
 
   PrintAbstract($DocRevisions{$DocRevID}{Abstract}); # All are called only here, so changes are OK
   FileListByRevID($DocRevID); # All are called only here, so changes are OK
@@ -253,11 +258,9 @@ sub PrintRevisionInfo {
     PrintRevisionSignoffInfo($DocRevID);
   }
 
-  print "</div>\n";  # MainColumn3Col
+  print "</div><!-- Closing div id MainColumn3Col -->\n";
 
-  print "<div id=\"Footer3Col\">\n"; # Must have to keep NavBar on true bottom
-  print "</div>\n";  # Footer3Col
-  print "</div>\n";  # RevisionInfo
+  print "</div><!-- Closing div id RevisionInfo -->\n";
 }
 
 sub PrintAbstract ($;$) {
@@ -496,7 +499,7 @@ sub OtherVersionLinks {
   }
   print "<b>Other Versions:</b>\n";
 
-  print "<table id=\"OtherVersionTable\" class=\"Alternating LowPaddedTable\">\n";
+  print "<table id=\"OtherVersionTable\" class=\"w3-table w3-striped w3-bordered\">\n";
   my $RowClass = "Odd";
 
   foreach $RevID (@RevIDs) {

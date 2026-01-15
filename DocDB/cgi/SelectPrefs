@@ -140,5 +140,4 @@ print "</table>\n";
 
 print $query -> end_form;
 
-DocDBNavBar();
 DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

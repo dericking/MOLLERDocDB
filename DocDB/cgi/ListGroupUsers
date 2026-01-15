@@ -108,5 +108,4 @@ foreach my $SecurityGroupID (@SecurityGroupIDs) {
   }
 }
 
-DocDBNavBar();
 DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

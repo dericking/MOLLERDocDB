@@ -196,5 +196,4 @@ if (@Documents) {
   print "<p><strong>Number of documents found: ",int($Row),"</strong></p>\n";
 }
 
-DocDBNavBar();
 DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

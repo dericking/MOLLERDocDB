@@ -82,5 +82,4 @@ if ($EventGroup || $EventGroupID) {
   }
 }
 
-DocDBNavBar();
 DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

@@ -245,5 +245,4 @@ print "<p><hr>\n";
 
 print "<p>\n";
 
-&DocDBNavBar();
 &DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

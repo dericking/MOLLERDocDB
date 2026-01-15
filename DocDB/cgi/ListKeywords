@@ -89,5 +89,4 @@ if ($Mode eq "chooser") {
   print "</p></form></center>";
 }
 
-&DocDBNavBar();
 &DocDBFooter($DBWebMasterEmail,$DBWebMasterName);

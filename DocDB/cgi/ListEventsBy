@@ -233,7 +233,6 @@ $HTML .= '</div>';
 if ($Format eq "html") {
   print PrettyHTML($HTML);
 
-  DocDBNavBar();
   DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
 } elsif ($Format eq "ical") {
   #print "<body><pre>\n";

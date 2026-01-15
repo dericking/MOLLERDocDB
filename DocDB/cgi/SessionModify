@@ -675,9 +675,6 @@ print "</p>\n";
 
 print "</div>\n";
 print $query -> end_multipart_form;
-my $NavBarText = "Display&nbsp;Session";
-my $NavBarURL  = "$DisplayMeeting?sessionid=$SessionID";
-&DocDBNavBar($NavBarText,$NavBarURL);
 &DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
 
 exit;

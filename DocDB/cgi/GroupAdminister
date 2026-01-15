@@ -289,7 +289,6 @@ if ($Action eq "Modify" || $Action eq "New") {
   print "</table>\n";
 }
 
-DocDBNavBar();
 DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
 
 exit;

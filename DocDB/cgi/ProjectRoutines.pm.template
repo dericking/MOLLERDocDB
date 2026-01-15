@@ -44,6 +44,14 @@ sub ProjectHeader {
 # Here is a link to a style sheet.
 
 #   print "<link rel=\"stylesheet\" href=\"/includes/style.css\" type=\"text/css\">\n";
+
+  print "<style>\n";
+  print "html, body { height: 100%; }\n";
+  print "body { min-height: 100vh; display: flex; flex-direction: column; margin: 0; }\n";
+  print "\n";
+  print "/* make the last direct child of body (your footer) stick to the bottom */\n";
+  print "body > :last-child { margin-top: auto; }\n";
+  print "</style>\n";
 }
 
 sub ProjectBodyStart {
@@ -57,11 +65,13 @@ sub ProjectBodyStart {
   my @TitleParts = split /\s+/, $PageTitle;
   $PageTitle = join '&nbsp;',@TitleParts;
 
-  print "<h1>$PageTitle</h1>\n";
-  # show the navbar at the top of the page as well as at the bottom
+  # Top navigation bar with title
   if ($dbh) {
      &DocDBNavBar();
   }
+  print "<div id=\"SectionTitle\" class=\"w3-container\">\n";
+  print "<h1 class=\"w3-center\">$PageTitle</h1>\n";
+  print "</div><!-- Closing div id SectionTitle -->\n";
 }
 
 sub ProjectFooter {
@@ -78,21 +88,20 @@ sub ProjectFooter {
 
 # You probably want to include some version of this:
 
-  print "<p><small>\n";
+  print "<div id=\"PageFooter\" class=\"w3-container w3-border-top w3-border-black w3-light-gray w3-center w3-small\">\n";
+  print "<p>\n";
   print "<a href=\"$DocDBHome\">DocDB</a> ";
   print "Version $DocDBVersion, contact \n";
-  print "<i>\n";
   print "<a href=\"mailto:$WebMasterEmail\">$WebMasterName</a>\n";
-  print "</i>\n";
-  print "</small><br/>\n";
   
 # This prints benchmark info for pages that have it  
   
   if ($EndTime && $StartTime) {
     my $TimeDiff = timediff($EndTime,$StartTime);
-    print "<small><b>Execution time: </b>",timestr($TimeDiff),"</small>\n";
+    print "<br/><strong>Execution time: </strong>",timestr($TimeDiff),"\n";
   }
   print "</p>\n";
+  print "</div><!-- Closing div id PageFooter -->\n";
   
 # Do not print the </body> and </html> tags, DocDB does that now.
 }
@@ -109,26 +118,82 @@ sub DocDBNavBar {
 
   require "Security.pm";
 
-  print "<div class=\"DocDBNavBar\">\n";
+  print "<div id=\"TopNavBar\" class=\"w3-bar w3-border w3-light-gray\">\n";
+  print "<div id=\"NavBarTitle\" class=\"w3-bar-item\"><strong>$Project Document Database</strong></div><!-- Closing div id NavBarTitle -->\n";
   if ($ExtraDesc && $ExtraURL) {
-    print "[&nbsp;<a href=\"$ExtraURL\">$ExtraDesc</a>&nbsp;]&nbsp;\n";
+    print "<a href=\"$ExtraURL\" class=\"w3-bar-item w3-button\">$ExtraDesc</a>\n";
   } 
-  print "[&nbsp;<a href=\"$MainPage\">DocDB&nbsp;Home</a>&nbsp;]&nbsp;\n";
+  print "<a href=\"$MainPage\" class=\"w3-bar-item w3-button\">DocDB Home</a>\n";
   if (&CanAdminister()) {
-    print "[&nbsp;<a href=\"$AdministerHome\">Administer</a>&nbsp;]&nbsp;\n";
+    print "<a href=\"$AdministerHome\" class=\"w3-bar-item w3-button\">Administer</a>\n";
   }
   if (&CanCreate()) {
-    print "[&nbsp;<a href=\"$DocumentAddForm?mode=add\">New</a>&nbsp;]&nbsp;\n";
+    print "<a href=\"$DocumentAddForm?mode=add\" class=\"w3-bar-item w3-button\">New</a>\n";
   }
-  print "[&nbsp;<a href=\"$SearchForm\">Search</a>&nbsp;]\n";
-  print "[&nbsp;<a href=\"$ListBy?days=$LastDays\">Last&nbsp;$LastDays&nbsp;Days</a>&nbsp;]\n";
-  print "[&nbsp;<a href=\"$ListAuthors\">List&nbsp;Authors</a>&nbsp;]\n";
-  print "[&nbsp;<a href=\"$ListTopics\">List&nbsp;Topics</a>&nbsp;]\n";
-  print "[&nbsp;<a href=\"$ListAllMeetings\">List&nbsp;Events</a>&nbsp;]\n";
+  print "<a href=\"$SearchForm\" class=\"w3-bar-item w3-button\">Search</a>\n";
+  print "<a href=\"$ListBy?days=$LastDays\" class=\"w3-bar-item w3-button\">Last $LastDays Days</a>\n";
+  print "<a href=\"$ListAuthors\" class=\"w3-bar-item w3-button\">List Authors</a>\n";
+  print "<a href=\"$ListTopics\" class=\"w3-bar-item w3-button\">List Topics</a>\n";
+  print "<a href=\"$ListAllMeetings\" class=\"w3-bar-item w3-button\">List Events</a>\n";
+  print "<div class=\"w3-dropdown-hover\">\n";
+  print "<button class=\"w3-button w3-bar-item\">About</button>\n";
+  print "<div class=\"w3-dropdown-content w3-bar-block\">\n";
+  print "<a href=\"$DocDBHome\" class=\"w3-bar-item w3-button\">About DocDB</a>\n";
   unless ($Public) {
-    print "[&nbsp;<a href=\"$DocDBInstructions\">Help</a>&nbsp;]\n";
-  } 
-  print "</div>\n";
+    print "<a href=\"$DocDBInstructions\" class=\"w3-bar-item w3-button\">Help</a>\n";
+  }
+  if (defined $Statistics) {
+    print "<a href=\"$Statistics\" class=\"w3-bar-item w3-button\">Statistics</a>\n";
+  }
+  print "</div><!-- Closing div w3-dropdown-content -->\n";
+  print "</div><!-- Closing div w3-dropdown-hover -->\n";
+  print "</div><!-- Closing div id TopNavBar -->\n";
+}
+
+sub PrintHeader3Col {
+  
+# This routine prints the HeaderMessages section with conditional certificate warnings
+# and welcome messages. This provides a consistent header across all homepages.
+# Only generates the div if there's content to display.
+
+  my $CertificateStatus = shift;
+
+  # Check if we have any content to display
+  my $HasContent = 0;
+  if ($UserValidation eq "certificate" && $CertificateStatus ne "verified") {
+    $HasContent = 1;
+  }
+  if (defined $WelcomeMessage && $WelcomeMessage ne "" && $WelcomeMessage =~ /\S/) {
+    $HasContent = 1;
+  }
+
+  # Only print the div if there's content
+  unless ($HasContent) {
+    return;
+  }
+
+  print "<div id=\"HeaderMessages\" class=\"w3-container\">\n";
+
+  if ($UserValidation eq "certificate" && $CertificateStatus ne "verified") {
+    print "<div class=\"w3-panel w3-red\">\n";
+    print "<h3 class=\"Warning\">\n";
+    print "You have presented a valid certificate, but are not yet authorized to access the DocDB.</h3>\n";
+    print "<h2 class=\"AccessApplyLink\">\n";
+    print "<a href=\"$CertificateApplyForm\">Apply for access or get more information.</a></h2>\n";
+    print "<h3>You will be redirected here in 5 seconds.</h3>\n";
+    print "</div>\n";
+    print "\n";
+  }
+
+  if (defined $WelcomeMessage && $WelcomeMessage ne "" && $WelcomeMessage =~ /\S/) {
+    print "<div class=\"w3-panel\">\n";
+    print "<h4>\n";
+    print "$WelcomeMessage\n";
+    print "</h4>\n";
+    print "</div>\n";
+  }
+
+  print "</div><!-- Closing div id HeaderMessages -->\n";
 }
 
 sub ProjectReferenceLink (;$$$$) {
