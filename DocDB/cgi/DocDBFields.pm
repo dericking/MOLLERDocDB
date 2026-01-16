@@ -25,9 +25,9 @@
 
 
 %FieldTitles = (
-                Docid      => "$ShortProject-doc-#", Title      => "Title",
+                Docid      => "Doc-ID",              Title      => "Title",
                 CanSign    => "Next Signature(s)",   Confirm    => "Confirm?",
-                Updated    => "Last Updated",        Created    => "Created",
+                Updated    => "Updated",             Created    => "Created",
                 Author     => "Author(s)",           Edit       => "Edit",
                 Events     => "Event(s)",            Files      => "File(s)",
                 References => "References",          TalkTime   => "Start",

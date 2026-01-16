@@ -94,7 +94,7 @@ sub DocumentTable (%) {
     my $TH = "<th";
     if ($RowSpan > 1) {$TH .= qq( rowspan="$RowSpan");}
     if ($ColSpan > 1) {$TH .= qq( colspan="$ColSpan");}
-    $TH .= " class=\"$Field\">";
+    $TH .= " class=\"$Field\" style=\"vertical-align: middle;\">";
     print "$TH",$FieldTitles{$Field},"</th>\n";
   }
   print "</tr></thead><tbody>\n";

@@ -87,7 +87,7 @@ if ($Days) {
 ### Days since last modification
 
   $Title   = "Documents from Last $Days Days";
-  $Message = "These documents have been modified in the last <span class=\"Highlight\">$Days days</span>.";
+  $Message = "";
   $List = $dbh -> prepare("select DISTINCT(DocumentID) from DocumentRevision where Obsolete=0 and TO_DAYS(NOW())-TO_DAYS(TimeStamp)<=?");
   $List -> execute($Days);
 } elsif ($TopicID) {
@@ -305,7 +305,12 @@ unless (@DocumentIDs) { # Some do their own
 print $query -> header( -charset => $HTTP_ENCODING );
 DocDBHeader($Title, "",  -scripts => \@Scripts, -jqueryelements => \@JQueryElements);
 
-print "<h4>$Message</h4><p/>\n";
+if ($Message) {
+  print "<div class=\"w3-container\">\n";
+  print "<h4>$Message</h4>\n";
+  print "</div><!-- Closing div w3-container -->\n";
+  print "<p/>\n";
+}
 
 # Special HTML for special situations
 
@@ -313,20 +318,35 @@ if ($Days) { # Print out modified by form
   require "FormElements.pm";
 
   print $query -> start_form('POST',"$ListBy");
-  print "<center>";
-  print $query -> submit(-class => "Action", -value => "Show Documents");
-  print " modified in the last ";
+  print "<div class=\"w3-center\">\n";
+  print "<table style=\"display: inline-table;\">\n";
+  print "<tr>\n";
+  print "<td style=\"vertical-align: middle;\">\n";
+  print $query -> submit(-class => "w3-button w3-teal w3-border w3-border-black w3-round", -value => "Show Documents");
+  print "</td>\n";
+  print "<td style=\"vertical-align: middle;\">\n";
+  print "&nbsp;&nbsp;modified in the last&nbsp;&nbsp;";
+  print "</td>\n";
+  print "<td style=\"vertical-align: middle; width: 80px;\">\n";
   DaysPulldown($Days);
-  print " days.</center>";
+  print "</td>\n";
+  print "<td style=\"vertical-align: middle;\">\n";
+  print "&nbsp;&nbsp;days.\n";
+  print "</td>\n";
+  print "</tr>\n";
+  print "</table>\n";
+  print "</div><!-- Closing div w3-center -->\n";
   print $query -> end_form;
   print "<p/>";
 }
 
 ### Table and Statistics
 my %FieldList = PrepareFieldList(%FieldListOptions);
+print "<div class=\"w3-margin\">\n";
 my $NumberOfDocuments = DocumentTable(-fieldlist => \%FieldList, -docids  => \@DocumentIDs,
                                       -sortby    => $SortBy,     -reverse => $Reverse);
 print "<p><b>Number of documents found: ",int($NumberOfDocuments),"</b></p>\n";
+print "</div><!-- Closing div w3-margin -->\n";
 
 $EndTime  = new Benchmark;
 
