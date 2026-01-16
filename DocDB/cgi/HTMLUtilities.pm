@@ -129,14 +129,10 @@ sub DocDBHeader {
 
   # Include W3CSS v5
   print '<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">',"\n";
-  print '<style>',"\n";
-  print '/* place AFTER the w3.css link */',"\n";
-  print '.no-row-lines tr,',"\n";
-  print '.no-row-lines td,',"\n";
-  print '.no-row-lines th {',"\n";
-  print '  border: 0 !important;',"\n";
-  print '}',"\n";
-  print '</style>',"\n";
+  
+  # Include MOLLERDocDB.css
+  my $MOLLERDocDBCSS = $CSSURLPath."/MOLLERDocDB.css";
+  print "<link rel=\"stylesheet\" href=\"$MOLLERDocDBCSS\" type=\"text/css\" />\n";
 
   # Include DocDB style sheets (DISABLED - using W3CSS exclusively)
   # Custom CSS files are no longer loaded as we're using W3CSS exclusively

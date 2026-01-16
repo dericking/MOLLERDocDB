@@ -1,0 +1,18 @@
+/* MOLLERDocDB.css
+   Custom stylesheet for MOLLER DocDB installation
+   Add project-specific CSS rules here
+*/
+
+/* Remove row lines from tables with no-row-lines class */
+.no-row-lines tr,
+.no-row-lines td,
+.no-row-lines th {
+  border: 0 !important;
+}
+
+/* Make select and textarea elements in SearchForm author fields full width */
+#SearchFormContainer table table select[multiple],
+#SearchFormContainer table table textarea {
+    width: 100%;
+    box-sizing: border-box;
+}

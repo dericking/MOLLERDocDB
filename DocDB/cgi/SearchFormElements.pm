@@ -65,130 +65,138 @@ require "SearchModes.pm";
 require "FormElements.pm";
 
 sub TitleSearchBox { # Box and mode selecter for searches on DocumentTitle
-  print "<tr><th>";
+  print "<tr><th class=\"w3-padding\" style=\"vertical-align: middle;\">";
   print FormElementTitle(-helplink => "wordsearch", -helptext => "Titles", -nobreak => $TRUE);
   print "</th>\n";
-  print "<td>\n";
+  print "<td class=\"w3-padding\">\n";
   print $query -> textfield (-name      => 'titlesearch',
                              -size      => 40,
                              -maxlength => 240,
                              -class     => "w3-input w3-border w3-round");
   print "</td>\n";
-  print "<td>\n";
+  print "<td class=\"w3-padding\">\n";
   print $query -> popup_menu (-name    => 'titlesearchmode',
-                              -values  => \%SearchModes);
+                              -values  => \%SearchModes,
+                              -class   => "w3-select w3-border");
   print "</td></tr>\n";
 };
 
 sub AbstractSearchBox { # Field and mode selecter for searches on Abstract
-  print "<tr><th>";
+  print "<tr><th class=\"w3-padding\" style=\"vertical-align: middle;\">";
   print FormElementTitle(-helplink => "wordsearch", -helptext => "Abstract", -nobreak => $TRUE);
   print "</th>\n";
-  print "<td>\n";
+  print "<td class=\"w3-padding\">\n";
   print $query -> textfield (-name      => 'abstractsearch',
                              -size      => 40,
                              -maxlength => 240,
                              -class     => "w3-input w3-border w3-round");
   print "</td>\n";
-  print "<td>\n";
+  print "<td class=\"w3-padding\">\n";
   print $query -> popup_menu (-name    => 'abstractsearchmode',
-                              -values  => \%SearchModes);
+                              -values  => \%SearchModes,
+                              -class   => "w3-select w3-border");
   print "</td></tr>\n";
 };
 
 sub KeywordsSearchBox { # Field and mode selecter for searches on Keywords
-  print "<tr><th>";
+  print "<tr><th class=\"w3-padding\" style=\"vertical-align: middle;\">";
   print FormElementTitle(-helplink => "wordsearch", -helptext => "Keywords", -nobreak => $TRUE);
   print "</th>\n";
-  print "<td>\n";
+  print "<td class=\"w3-padding\">\n";
   print $query -> textfield (-name      => 'keywordsearch',
                              -size      => 40,
                              -maxlength => 240,
                              -class     => "w3-input w3-border w3-round");
   print "</td>\n";
-  print "<td>\n";
+  print "<td class=\"w3-padding\">\n";
   print $query -> popup_menu (-name    => 'keywordsearchmode',
-                              -values  => \%SearchModes);
+                              -values  => \%SearchModes,
+                              -class   => "w3-select w3-border");
   print "</td></tr>\n";
 };
 
 sub RevisionNoteSearchBox { # Field and mode selecter for searches on Note
-  print "<tr><th>";
+  print "<tr><th class=\"w3-padding\" style=\"vertical-align: middle;\">";
   print FormElementTitle(-helplink => "wordsearch", -helptext => "Notes and Changes", -nobreak => $TRUE);
   print "</th>\n";
-  print "<td>\n";
+  print "<td class=\"w3-padding\">\n";
   print $query -> textfield (-name      => 'revisionnotesearch',
                              -size      => 40,
                              -maxlength => 240,
                              -class     => "w3-input w3-border w3-round");
   print "</td>\n";
-  print "<td>\n";
+  print "<td class=\"w3-padding\">\n";
   print $query -> popup_menu (-name    => 'revisionnotesearchmode',
-                              -values  => \%SearchModes);
+                              -values  => \%SearchModes,
+                              -class   => "w3-select w3-border");
   print "</td></tr>\n";
 };
 
 sub PubInfoSearchBox { # Field and mode selecter for searches on PublicationInfo
-  print "<tr><th>";
+  print "<tr><th class=\"w3-padding\" style=\"vertical-align: middle;\">";
   print FormElementTitle(-helplink => "wordsearch", -helptext => "Publication Info", -nobreak => $TRUE);
   print "</th>\n";
-  print "<td>\n";
+  print "<td class=\"w3-padding\">\n";
   print $query -> textfield (-name      => 'pubinfosearch',
                              -size      => 40,
                              -maxlength => 240,
                              -class     => "w3-input w3-border w3-round");
   print "</td>\n";
-  print "<td>\n";
+  print "<td class=\"w3-padding\">\n";
   print $query -> popup_menu (-name    => 'pubinfosearchmode',
-                              -values  => \%SearchModes);
+                              -values  => \%SearchModes,
+                              -class   => "w3-select w3-border");
   print "</td></tr>\n";
 };
 
 sub FileNameSearchBox { # Field and mode selecter for searches on Files
-  print "<tr><th>";
+  print "<tr><th class=\"w3-padding\" style=\"vertical-align: middle;\">";
   print FormElementTitle(-helplink => "wordsearch", -helptext => "File names", -nobreak => $TRUE);
   print "</th>\n";
-  print "<td>\n";
+  print "<td class=\"w3-padding\">\n";
   print $query -> textfield (-name      => 'filesearch',
                              -size      => 40,
                              -maxlength => 240,
                              -class     => "w3-input w3-border w3-round");
   print "</td>\n";
-  print "<td>\n";
+  print "<td class=\"w3-padding\">\n";
   print $query -> popup_menu (-name    => 'filesearchmode',
-                              -values  => \%SearchModes);
+                              -values  => \%SearchModes,
+                              -class   => "w3-select w3-border");
   print "</td></tr>\n";
 };
 
 sub DescriptionSearchBox { # Field and mode selecter for searches on Files
-  print "<tr><th>";
+  print "<tr><th class=\"w3-padding\" style=\"vertical-align: middle;\">";
   print FormElementTitle(-helplink => "wordsearch", -helptext => "File descriptions", -nobreak => $TRUE);
   print "</th>\n";
-  print "<td>\n";
+  print "<td class=\"w3-padding\">\n";
   print $query -> textfield (-name      => 'filedescsearch',
                              -size      => 40,
                              -maxlength => 240,
                              -class     => "w3-input w3-border w3-round");
   print "</td>\n";
-  print "<td>\n";
+  print "<td class=\"w3-padding\">\n";
   print $query -> popup_menu (-name    => 'filedescsearchmode',
-                              -values  => \%SearchModes);
+                              -values  => \%SearchModes,
+                              -class   => "w3-select w3-border");
   print "</td></tr>\n";
 };
 
 sub ContentSearchBox { # Field and mode selecter for searches on Files
-  print "<tr><th>";
+  print "<tr><th class=\"w3-padding\" style=\"vertical-align: middle;\">";
   print FormElementTitle(-helplink => "contentsearch", -helptext => "File contents", -nobreak => $TRUE);
   print "</th>\n";
-  print "<td>\n";
+  print "<td class=\"w3-padding\">\n";
   print $query -> textfield (-name      => 'filecontsearch',
                              -size      => 40,
                              -maxlength => 240,
                              -class     => "w3-input w3-border w3-round");
   print "</td>\n";
-  print "<td>\n";
+  print "<td class=\"w3-padding\">\n";
   print $query -> popup_menu (-name    => 'filecontsearchmode',
-                              -values  => \%SearchModes);
+                              -values  => \%SearchModes,
+                              -class   => "w3-select w3-border");
   print "</td></tr>\n";
 };
 
@@ -219,42 +227,99 @@ sub DateRangePullDown { # Two sets of pulldowns for defining a date range
     push @years,$i;
   }
 
-  print $query -> popup_menu (-name => 'afterday',  -values => \@days);
-  print $query -> popup_menu (-name => 'aftermonth',-values => \@months);
-  print $query -> popup_menu (-name => 'afteryear', -values => \@years);
-  print " (Start)\n";
-  print "<br/><strong><big>&nbsp;</big>&nbsp;and</strong><br/>\n";
+  # Start Date section - first cell with label
+  print "<td class=\"w3-padding\" style=\"vertical-align: middle;\">\n";
+  print "<strong>Start Date:</strong>\n";
+  print "</td>\n";
+  
+  # Start Date section - second cell with dropdowns
+  print "<td class=\"w3-padding\" style=\"vertical-align: middle;\">\n";
+  print "<div class=\"w3-cell-row w3-margin-top\" style=\"margin-top:4px!important;\">\n";
+  print "<div class=\"w3-cell\" style=\"width:80px;\">\n";
+  print "<label class=\"w3-small\">Month</label><br/>\n";
+  print $query -> popup_menu (-name => 'aftermonth',-values => \@months, -class => "w3-select w3-border w3-round");
+  print "</div>\n";
+  print "<div class=\"w3-cell\" style=\"width:70px; padding-left:4px;\">\n";
+  print "<label class=\"w3-small\">Day</label><br/>\n";
+  print $query -> popup_menu (-name => 'afterday',  -values => \@days, -class => "w3-select w3-border w3-round");
+  print "</div>\n";
+  print "<div class=\"w3-cell\" style=\"width:90px; padding-left:4px;\">\n";
+  print "<label class=\"w3-small\">Year</label><br/>\n";
+  print $query -> popup_menu (-name => 'afteryear', -values => \@years, -class => "w3-select w3-border w3-round");
+  print "</div>\n";
+  print "</div><!-- Closing div w3-cell-row -->\n";
+  print "</td>\n";
 
-  print $query -> popup_menu (-name => 'beforeday',  -values => \@days);
-  print $query -> popup_menu (-name => 'beforemonth',-values => \@months);
-  print $query -> popup_menu (-name => 'beforeyear', -values => \@years);
-  print " (End)\n";
+  # End Date section - third cell with label
+  print "<td class=\"w3-padding\" style=\"vertical-align: middle;\">\n";
+  print "<strong>End Date:</strong>\n";
+  print "</td>\n";
+  
+  # End Date section - fourth cell with dropdowns
+  print "<td class=\"w3-padding\" style=\"vertical-align: middle;\">\n";
+  print "<div class=\"w3-cell-row w3-margin-top\" style=\"margin-top:4px!important;\">\n";
+  print "<div class=\"w3-cell\" style=\"width:80px;\">\n";
+  print "<label class=\"w3-small\">Month</label><br/>\n";
+  print $query -> popup_menu (-name => 'beforemonth',-values => \@months, -class => "w3-select w3-border w3-round");
+  print "</div>\n";
+  print "<div class=\"w3-cell\" style=\"width:70px; padding-left:4px;\">\n";
+  print "<label class=\"w3-small\">Day</label><br/>\n";
+  print $query -> popup_menu (-name => 'beforeday',  -values => \@days, -class => "w3-select w3-border w3-round");
+  print "</div>\n";
+  print "<div class=\"w3-cell\" style=\"width:90px; padding-left:4px;\">\n";
+  print "<label class=\"w3-small\">Year</label><br/>\n";
+  print $query -> popup_menu (-name => 'beforeyear', -values => \@years, -class => "w3-select w3-border w3-round");
+  print "</div>\n";
+  print "</div><!-- Closing div w3-cell-row -->\n";
+  print "</td>\n";
 }
 
 sub LogicTypeButtons { # Two buttons allow control whether inner and outer
                        # logic are done with ANDs or ORs
   my @Values = ["AND","OR"];
 
+  print "<table class=\"w3-table\">\n";
+  print "<tr>\n";
+  print "<td class=\"w3-padding w3-right-align\" style=\"vertical-align: middle;\">\n";
   print FormElementTitle(-helplink => "logictype", -helptext => "Between Fields", -nobreak => $TRUE);
-  print $query -> radio_group(-name => "outerlogic",
+  print "</td>\n";
+  print "<td class=\"w3-padding w3-left-align\" style=\"vertical-align: middle;\">\n";
+  my $outerRadio = $query -> radio_group(-name => "outerlogic",
                               -values => @Values, -default => "AND");
-
-  print "&nbsp;&nbsp;&nbsp;&nbsp;";
-
+  $outerRadio =~ s/(<\/label>)(<input)/$1&nbsp;&nbsp;$2/g;
+  print $outerRadio;
+  print "</td>\n";
+  print "<td class=\"w3-padding w3-right-align\" style=\"vertical-align: middle;\">\n";
   print FormElementTitle(-helplink => "logictype", -helptext => "Within Fields", -nobreak => $TRUE);
-  print $query -> radio_group(-name => "innerlogic",
+  print "</td>\n";
+  print "<td class=\"w3-padding w3-left-align\" style=\"vertical-align: middle;\">\n";
+  my $innerRadio = $query -> radio_group(-name => "innerlogic",
                               -values => @Values, -default => "OR");
+  $innerRadio =~ s/(<\/label>)(<input)/$1&nbsp;&nbsp;$2/g;
+  print $innerRadio;
+  print "</td>\n";
+  print "</tr>\n";
+  print "</table>\n";
 }
 
 sub ModeSelect { # Display Mode selecter for searches
-  print FormElementTitle(-helptext => "Sort by", -helplink => "displaymode", -nobreak => $TRUE),"\n";
   my %Modes = ();
   $Modes{date}    = "Date with document #";
   $Modes{meeting} = "Author with topics and files";
   $Modes{title}   = "Document title";
+  print "<table class=\"w3-table\">\n";
+  print "<tr>\n";
+  print "<td class=\"w3-padding\" style=\"vertical-align: middle;\">\n";
+  print FormElementTitle(-helptext => "Sort by", -helplink => "displaymode", -nobreak => $TRUE),"\n";
+  print "</td>\n";
+  print "<td class=\"w3-padding\" style=\"vertical-align: middle;\">\n";
   print $query -> popup_menu (-name    => 'mode',
                               -values  => \%Modes,
-                              -default => 'date');
+                              -default => 'date',
+                              -class   => "w3-select w3-border");
+  print "</td>\n";
+  print "</tr>\n";
+  print "</table>\n";
 }
 
 1;

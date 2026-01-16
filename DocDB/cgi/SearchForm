@@ -38,6 +38,7 @@ require "MiscSQL.pm";
 require "ResponseElements.pm";
 require "HTMLUtilities.pm";
 require "MeetingHTML.pm";
+require "XRefSQL.pm";
 
 $query = new CGI;  # Global for subroutines
 $query -> autoEscape(0);
@@ -54,53 +55,60 @@ print $query -> header( -charset => $HTTP_ENCODING );
 DocDBHeader("$Project Document Database Search","Document Database Search",
             -search => $TRUE, -scripts => ["PopUps","EventChooser"]);
 
-
-print "<h4>Click on any of the <span class=\"Help\">highlighted headings</span> for help.</h4>\n";
-print "<h4><a href=\"$XSearch\">Search</a> other DocDB installations</h4>\n";
+my @ExternalDocDBIDs = GetAllExternalDocDBs();
+if (@ExternalDocDBIDs) {
+  print "<h5><a href=\"$XSearch\" class=\"w3-text-teal\">Search</a> other DocDB installations</h5>\n";
+}
 
 # Quick search table
 
+print "<div class=\"w3-panel w3-paper w3-border w3-border-gray w3-round-xlarge w3-padding\" style=\"margin-left: 50px; margin-right: 50px;\">\n";
 print $query -> start_multipart_form('POST',$Search,"name=\"simplesearch\"");
-print '<table id="QuickSearchForm" class="SearchFormTable LowPaddedTable CenteredTable"><tr><td>';
+print '<table id="QuickSearchForm" class="w3-table w3-bordered no-row-lines"><tr><td class="w3-padding" style="vertical-align: middle;">';
 print FormElementTitle(-helplink => "quicksearch", -nobreak => $TRUE,
                        -helptext => "Search for", );
-print "</td><td>\n";
+print "</td><td class=\"w3-padding\" style=\"vertical-align: middle;\">\n";
 print $query -> textfield(-size => 40, -name => "simpletext", -class => "w3-input w3-border w3-round");
 print $query -> hidden(-name => "simple", -default => '1');
-print "</td><td>\n";
-print $query -> submit (-class => "Action", -value => "Quick Search");
+print "</td><td class=\"w3-padding\" style=\"vertical-align: middle;\">\n";
+print $query -> submit (-class => "w3-button w3-teal w3-border w3-border-black w3-round", -value => "Quick Search");
 print "</td></tr></table>\n";
 print $query -> end_multipart_form;
+print "</div><!-- Closing div w3-panel w3-paper w3-border w3-border-gray w3-round w3-padding -->\n";
 
-print "<hr/>\n";
+print "<div id=\"hr\" class=\"w3-panel w3-black\"></div>\n";
 
 # Advanced search table
 
+print "<div class=\"w3-content w3-padding\">\n";
+print "<div id=\"SearchFormContainer\" class=\"w3-panel w3-paper w3-border w3-border-gray w3-round-xlarge\">\n";
 print $query -> start_multipart_form('POST',$Search,"name=\"queryform\"");
-print "<table class=\"SearchFormTable HighPaddedTable CenteredTable\">\n";
+# Hidden field for doctypemulti to ensure parameter exists even when field is commented out
+print $query -> hidden(-name => "doctypemulti", -value => "", -override => 1);
+print "<table class=\"w3-table w3-bordered no-row-lines\">\n";
 print "<tr>\n";
- print "<td colspan=\"3\" class=\"SubmitCell\">\n";
+ print "<td colspan=\"3\" class=\"w3-padding-16 w3-center\">\n";
  print '<a name="Advanced"></a>';
- print $query -> submit (-value => "Advanced Search");
+ print $query -> submit (-value => "Advanced Search", -class => "w3-button w3-teal w3-border w3-border-black w3-round");
  print "&nbsp;&nbsp;&nbsp;\n";
- print $query -> reset (-value => "Reset Search Form");
+ print $query -> reset (-value => "Reset Search Form", -class => "w3-button w3-border w3-border-black w3-round");
  print "</td>\n";
 print "</tr>\n";
 
 print "<tr>\n";
- print "<td colspan=\"3\" class=\"SubmitCell\">\n";
+ print "<td colspan=\"3\" class=\"w3-padding\">\n";
  LogicTypeButtons();
  print "</td>\n";
 print "</tr>\n";
 print "<tr>\n";
- print "<td colspan=\"3\" class=\"SubmitCell\">\n";
+ print "<td colspan=\"3\" class=\"w3-padding\">\n";
  ModeSelect();
 print "</td></tr>\n";
 
 print "<tr>\n";
- print "<td colspan=\"3\">\n";
+ print "<td colspan=\"3\" class=\"w3-padding\">\n";
 
-  print "<table class=\"LowPaddedTable LeftHeader\">\n";
+  print "<table class=\"w3-table w3-bordered no-row-lines\">\n";
    TitleSearchBox();
    AbstractSearchBox();
    KeywordsSearchBox();
@@ -119,57 +127,85 @@ print "</tr>\n";
 
 
  print "<tr>\n";
-
- print "<td>\n"; # Requester
+ print "<td colspan=\"3\" class=\"w3-padding\">\n";
+ 
+ print "<table class=\"w3-table w3-bordered no-row-lines\">\n";
+ print "<tr>\n";
+ print "<td class=\"w3-padding\" style=\"vertical-align: middle; width: 33.33%;\">\n"; # Requester
  AuthorScroll(-helplink => "requestersearch", -helptext => "Last Updated By:",
               -name     => "requestersearch", -multiple => $TRUE);
  print "</td>\n";
 
- print "<td>\n"; # Authors
+ print "<td class=\"w3-padding\" style=\"vertical-align: middle; width: 33.33%;\">\n"; # Authors
  AuthorScroll(-helplink => "authors", -multiple => $TRUE);
  print "</td>\n";
 
- print "<td>\n";
+ print "<td class=\"w3-padding\" style=\"vertical-align: middle; width: 33.33%;\">\n";
  AuthorTextEntry( {-helplink => "authortextsearch"} );
  print "</td>\n";
-
+ print "</tr>\n";
+ print "</table>\n";
+ 
+ print "</td>\n";
  print "</tr>\n";
 
  print "<tr>\n";
- print "<td>\n"; DocTypeMulti();       print "</td>\n";
-  print "<td colspan=\"2\">\n";
-  print "<dl>\n";
-  print "<dt>";
-  print FormElementTitle(-helplink => "beforeafterdate", -helptext => "Last Modified Between");
-  print "</dt><dd>\n";
-  DateRangePullDown();
-  print "</dd></dl>\n";
-  print "</td>\n";
+ print "<td colspan=\"3\" class=\"w3-padding\">\n";
+ 
+ print "<table class=\"w3-table w3-bordered no-row-lines\">\n";
+ print "<tr>\n";
+# print "<td class=\"w3-padding\" style=\"vertical-align: middle;\">\n"; DocTypeMulti();       print "</td>\n";
+ DateRangePullDown();
+ print "</tr>\n";
+ print "</table>\n";
+ 
+ print "</td>\n";
  print "</tr>\n";
 
- print "<tr><td colspan=\"3\">\n";
+ print "<tr>\n";
+ print "<td colspan=\"3\" class=\"w3-padding\">\n";
+ 
+ print "<table class=\"w3-table w3-bordered no-row-lines\">\n";
+ print "<tr>\n";
+ print "<td class=\"w3-padding\" style=\"vertical-align: middle;\">\n";
   TopicScroll({ -multiple => $TRUE, -helplink => "searchtopic", });
- print "</br>\n";
+ print "</td>\n";
+ print "<td class=\"w3-padding w3-left-align\" style=\"vertical-align: middle;\">\n";
  print '<label><input type="checkbox" name="includesubtopics" class="w3-check" style="accent-color: teal;" checked="checked" value="1"> Include sub-topics</label>';
- print "</td></tr>\n";
+ print "</td>\n";
+ print "</tr>\n";
+ print "</table>\n";
+ 
+ print "</td>\n";
+ print "</tr>\n";
 
  print "<tr>\n";
- print "<td>\n";
+ print "<td colspan=\"3\" class=\"w3-padding\">\n";
+ 
+ print "<table class=\"w3-table w3-bordered no-row-lines\">\n";
+ print "<tr>\n";
+ print "<td class=\"w3-padding\" style=\"vertical-align: middle;\">\n";
   EventGroupSelect( {-multiple => $TRUE, -onchange => "selectEvent(this.form);"} );
  print "</td>\n";
- print "<td colspan=\"2\">\n";
+ print "<td colspan=\"2\" class=\"w3-padding\" style=\"vertical-align: middle;\">\n";
   EventSelect( {-multiple => $TRUE, -format => "full"} );
  print "</td>\n";
  print "</tr>\n";
+ print "</table>\n";
+ 
+ print "</td>\n";
+ print "</tr>\n";
 
  print "<tr>\n";
-  print "<td colspan=\"3\" class=\"SubmitCell\">\n";
-  print $query -> submit (-value => "Advanced Search");
+  print "<td colspan=\"3\" class=\"w3-padding-16 w3-center\">\n";
+  print $query -> submit (-value => "Advanced Search", -class => "w3-button w3-teal w3-border w3-border-black w3-round");
   print "&nbsp;&nbsp;&nbsp;\n";
-  print $query -> reset (-value => "Reset Search Form");
+  print $query -> reset (-value => "Reset Search Form", -class => "w3-button w3-border w3-border-black w3-round");
   print "</td>\n";
  print "</tr>\n";
 print "</table>\n";
 print $query -> end_multipart_form;
+print "</div><!-- Closing div id SearchFormContainer -->\n";
+print "</div><!-- Closing div w3-content w3-padding -->\n";
 
 DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
