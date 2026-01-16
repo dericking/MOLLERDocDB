@@ -206,7 +206,8 @@ sub TopicsTable {
 
   my $Target = $TotalSize/$NCols;
   push @DebugStack,"Initial target column length $Target";
-  print '<table class="HighPaddedTable CenteredTable">'."<tr><td>\n";
+  print '<div class="w3-container w3-margin">'."\n";
+  print '<table id="TopicsTable" class="w3-table w3-bordered no-row-lines" style="margin-left: auto; margin-right: auto;">'."<tr><td class=\"w3-padding\" style=\"vertical-align: top;\">\n";
   my $Col      = 1;
   my $NThisCol = 0;
   my $NSoFar   = 0;
@@ -220,7 +221,7 @@ sub TopicsTable {
     if ($NThisCol != 0 && $Col != $NCols && $NThisCol + 0.5*$Size >= $Target) {
       push @DebugStack,"Breaking column";
       $Target = ($TotalSize - $NSoFar)/($NCols-$Col);
-      print "</td><td>\n";
+      print "</td><td class=\"w3-padding\" style=\"vertical-align: top;\">\n";
       ++$Col;
       $NThisCol = 0;
     }
@@ -229,7 +230,8 @@ sub TopicsTable {
     $NSoFar   += $Size;
     print $List{$TopicID}{HTML};
   }
-  print "</td></tr></table>";
+  print "</td></tr></table>\n";
+  print "</div><!-- Closing div w3-container w3-margin -->\n";
 }
 
 sub TopicListWithChildren { # Recursive routine
@@ -296,6 +298,7 @@ sub TopicListWithChildren { # Recursive routine
         }
         $HTML .= ">";
       } else {
+        $HTML .= "<div class=\"w3-padding w3-paper w3-border w3-border-light-gray w3-round-large\" style=\"margin-bottom: 8px;\">\n";
         $HTML .= "<strong>";
       }
       if ($Chooser) {
@@ -334,6 +337,9 @@ sub TopicListWithChildren { # Recursive routine
                                          -chooser  => $Chooser, -defaulttopicids => \@DefaultTopicIDs});
       } elsif ($Depth == 1 && !$Chooser) {
         $HTML .= '<br class="EmptyTopic" />';
+      }
+      if ($Depth == 1 && !$Chooser) {
+        $HTML .= "</div><!-- Closing div w3-padding w3-paper w3-border w3-border-light-gray w3-round-large -->\n";
       }
       if ($Depth > 1 || $Chooser) {
         $HTML .= "</li>\n";

@@ -23,3 +23,50 @@
 #DocumentTable td.Created {
     white-space: nowrap;
 }
+
+/* Topics list styling - replace native DocDB CSS */
+/* Root topic headings */
+#TopicsTable strong,
+table strong {
+    font-size: 1.1em;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 24px;
+    margin-top: 16px;
+}
+
+/* First root topic shouldn't have top margin */
+#TopicsTable strong:first-child,
+table td:first-child strong:first-child {
+    margin-top: 0;
+}
+
+/* List styling for topics */
+#TopicsTable ul,
+table ul {
+    margin-top: 0;
+    margin-bottom: 16px;
+    margin-left: 1em;
+    padding-left: 0.5em;
+    list-style-type: disc;
+}
+
+/* Nested lists */
+#TopicsTable ul ul,
+table ul ul {
+    margin-bottom: 8px;
+    margin-top: 4px;
+}
+
+/* List items */
+#TopicsTable li,
+table li {
+    margin-bottom: 4px;
+    line-height: 1.5;
+}
+
+/* Empty topic spacing */
+br.EmptyTopic {
+    display: block;
+    margin-bottom: 8px;
+}
