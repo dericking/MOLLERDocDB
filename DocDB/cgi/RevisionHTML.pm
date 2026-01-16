@@ -379,6 +379,7 @@ sub PrintEventInfo (%) {
   my %Params = @_;
   my $DocRevID = $Params{-docrevid};
   my $Format   = $Params{-format}   || "normal";
+  my $EventGroupID = $Params{-eventgroupid} || 0;
 
   my @EventIDs = GetRevisionEvents($DocRevID);
 
@@ -402,7 +403,13 @@ sub PrintEventInfo (%) {
       }
       print "$EventLink ";
       if ($Format eq "short" || $Format eq "description") {
-        print "($Start)<br/>";
+        if ($EventGroupID) {
+          # Comment out the date when eventgroupid is specified
+          # print "($Start)<br/>";
+          print "<br/>";
+        } else {
+          print "($Start)<br/>";
+        }
       } else {
         if ($Start && $End && ($Start ne $End)) {
           print " held from $Start to $End ";

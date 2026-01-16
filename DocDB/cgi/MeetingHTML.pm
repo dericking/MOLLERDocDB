@@ -1002,22 +1002,34 @@ sub EventsTable {
   my $Row   = 0;
   my @EventGroupIDs = sort EventGroupsByName &GetAllEventGroups();
 
-  print "<table class=\"HighPaddedTable\">\n";
+  # Filter out event groups that have no events
+  my @EventIDs = keys %Conferences;
+  my @EventGroupIDsWithEvents = ();
   foreach my $EventGroupID (@EventGroupIDs) {
-    unless ($Col % $NCols) {
-      if ($Row) {
-        print "</tr>\n";
+    my $HasEvents = $FALSE;
+    foreach my $EventID (@EventIDs) {
+      if (exists $Conferences{$EventID}{EventGroupID} && 
+          $Conferences{$EventID}{EventGroupID} == $EventGroupID) {
+        $HasEvents = $TRUE;
+        last;
       }
-      print "<tr>\n";
-      ++$Row;
     }
-    print "<td>\n";
-    EventsByGroup( {-groupid => $EventGroupID, -mode => $Mode, -maxevents => $MaxPerGroup} );
-    print "</td>\n";
-    ++$Col;
+    if ($HasEvents) {
+      push @EventGroupIDsWithEvents, $EventGroupID;
+    }
   }
-  print "</tr>\n";
-  print "</table>\n";
+
+  print "<div class=\"w3-container w3-margin\">\n";
+  print "<div class=\"w3-row\">\n";
+  foreach my $EventGroupID (@EventGroupIDsWithEvents) {
+    print "<div class=\"w3-col m6 l6 s12\" style=\"padding-left: 8px; padding-right: 8px;\">\n";
+    print "<div class=\"w3-card w3-padding w3-margin-bottom w3-paper w3-border w3-border-light-gray w3-round-large\">\n";
+    EventsByGroup( {-groupid => $EventGroupID, -mode => $Mode, -maxevents => $MaxPerGroup} );
+    print "</div><!-- Closing div w3-card -->\n";
+    print "</div><!-- Closing div w3-col -->\n";
+  }
+  print "</div><!-- Closing div w3-row -->\n";
+  print "</div><!-- Closing div w3-container w3-margin -->\n";
 }
 
 sub EventsByGroup (%) {
@@ -1041,25 +1053,63 @@ sub EventsByGroup (%) {
   @DisplayEventIDs = reverse sort EventsByDate @DisplayEventIDs;
   FetchEventGroup($EventGroupID);
 
-  my $TableClass = "LowPaddedTable";
   my ($Big,$EBig);
   if ($SingleGroup) {
-    ($Big,$EBig) = ("<big>","</big>");
-    $TableClass .= " CenteredTable";
-  }
-  print "<table class=\"$TableClass\">";
-  print "<tr><td colspan=\"4\">\n";
-  my $ShortGroup = SmartHTML( {-text => $EventGroups{$EventGroupID}{ShortDescription}, } );
-  if ($Mode eq "display") {
-    print "<strong>$Big<a href=\"$ListBy?eventgroupid=$EventGroupID\" class=\"w3-text-teal\">$ShortGroup</a>$EBig</strong>\n";
+    ($Big,$EBig) = ("",""); # Not used in SingleGroup case, but keep for else branch
+    # Wrap single group table in a container div
+    print "<div class=\"w3-container w3-margin\">\n";
+    print "<div class=\"w3-panel w3-paper w3-border w3-border-gray w3-round-large w3-padding\">\n";
+    
+    # Event group name as heading above the table
+    my $ShortGroup = SmartHTML( {-text => $EventGroups{$EventGroupID}{ShortDescription}, } );
+    print "<div class=\"w3-cell-row w3-margin-bottom\">\n";
+    print "<div class=\"w3-cell\">\n";
+    if ($Mode eq "display") {
+      print "<div class=\"w3-large w3-margin-0\"><strong>$ShortGroup</strong> ";
+      print "<a href=\"$ListBy?eventgroupid=$EventGroupID\" class=\"w3-text-teal\">Click to show all event type documents</a></div>\n";
+    } else {
+      print "<div class=\"w3-large w3-margin-0\"><strong>$ShortGroup</strong></div>\n";
+    }
+    print "</div>\n";
+    if ($Preferences{Components}{iCal}) {
+      print "<div class=\"w3-cell\" style=\"width: auto;\">\n";
+      print ICalLink({ -eventgroupid => $EventGroupID });
+      print "</div>\n";
+    }
+    print "</div><!-- Closing div w3-cell-row -->\n";
+    
+    # Add table headers for single group display
+    print "<table class=\"w3-table w3-bordered w3-margin-bottom\" style=\"margin-left: auto; margin-right: auto;\">\n";
+    print "<thead>\n";
+    print "<tr>\n";
+    print "<th class=\"w3-padding\" style=\"vertical-align: middle;\">Event</th>\n";
+    print "<th class=\"w3-padding\" style=\"vertical-align: middle;\">Start Date</th>\n";
+    print "<th class=\"w3-padding\" style=\"vertical-align: middle;\">End Date</th>\n";
+    print "</tr>\n";
+    print "</thead>\n";
+    print "<tbody>\n";
   } else {
-    print "<strong>$Big$ShortGroup$EBig</strong>\n";
+    my $TableStyle = "";
+    print "<table class=\"w3-table w3-bordered no-row-lines\" style=\"$TableStyle\">";
+    print "<tr><td colspan=\"4\" class=\"w3-padding\" style=\"vertical-align: middle;\">\n";
+    my $ShortGroup = SmartHTML( {-text => $EventGroups{$EventGroupID}{ShortDescription}, } );
+    print "<div class=\"w3-cell-row\">\n";
+    print "<div class=\"w3-cell\">\n";
+    if ($Mode eq "display") {
+      print "<strong>$Big<a href=\"$ListBy?eventgroupid=$EventGroupID\" class=\"w3-text-teal\">$ShortGroup</a>$EBig</strong>\n";
+    } else {
+      print "<strong>$Big$ShortGroup$EBig</strong>\n";
+    }
+    print "</div>\n";
+    if ($Preferences{Components}{iCal}) {
+      print "<div class=\"w3-cell\" style=\"width: auto;\">\n";
+      print ICalLink({ -eventgroupid => $EventGroupID });
+      print "</div>\n";
+    }
+    print "</div><!-- Closing div w3-cell-row -->\n";
+    print "</td></tr>\n";
   }
-  if ($Preferences{Components}{iCal}) {
-    print ' '.ICalLink({ -eventgroupid => $EventGroupID });
-  }
-
-  print "</td></tr>\n";
+  
   my $EventCount = 0;
   my $Truncated = $FALSE;
   foreach my $EventID (@DisplayEventIDs) {
@@ -1080,25 +1130,21 @@ sub EventsByGroup (%) {
     print "<tr>\n";
     if ($EventCount > $MaxEvents && $MaxEvents) { # Put ...show all... at bottom
       $Truncated = $TRUE;
-      print '<th colspan="2">';
+      my $Colspan = $SingleGroup ? "3" : "2";
+      print "<th colspan=\"$Colspan\" class=\"w3-padding w3-center\" style=\"vertical-align: middle;\">";
       if ($Mode eq "display") {
-        print "<a href=\"$ListAllMeetings?eventgroupid=$EventGroupID\" class=\"w3-text-teal\">...more events and information...</a>\n";
+        print "<a href=\"$ListAllMeetings?eventgroupid=$EventGroupID\" class=\"w3-text-teal\"><strong>Click here for more events and information.</strong></a>\n";
       } else {
-        print "<a href=\"$ListAllMeetings?eventgroupid=$EventGroupID&amp;mode=modify\" class=\"w3-text-teal\">...more events and information...</a>\n";
+        print "<a href=\"$ListAllMeetings?eventgroupid=$EventGroupID&amp;mode=modify\" class=\"w3-text-teal\"><strong>Click here for more events and information.</strong></a>\n";
       }
       print "</th>";
       last;
     } else { # Print normal entry
-      print "<td>$MeetingLink$ICalLink</td>\n";
-      print "<td>",EuroDate($Conferences{$EventID}{StartDate}),"</td>\n";
+      print "<td class=\"w3-padding\" style=\"vertical-align: middle;\">$MeetingLink$ICalLink</td>\n";
+      print "<td class=\"w3-padding\" style=\"vertical-align: middle;\">",EuroDate($Conferences{$EventID}{StartDate}),"</td>\n";
 
-      if ($SingleGroup) { # Add end date and location for singe group display
-        if ($Conferences{$EventID}{StartDate} ne $Conferences{$EventID}{EndDate}) {
-          print "<td>-</td><td>".EuroDate($Conferences{$EventID}{EndDate})."</td>\n";
-        } else {
-          print "<td></td><td></td>\n";
-        }
-        print "<td>",$Conferences{$EventID}{Location},"</td>";
+      if ($SingleGroup) { # Add end date for single group display
+        print "<td class=\"w3-padding\" style=\"vertical-align: middle;\">",EuroDate($Conferences{$EventID}{EndDate}),"</td>";
       }
     }
     print "</tr>\n";
@@ -1107,15 +1153,24 @@ sub EventsByGroup (%) {
 
   }
   if (!$Truncated && !$SingleGroup) {
-    print '<tr><th colspan="2">';
+    print '<tr><th colspan="2" class="w3-padding w3-center" style="vertical-align: middle;">';
     if ($Mode eq "display") {
-      print "<a href=\"$ListAllMeetings?eventgroupid=$EventGroupID\" class=\"w3-text-teal\">...more information...</a>\n";
+      print "<a href=\"$ListAllMeetings?eventgroupid=$EventGroupID\" class=\"w3-text-teal\"><strong>Click here for more information.</strong></a>\n";
     } else {
-      print "<a href=\"$ListAllMeetings?eventgroupid=$EventGroupID&amp;mode=modify\" class=\"w3-text-teal\">...more information...</a>\n";
+      print "<a href=\"$ListAllMeetings?eventgroupid=$EventGroupID&amp;mode=modify\" class=\"w3-text-teal\"><strong>Click here for more information.</strong></a>\n";
     }
     print "</th></tr>";
   }
+  
+  if ($SingleGroup) {
+    print "</tbody>\n";
+  }
   print "</table>\n";
+  
+  if ($SingleGroup) {
+    print "</div><!-- Closing div w3-panel -->\n";
+    print "</div><!-- Closing div w3-container w3-margin -->\n";
+  }
 }
 
 sub EventGroupSelect ($) {

@@ -344,7 +344,8 @@ if ($Days) { # Print out modified by form
 my %FieldList = PrepareFieldList(%FieldListOptions);
 print "<div class=\"w3-margin\">\n";
 my $NumberOfDocuments = DocumentTable(-fieldlist => \%FieldList, -docids  => \@DocumentIDs,
-                                      -sortby    => $SortBy,     -reverse => $Reverse);
+                                      -sortby    => $SortBy,     -reverse => $Reverse,
+                                      -eventgroupid => $EventGroupID);
 print "<p><b>Number of documents found: ",int($NumberOfDocuments),"</b></p>\n";
 print "</div><!-- Closing div w3-margin -->\n";
 

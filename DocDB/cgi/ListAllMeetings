@@ -70,14 +70,18 @@ if ($EventGroup || $EventGroupID) {
 } else {
   GetConferences($TRUE);
   if ($Mode eq "modify") {
-    print "<h3>Select an event to change:</h3>\n";
+    print "<div class=\"w3-container\">\n";
+    print "<h4>Select an event to change:</h4>\n";
+    print "</div><!-- Closing div w3-container -->\n";
     EventsTable( {-mode => "modify"} );
   } else {
-    print "<h3>All events";
+    print "<div class=\"w3-container w3-center\">\n";
+    print "<h4>All events";
     if ($Preferences{Components}{iCal}) {
       print ' '.ICalLink({ -allevents => 1 });
     }
-    print "</h3>\n";
+    print "</h4>\n";
+    print "</div><!-- Closing div w3-container w3-center -->\n";
     EventsTable( {-mode => "display"} );
   }
 }

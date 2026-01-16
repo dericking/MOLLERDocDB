@@ -47,6 +47,7 @@ sub DocumentTable (%) {
   my @DocumentIDs     = @{$Params{-docids}};
   my @SessionOrderIDs = @{$Params{-sessionorderids}};
   my %FieldList       = %{$Params{-fieldlist}};
+  my $EventGroupID    =   $Params{-eventgroupid} || 0;
 
   my @IDs  = ();
   my $Mode;
@@ -246,7 +247,7 @@ sub DocumentTable (%) {
           print SignatureLink($EmailUserID),"<br/>\n";
         }
       } elsif ($Field eq "Conference" || $Field eq "Events") {
-        PrintEventInfo(-docrevid => $DocRevID, -format => "short");
+        PrintEventInfo(-docrevid => $DocRevID, -format => "short", -eventgroupid => $EventGroupID);
       } elsif ($Field eq "LongEvents") {
         PrintEventInfo(-docrevid => $DocRevID, -format => "description");
       } elsif ($Field eq "Topics") {  # Topics for document

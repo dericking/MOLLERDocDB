@@ -105,7 +105,6 @@ sub DocDBNavBar {
     print "</div><!-- Closing div w3-dropdown-content -->\n";
     print "</div><!-- Closing div w3-dropdown-hover -->\n";
   }
-  print "<a href=\"$SearchForm\" class=\"w3-bar-item w3-button\"><i class=\"fa-solid fa-magnifying-glass w3-text-teal\"></i>&nbsp; Search</a>\n";
   print "<a href=\"$ListBy?days=$LastDays\" class=\"w3-bar-item w3-button\"><i class=\"fa-solid fa-clock w3-text-teal\"></i>&nbsp; Recent</a>\n";
   print "<div class=\"w3-dropdown-hover\">\n";
   print "<button class=\"w3-button\"><i class=\"fa-solid fa-rectangle-list w3-text-teal\"></i>&nbsp; Lists <i class=\"fa-solid fa-caret-down w3-text-teal\"></i></button>\n";
@@ -115,7 +114,8 @@ sub DocDBNavBar {
   print "<a href=\"$ListAllMeetings\" class=\"w3-bar-item w3-button\"><i class=\"fa-solid fa-calendar-days w3-text-teal\"></i>&nbsp; Events</a>\n";
   print "</div><!-- Closing div w3-dropdown-content -->\n";
   print "</div><!-- Closing div w3-dropdown-hover -->\n";
-  print "<div class=\"w3-dropdown-hover\">\n";
+  print "<a href=\"$SearchForm\" class=\"w3-bar-item w3-button\"><i class=\"fa-solid fa-magnifying-glass w3-text-teal\"></i>&nbsp; Search</a>\n";
+  print "<div class=\"w3-dropdown-hover w3-right\">\n";
   print "<button class=\"w3-button\"><i class=\"fa-solid fa-circle-info w3-text-teal\"></i>&nbsp; About <i class=\"fa-solid fa-caret-down w3-text-teal\"></i></button>\n";
   print "<div class=\"w3-dropdown-content w3-bar-block w3-border w3-border-gray w3-card-4\">\n";
   print "<a href=\"https://github.com/dericking/DocDB\" class=\"w3-bar-item w3-button\">MOLLER DocDB</a>\n";
