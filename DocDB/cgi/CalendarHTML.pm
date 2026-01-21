@@ -37,7 +37,9 @@ sub CalendarLink (%) {
 
   my $Link = "<a ";
   if ($Class) {
-    $Link .= "class=\"Date\" ";
+    $Link .= "class=\"w3-text-teal\" ";
+  } else {
+    $Link .= "class=\"w3-text-teal\" ";
   }
   $Link .= "href=\"".$ShowCalendar;
 
@@ -72,17 +74,9 @@ sub PrintCalendar {
   my $MonthName   = $FirstDay -> month_name();
   my $Today       = DateTime ->today(time_zone => 'local');
 
-  my $Class = "ByMonth";
-  if ($Type eq "year") {
-    $Class = "InYear";
-  }
-
-  print "<table class=\"Calendar $Class\">";
-
-  if ($Type eq "year") {
-    my $MonthLink = CalendarLink(-year => $Year, -month => $Month, -text => $MonthName);
-    print "<tr><th colspan=\"7\">$MonthLink</th></tr>\n";
-  } elsif ($Type eq "month") {
+  if ($Type eq "month") {
+    print "<div class=\"w3-container w3-margin-bottom\">\n";
+    print "<div id=\"CalendarNavigator\" class=\"w3-cell-row w3-center w3-margin-bottom w3-panel w3-paper w3-round-large w3-border w3-border-light-gray w3-padding\">\n";
     my $PrevMonth = $FirstDay -> clone();
        $PrevMonth -> add(months => -1);
     my $PrevMNum  = $PrevMonth -> month();
@@ -96,20 +90,37 @@ sub PrintCalendar {
 
     my $YearLink = CalendarLink(-year => $Year, -text => $Year);
     my $CurrLink = "$MonthName $YearLink";
-    my $PrevLink = CalendarLink(-year => $PrevYear, -month => $PrevMNum, -text => "&laquo;$PrevName $PrevYear");
-    my $NextLink = CalendarLink(-year => $NextYear, -month => $NextMNum, -text => "$NextName $NextYear&raquo;");
-    print "<tr class=\"MonthNav\">\n
-            <th>$PrevLink</th>\n
-            <th colspan=\"5\"><h1>$CurrLink</h1></th>\n
-            <th>$NextLink</th>\n
-          </tr>\n";
+    print "<div class=\"w3-cell w3-cell-middle\">\n";
+    print "<a href=\"".$ShowCalendar."?year=$PrevYear&amp;month=$PrevMNum\" class=\"w3-medium w3-text-teal\"><span class=\"\">$PrevName $PrevYear</span></a>\n";
+    print "</div><!-- Closing div w3-cell -->\n";
+    print "<div class=\"w3-cell w3-cell-middle\" style=\"padding-left:2em; padding-right:2em;\">\n";
+    print "<span class=\"w3-large\">$CurrLink</span>\n";
+    print "</div><!-- Closing div w3-cell -->\n";
+    print "<div class=\"w3-cell w3-cell-middle\">\n";
+    print "<a href=\"".$ShowCalendar."?year=$NextYear&amp;month=$NextMNum\" class=\"w3-text-teal\"><span class=\"\">$NextName $NextYear</span></a>\n";
+    print "</div><!-- Closing div w3-cell -->\n";
+    print "</div><!-- Closing div id CalendarNavigator -->\n";
+    print "<div class=\"w3-card w3-border w3-border-gray\">\n";
   }
+
+  print "<table class=\"w3-table w3-bordered\" id=\"CalendarTable\">\n";
+  if ($Type eq "month") {
+    print "<colgroup>\n";
+    print "<col span=\"7\" style=\"width:14.2857%;\">\n";
+    print "</colgroup>\n";
+  }
+
+  if ($Type eq "year") {
+    my $MonthLink = CalendarLink(-year => $Year, -month => $Month, -text => $MonthName);
+    print "<tr><th colspan=\"7\" class=\"w3-center w3-teal\">$MonthLink</th></tr>\n";
+  }
+  
   print "<tr>\n";
   foreach my $DayName ("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday") {
     if ($Type eq "year") {
-      print "<th class=\"$DayName InYearDays\">",substr($DayName,0,1),"</th>\n";
+      print "<th class=\"w3-center w3-light-gray\">",substr($DayName,0,1),"</th>\n";
     } else {
-      print "<th class=\"$DayName\">$DayName</th>\n";
+      print "<th class=\"w3-center w3-teal\">$DayName</th>\n";
     }
   }
   print "</tr>\n";
@@ -145,29 +156,49 @@ sub PrintCalendar {
       $RowOpen = $TRUE;
     }
 
-    my $TDClass = "$DayName";
+    my $CellClass = "";
+    my $TodayStyle = "";
     if ($DateTime == $Today) {
-      $TDClass .= " Today";
+      $TodayStyle = " border: 3px solid teal;";
+    } elsif ($DOW == 1 || $DOW == 7) {  # Sunday or Saturday
+      $CellClass = "w3-light-gray";
     }
-    print "<td class=\"$TDClass\">\n";
-    my $DayLink = "<a class=\"Date\" href=\"".$ShowCalendar."?year=$Year&amp;month=$Month&amp;day=$Day\">".
-                  $DateTime -> day()."</a>";
+    
+    # Format IDs: CalCellDay{year}{month}{day}, etc.
+    my $CellID = sprintf("%04d%02d%02d", $Year, $Month, $Day);
+    
+    print "<td class=\"CalendarCell w3-padding-small $CellClass\" style=\"vertical-align: top; height: 7em;$TodayStyle\">\n";
+    
     if ($Type eq "year") {
       my @EventIDs   = GetEventsByDate({-on => $SQLDate});
       my @SessionIDs = FetchSessionsByDate($SQLDate);
       if (@EventIDs || @SessionIDs) {
+        my $DayLink = "<a class=\"w3-text-teal\" href=\"".$ShowCalendar."?year=$Year&amp;month=$Month&amp;day=$Day\">".
+                      "<span class=\"u-fw700\">".$DateTime -> day()."</span></a>";
         print "$DayLink\n";
       } else {
-        print "$Day\n";
+        print "<span class=\"u-fw700\">".$Day."</span>\n";
       }
     }
+    
     if ($Type eq "month") {
-      my $AddLink = "<a class=\"AddEvent\" href=\"".$SessionModify."?mode=new&amp;singlesession=1&amp;sessionyear=$Year&amp;sessionmonth=$Month&amp;sessionday=$Day\">+</a>";
+      print "<div class=\"w3-display-container\" style=\"height:7em;\">\n";
+      
+      my $DayLink = "<a id=\"CalCellDay$CellID\" class=\"w3-display-topleft w3-text-teal w3-medium\" href=\"".$ShowCalendar."?year=$Year&amp;month=$Month&amp;day=$Day\">".
+                    "<span class=\"u-fw700\">".$DateTime -> day()."</span></a>";
       print $DayLink,"\n";
+      
       if (CanCreateMeeting()) {
+        my $AddLink = "<a id=\"CalCellAdd$CellID\" class=\"w3-display-bottomleft w3-tag w3-tiny w3-teal w3-round u-pad4\" href=\"".$SessionModify."?mode=new&amp;singlesession=1&amp;sessionyear=$Year&amp;sessionmonth=$Month&amp;sessionday=$Day\" title=\"Add event\">".
+                      "<i class=\"fa-solid fa-plus\"></i></a>";
         print $AddLink,"\n";
       }
+      
+      print "<div id=\"CalCellContent$CellID\" class=\"w3-display-middle w3-small\" style=\"width:100%; text-align:left;\">\n";
       PrintDayEvents(-day => $Day, -month => $Month, -year => $Year, -format => "summary");
+      print "</div><!-- Closing div id CalCellContent$CellID -->\n";
+      
+      print "</div><!-- Closing div w3-display-container -->\n";
     }
     print "</td>\n";
   }
@@ -177,6 +208,10 @@ sub PrintCalendar {
   }
 
   print "</tr></table>\n";
+  if ($Type eq "month") {
+    print "</div><!-- Closing div w3-card -->\n";
+    print "</div><!-- Closing div w3-container -->\n";
+  }
 }
 
 sub PrintDayEvents (%) {
@@ -200,7 +235,8 @@ sub PrintDayEvents (%) {
 
   my @EventIDs = sort numerically GetEventsByDate({-on => $SQLDate});
   if ($Format eq "full") {
-    print "<table class=\"CenteredTable MedPaddedTable\">\n";
+    print "<div class=\"w3-container w3-margin-bottom\">\n";
+    print "<table class=\"w3-table w3-bordered\">\n";
   }
   my $DayPrinted = $FALSE;
   my $Count      = 0;
@@ -250,10 +286,10 @@ sub PrintDayEvents (%) {
     if ($EventLink) {
       ++$Count;
       if ($Format eq "full" || $Format eq "multiday" ) {
-        print "<tr class=\"$RowClass\">\n";
+        print "<tr>\n";
         if ($Format eq "multiday" && !$DayPrinted) {
           $DayPrinted = $TRUE;
-          print "<th class=\"LeftHeader\">$Day ",@AbrvMonths[$Month-1]," $Year</th>\n";
+          print "<th class=\"w3-left-align\">$Day ",@AbrvMonths[$Month-1]," $Year</th>\n";
         } elsif ($Format eq "multiday") {
           print "<td>&nbsp;</td>\n";
         }
@@ -263,7 +299,7 @@ sub PrintDayEvents (%) {
         print "<td>$Conferences{$EventID}{URL}</td>\n";
         print "</tr>\n";
       } elsif ($Format eq "summary") {
-        print $EventLink,"\n";
+        print "<div class=\"w3-small\" style=\"margin-top:2px;\">$EventLink</div>\n";
       }
     }
   }
@@ -281,10 +317,10 @@ sub PrintDayEvents (%) {
     if ($Format eq "full" || $Format eq "multiday" ) {
       ++$Count;
       my $SessionLink = &SessionLink(-sessionid => $SessionID, -format => "full");
-      print "<tr class=\"$RowClass\">\n";
+      print "<tr>\n";
       if ($Format eq "multiday" && !$DayPrinted) {
         $DayPrinted = $TRUE;
-        print "<th class=\"LeftHeader\">$Day ",@AbrvMonths[$Month-1]," $Year</th>\n";
+        print "<th class=\"w3-left-align\">$Day ",@AbrvMonths[$Month-1]," $Year</th>\n";
       } elsif ($Format eq "multiday") {
         print "<td>&nbsp;</td>\n";
       }
@@ -295,11 +331,12 @@ sub PrintDayEvents (%) {
       print "</tr>\n";
     } elsif ($Format eq "summary") {
       my $SessionLink = &SessionLink(-sessionid => $SessionID);
-      print "<span class=\"Event\">$StartTime $SessionLink</span>\n";
+      print "<div class=\"w3-small\" style=\"margin-top:2px;\">$StartTime $SessionLink</div>\n";
     }
   }
   if ($Format eq "full") {
     print "</table>\n";
+    print "</div><!-- Closing div w3-container -->\n";
   }
   return $Count;
 }

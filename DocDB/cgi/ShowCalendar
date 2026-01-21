@@ -108,6 +108,8 @@ if ($TodayOnly) {
 DocDBHeader("Calendar for $TitleDate");
 EndPage(@ErrorStack);
 
+print "<div id=\"CalendarBody\" class=\"w3-container w3-row\">\n";
+
 if ($Day && $Month && $Year) {
 
   my $TheDay = DateTime -> new(year => $Year, month => $Month, day => $Day);
@@ -126,51 +128,46 @@ if ($Day && $Month && $Year) {
   my $NextName  = $NextDay -> month_name();
   my $NextYear  = $NextDay -> year();
 
-  print "<p class=\"DayNav\">\n";
+  print "<div class=\"w3-bar w3-center w3-margin-bottom\">\n";
   print CalendarLink(-year => $PrevYear, -month => $PrevMNum, -day => $PrevDNum,
-                     -text => "&laquo; $PrevDNum $PrevName $PrevYear");
-  print "<span class=\"CurrDate\">$Day ";
+                     -text => "<i class=\"fa-solid fa-chevron-left w3-text-teal\"></i>&nbsp; $PrevDNum $PrevName $PrevYear");
+  print "<span class=\"w3-bar-item\" style=\"margin-left:2em; margin-right:2em;\"><strong>$Day ";
   print CalendarLink(-year => $Year, -month => $Month,
                      -text => $TheDay -> month_name());
   print " ";
   print CalendarLink(-year => $Year, -text => "$Year");
-  print "</span>\n";
+  print "</strong></span>\n";
   print CalendarLink(-year => $NextYear, -month => $NextMNum, -day => $NextDNum,
-                     -text => "$NextDNum $NextName $NextYear &raquo;");
-  print "</p>\n";
+                     -text => "$NextDNum $NextName $NextYear &nbsp;<i class=\"fa-solid fa-chevron-right w3-text-teal\"></i>");
+  print "</div><!-- Closing div w3-bar -->\n";
 
   if (CanCreateMeeting()) {
-    print "<p class=\"DayNav\">\n";
-    print "<a href=\"".$SessionModify."?mode=new&amp;singlesession=1&amp;sessionyear=$Year&amp;sessionmonth=$Month&amp;sessionday=$Day\">Add a New Event on this Day</a>\n";
-    print "</p>\n";
+    print "<div class=\"w3-bar w3-center w3-margin-bottom\">\n";
+    print "<a href=\"".$SessionModify."?mode=new&amp;singlesession=1&amp;sessionyear=$Year&amp;sessionmonth=$Month&amp;sessionday=$Day\" class=\"w3-bar-item w3-button w3-teal w3-border w3-border-black w3-round\">Add a New Event on this Day</a>\n";
+    print "</div><!-- Closing div w3-bar -->\n";
   }
 
   PrintDayEvents(-year => $Year, -month => $Month, -day => $Day);
 } elsif ($Month && $Year) {
   PrintCalendar(-year => $Year, -month => $Month);
 } elsif ($Year) {
-  print "<table class=\"Calendar WholeYear\">\n";
-  my $PrevLink = CalendarLink(-year => $Year - 1, -text => "&laquo;".($Year - 1));
-  my $NextLink = CalendarLink(-year => $Year + 1, -text => ($Year + 1)."&raquo;");
-
-  print "<tr class=\"MonthNav\">\n
-         <th>$PrevLink</th>\n
-         <th colspan=\"2\"><h1>$Year</h1></th>\n
-         <th>$NextLink</th>\n
-         </tr>\n";
-
+  print "<div class=\"w3-container w3-margin-bottom\">\n";
+  print "<div class=\"w3-bar w3-center w3-margin-bottom\">\n";
+  print CalendarLink(-year => $Year - 1, -text => "<i class=\"fa-solid fa-chevron-left w3-text-teal\"></i>&nbsp;".($Year - 1));
+  print "<span class=\"w3-bar-item\" style=\"margin-left:2em; margin-right:2em;\"><h2>$Year</h2></span>\n";
+  print CalendarLink(-year => $Year + 1, -text => ($Year + 1)."&nbsp;<i class=\"fa-solid fa-chevron-right w3-text-teal\"></i>");
+  print "</div><!-- Closing div w3-bar -->\n";
+  
+  print "<div class=\"w3-row\">\n";
   for $Month (1 .. 12) {
-    unless (($Month-1) % 4) {
-      print "<tr>\n";
-    }
-    print "<td class=\"Month\">";
+    print "<div class=\"w3-col m3 l3 s12 w3-margin-bottom\">\n";
+    print "<div class=\"w3-card w3-padding w3-paper w3-border w3-border-gray w3-round\">\n";
     PrintCalendar(-year => $Year, -month => $Month, -type => "year");
-    print "</td>";
-    unless ($Month % 4) {
-      print "</tr>\n";
-    }
+    print "</div><!-- Closing div w3-card -->\n";
+    print "</div><!-- Closing div w3-col -->\n";
   }
-  print "</table>\n";
+  print "</div><!-- Closing div w3-row -->\n";
+  print "</div><!-- Closing div w3-container -->\n";
 }
 
 if ($FutureEventTable || $MonthEventTable) {
@@ -186,7 +183,8 @@ if ($FutureEventTable || $MonthEventTable) {
   my @EventIDs = GetEventsByDate({-from => $WindowStart, -to => $WindowEnd});
 
   if (@EventIDs) {
-    print "<table class=\"CenteredTable MultidayEventList Alternating\">\n";
+    print "<div class=\"w3-container w3-margin-bottom\">\n";
+    print "<table class=\"w3-table w3-bordered w3-striped\">\n";
     print "<tr><th>Date</th><th>Time</th>";
     if ($FutureEventTable) {
       print "<th>Upcoming Events</th>";
@@ -195,21 +193,17 @@ if ($FutureEventTable || $MonthEventTable) {
     }
     print "<th>Location</th><th>&nbsp;</th></tr>\n";
     my $TheDay = $EventTableStart -> clone();
-    my $RowClass = "Odd";
     foreach my $i (1..$WindowDays) {
       my $Count = PrintDayEvents(-year => $TheDay -> year(), -month  => $TheDay -> month(),
-                                 -day  => $TheDay -> day(),  -format => "multiday",
-                                 -rowclass => $RowClass);
-      if ($Count && $RowClass eq "Odd") {
-        $RowClass = "Even";
-      } elsif ($Count && $RowClass eq "Even") {
-        $RowClass = "Odd";
-      }
+                                 -day  => $TheDay -> day(),  -format => "multiday");
       $TheDay -> add(days => 1);
     }
     print "</table>\n";
+    print "</div><!-- Closing div w3-container -->\n";
   }
 }
+
+print "</div><!-- Closing div id CalendarBody -->\n";
 
 $EndTime  = new Benchmark;
 
