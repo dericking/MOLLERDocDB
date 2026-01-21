@@ -509,10 +509,12 @@ sub LocalSearch ($) {
 
   if ($OutFormat eq 'HTML') {
     my %FieldList = PrepareFieldList(%FieldListOptions);
+    print "<div class=\"w3-margin\">\n";
     my $NumberOfDocuments = DocumentTable(-fieldlist => \%FieldList, -docids  => \@DocumentIDs,
                                           -sortby    => $SortBy,     -reverse => $Reverse);
 
-    print "<strong>Number of documents found: ",int($NumberOfDocuments),"</strong><p/>\n";
+    print "<p><b>Number of documents found: ",int($NumberOfDocuments),"</b></p>\n";
+    print "</div><!-- Closing div w3-margin -->\n";
   } else {
     foreach my $DocumentID (@DocumentIDs) {
       my $DocumentXML = DocumentXMLOut( {-docid => $DocumentID} );
