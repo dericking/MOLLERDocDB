@@ -9,10 +9,15 @@
     table-layout: fixed;
 }
 
+/* Ensure vertical borders are visible in calendar tables */
+#CalendarTable td,
+#CalendarTable th {
+    border-left: 1px solid #ddd !important;
+    border-right: 1px solid #ddd !important;
+}
+
 #CalendarTable td.CalendarCell {
     vertical-align: top;
-    height: 7em;              /* keep your fixed cell height */
-    padding: 4px;             /* optional: consistent interior spacing */
   }
   
 /* Use instead of <strong> */
@@ -20,11 +25,6 @@
   
 /* Add tag/button padding */
 #CalendarTable .u-pad4 { padding: 4px !important; display: inline-block !important; }
-  
-/* If you’re using w3-display-container inside each cell, make it fill the cell */
-#CalendarTable td.CalendarCell > .w3-display-container {
-  height: 100%;
-}
 /* ****************************************************** */
 
 /* Remove row lines from tables with no-row-lines class */
