@@ -60,9 +60,20 @@ sub SmartHTML ($) {
 
   # Make two line-feeds into a paragraph break and one into a line break in HTML
   if ($AddLineBreaks) {
-    $Text =~ s/\s*\n\s*\n\s*/<p\/>/g; # Replace two new lines and any space with <p>
-    $Text =~ s/\s*\n\s*/<br\/>\n/g;
-    $Text =~ s/<p\/>/<p\/>\n/g;
+    # First, handle paragraph breaks (double newlines)
+    # Split text by double newlines, preserving content
+    my @paragraphs = split(/\s*\n\s*\n\s*/, $Text);
+    my $result = "";
+    foreach my $para (@paragraphs) {
+      $para =~ s/^\s+//;  # Trim leading whitespace
+      $para =~ s/\s+$//;  # Trim trailing whitespace
+      if ($para) {  # Only add paragraph if it has content
+        # Convert single newlines within paragraph to <br/>
+        $para =~ s/\s*\n\s*/<br\/>\n/g;
+        $result .= "<p>$para</p>";
+      }
+    }
+    $Text = $result;
   }
 
   return $Text;
