@@ -102,6 +102,7 @@ sub DocDBNavBar {
     print "<div class=\"w3-dropdown-content w3-bar-block w3-border w3-border-gray w3-card-4\">\n";
     print "<a href=\"$DocumentAddForm?mode=add\" class=\"w3-bar-item w3-button\"><i class=\"fa-solid fa-file-circle-plus w3-text-teal\"></i>&nbsp; Add Document</a>\n";
     print "<a href=\"$AuthorAddForm\" class=\"w3-bar-item w3-button\"><i class=\"fa-solid fa-user-plus w3-text-teal\"></i>&nbsp; Add Author</a>\n";
+    print "<a href=\"$SessionModify?mode=new&amp;singlesession=1\" class=\"w3-bar-item w3-button\"><i class=\"fa-solid fa-calendar-plus w3-text-teal\"></i>&nbsp; Add Event</a>\n";
     print "</div><!-- Closing div w3-dropdown-content -->\n";
     print "</div><!-- Closing div w3-dropdown-hover -->\n";
   }
@@ -110,10 +111,11 @@ sub DocDBNavBar {
   print "<button class=\"w3-button\"><i class=\"fa-solid fa-rectangle-list w3-text-teal\"></i>&nbsp; Lists <i class=\"fa-solid fa-caret-down w3-text-teal\"></i></button>\n";
   print "<div class=\"w3-dropdown-content w3-bar-block w3-border w3-border-gray w3-card-4\">\n";
   print "<a href=\"$ListAuthors\" class=\"w3-bar-item w3-button\"><i class=\"fa-solid fa-users w3-text-teal\"></i>&nbsp; Authors</a>\n";
-  print "<a href=\"$ListTopics\" class=\"w3-bar-item w3-button\"><i class=\"fa-solid fa-clipboard-list w3-text-teal\"></i>&nbsp; Topics</a>\n";
-  print "<a href=\"$ListGroups\" class=\"w3-bar-item w3-button\"><i class=\"fa-solid fa-user-group w3-text-teal\"></i>&nbsp; Groups</a>\n";
-  print "<a href=\"$ListKeywords\" class=\"w3-bar-item w3-button\"><i class=\"fa-solid fa-tags w3-text-teal\"></i>&nbsp; Keywords</a>\n";
+  print "<a href=\"$ListBy?days=30\" class=\"w3-bar-item w3-button\"><i class=\"fa-solid fa-file-lines w3-text-teal\"></i>&nbsp; Documents</a>\n";
   print "<a href=\"$ListAllMeetings\" class=\"w3-bar-item w3-button\"><i class=\"fa-solid fa-calendar-days w3-text-teal\"></i>&nbsp; Events</a>\n";
+  print "<a href=\"$ListTopics\" class=\"w3-bar-item w3-button\"><i class=\"fa-solid fa-clipboard-list w3-text-teal\"></i>&nbsp; Topics</a>\n";
+  print "<a href=\"$ListKeywords\" class=\"w3-bar-item w3-button\"><i class=\"fa-solid fa-tags w3-text-teal\"></i>&nbsp; Keywords</a>\n";
+  print "<a href=\"$ListGroups\" class=\"w3-bar-item w3-button\"><i class=\"fa-solid fa-user-group w3-text-teal\"></i>&nbsp; Groups</a>\n";
   print "</div><!-- Closing div w3-dropdown-content -->\n";
   print "</div><!-- Closing div w3-dropdown-hover -->\n";
   print "<a href=\"$SearchForm\" class=\"w3-bar-item w3-button\"><i class=\"fa-solid fa-magnifying-glass w3-text-teal\"></i>&nbsp; Search</a>\n";
