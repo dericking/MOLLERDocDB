@@ -263,10 +263,8 @@ sub AuthorsTable {
         print "</ul>\n";
       }
       $FirstPass = 0;
-      if ($UseAnchors) {
-        print "<a name=\"$FirstLetter\" />\n";
-        print "<strong class=\"w3-large\">$FirstLetter</strong>\n";
-      }
+      print "<a id=\"$FirstLetter\"></a>\n";
+      print "<div class=\"w3-large w3-teal w3-round w3-panel w3-leftbar w3-border w3-border-black\" style=\"font-weight:700;\">$FirstLetter</div>\n";
       print "<ul>\n";
     }
     my $AuthorLink = AuthorLink($AuthorID, -format => "formal");
