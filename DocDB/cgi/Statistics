@@ -38,6 +38,11 @@ print $query -> header( -charset => $HTTP_ENCODING );
 
 &DocDBHeader("$Project DocDB Statistics");
 
+print "<div class=\"w3-container\">\n";
+print "<div class=\"w3-panel w3-paper w3-border w3-border-black w3-round-large w3-padding\">\n";
+print "<p>This page shows statistics about the Document Database, such as how many Documents, Revisions, and Files are in the DB.</p>\n";
+print "</div>\n";
+
 my $NDoc_query = $dbh -> prepare("select COUNT(DocumentID) from Document");
    $NDoc_query -> execute();
 my ($NDocuments) = $NDoc_query -> fetchrow_array;
@@ -66,23 +71,21 @@ my ($NOKFiles) = $NOKFile_query -> fetchrow_array;
 my $FilePerRev = sprintf "%5.2f",$NOKFiles/$NOKRevisions;
 my $FilePerDoc = sprintf "%5.2f",$NOKFiles/$NDocuments;
 
-print "<h4>This page shows statistics about the Document Database,
-       such as how many Documents, Revisions, and Files are in the DB.</h4>\n";
-print "<table id=\"StatisticsTable\" class=\"CenteredTable MedPaddedTable\">\n";
-# Use row groups and borders, right align tds
-
-
+print "<div class=\"w3-border w3-border-black w3-margin-bottom\">\n";
+print "<table id=\"StatisticsTable\" class=\"w3-table w3-bordered w3-paper\">\n";
+print "<thead class=\"w3-light-gray\">\n";
+print "<tr><th colspan=\"4\" class=\"w3-center\" style=\"font-weight:700;\">Documents, Revisions, and Files</th></tr>\n";
+print "</thead>\n";
 print "<tbody>\n";
 
-print "<tr><th>Total number of Documents:          </th><td>$NDocuments</td></tr>\n";
-print "<tr><th>Total number of Revisions:          </th><td>$NRevisions</td>\n";
-print "    <th>Number of File Entries:             </th><td>$NFiles</td></tr>\n";
-print "<tr><th>Total Active Revisions:             </th><td>$NOKRevisions</td>\n";
-print " <th>Actual number of Files:                </th><td>$NOKFiles</td></tr>\n";
-print "<tr><th>Average Versions per Document:      </th><td>$RevPerDoc</td>\n";
-print " <th>Average Files per Revision:            </th><td>$FilePerRev</td></tr>\n";
-print "<tr><td></td><td></td>\n";
-print " <th>Average Files per Document: </th><td>$FilePerDoc</td></tr>\n";
+print "<tr><th style=\"text-align:left;\">Total number of Documents:</th><td>$NDocuments</td>\n";
+print "<th style=\"text-align:left;\">Total number of Revisions:</th><td>$NRevisions</td></tr>\n";
+print "<tr><th style=\"text-align:left;\">Number of File Entries:</th><td>$NFiles</td>\n";
+print "<th style=\"text-align:left;\">Total Active Revisions:</th><td>$NOKRevisions</td></tr>\n";
+print "<tr><th style=\"text-align:left;\">Actual number of Files:</th><td>$NOKFiles</td>\n";
+print "<th style=\"text-align:left;\">Average Versions per Document:</th><td>$RevPerDoc</td></tr>\n";
+print "<tr><th style=\"text-align:left;\">Average Files per Revision:</th><td>$FilePerRev</td>\n";
+print "<th style=\"text-align:left;\">Average Files per Document:</th><td>$FilePerDoc</td></tr>\n";
 
 print "</tbody>\n";
 
@@ -116,21 +119,24 @@ my ($NRevisionTopics) = $NRevTopic_query -> fetchrow_array;
 my $TopicPerRev = sprintf "%5.2f",$NRevisionTopics/$NRevisions;
 my $DocPerTopic = sprintf "%5.2f",$NDocuments/$NUniqTopics*$TopicPerRev;
 
+print "<thead class=\"w3-light-gray\">\n";
+print "<tr><th colspan=\"4\" class=\"w3-center\" style=\"font-weight:700;\">Authors and Topics</th></tr>\n";
+print "</thead>\n";
 print "<tbody>\n";
-print "<tr><th>Number of registered Authors:       </th><td>$NAuthors</td>\n";
-print " <th>Number of possible Topics:             </th><td>$NTopics</td></tr>\n";
+print "<tr><th style=\"text-align:left;\">Number of registered Authors:</th><td>$NAuthors</td>\n";
+print "<th style=\"text-align:left;\">Number of possible Topics:</th><td>$NTopics</td></tr>\n";
 
-print "<tr><th>Authors of one or more Documents:   </th><td>$NUniqAuth</td>\n";
-print "    <th>Number of Topics used:              </th><td>$NUniqTopics</td></tr>\n";
+print "<tr><th style=\"text-align:left;\">Authors of one or more Documents:</th><td>$NUniqAuth</td>\n";
+print "<th style=\"text-align:left;\">Number of Topics used:</th><td>$NUniqTopics</td></tr>\n";
 
-print "<tr><th>Number of Authors on all Revisions: </th><td>$NRevisionAuthors</td>\n";
-print "    <th>Number of Topics on all Revisions:  </th><td>$NRevisionTopics</td></tr>\n";
+print "<tr><th style=\"text-align:left;\">Number of Authors on all Revisions:</th><td>$NRevisionAuthors</td>\n";
+print "<th style=\"text-align:left;\">Number of Topics on all Revisions:</th><td>$NRevisionTopics</td></tr>\n";
 
-print "<tr><th>Average Authors per Revision:       </th><td>$AuthPerRev</td>\n";
-print "    <th>Average Topics per Revision:        </th><td>$TopicPerRev</td></tr>\n";
+print "<tr><th style=\"text-align:left;\">Average Authors per Revision:</th><td>$AuthPerRev</td>\n";
+print "<th style=\"text-align:left;\">Average Topics per Revision:</th><td>$TopicPerRev</td></tr>\n";
 
-print "<tr><th>Average Documents per Author:       </th><td>$DocPerAuth</td>\n";
-print "    <th>Average Documents per Topic:        </th><td>$DocPerTopic</td></tr>\n";
+print "<tr><th style=\"text-align:left;\">Average Documents per Author:</th><td>$DocPerAuth</td>\n";
+print "<th style=\"text-align:left;\">Average Documents per Topic:</th><td>$DocPerTopic</td></tr>\n";
 
 print "</tbody>\n";
 
@@ -149,15 +155,20 @@ my ($NRevisionEvents) = $NRevEvent_query -> fetchrow_array;
 my $EventsPerRev = sprintf "%5.2f",$NRevisionEvents/$NRevisions;
 my $DocPerEvent  = sprintf "%5.2f",$NDocuments/$NEvents*$EventsPerRev;
 
-
+print "<thead class=\"w3-light-gray\">\n";
+print "<tr><th colspan=\"4\" class=\"w3-center\" style=\"font-weight:700;\">Events</th></tr>\n";
+print "</thead>\n";
 print "<tbody>\n";
-print "<tr><th>Number of Events:                   </th><td>$NEvents</td></tr>\n";
-print "<tr><th>Events with Documents:              </th><td>$NUniqEvents</td></tr>\n";
-print "<tr><th>Number of Events for all Revisions: </th><td>$NRevisionEvents</td></tr>\n";
-print "<tr><th>Average Events per Revision:        </th><td>$EventsPerRev</td></tr>\n";
-print "<tr><th>Estimated Documents per Event:      </th><td>$DocPerEvent</td></tr>\n";
+print "<tr><th style=\"text-align:left;\">Number of Events:</th><td>$NEvents</td>\n";
+print "<th style=\"text-align:left;\">Events with Documents:</th><td>$NUniqEvents</td></tr>\n";
+print "<tr><th style=\"text-align:left;\">Number of Events for all Revisions:</th><td>$NRevisionEvents</td>\n";
+print "<th style=\"text-align:left;\">Average Events per Revision:</th><td>$EventsPerRev</td></tr>\n";
+print "<tr><th style=\"text-align:left;\">Estimated Documents per Event:</th><td>$DocPerEvent</td>\n";
+print "<td></td><td></td></tr>\n";
 print "</tbody>\n";
 
 print "</table>\n";
+print "</div><!-- Closing div w3-border w3-border-black w3-margin-bottom -->\n";
+print "</div><!-- Closing div w3-container -->\n";
 
 &DocDBFooter($DBWebMasterEmail,$DBWebMasterName);
