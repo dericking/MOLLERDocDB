@@ -62,170 +62,260 @@ EndPage(@ErrorStack);
 DocDBHomeHeader();
 
 print "<div id=\"LeftColumn3ColWrapper\">\n";
-print "<div id=\"LeftColumn3Col\" class=\"w3-quarter w3-paper w3-border w3-border-gray w3-round w3-margin-top\">\n";
+print "<div id=\"LeftColumnModifyHome\" class=\"w3-quarter w3-card w3-paper w3-border w3-border-gray w3-round w3-margin-top\">\n";
+print "<div class=\"w3-center\" style=\"font-weight:700;margin-top:4px;\"><span style=\"text-decoration:underline;\">Quick Links</span></div>\n";
 print "<div class=\"w3-bar-block\">\n";
-print "<div class=\"w3-bar-item\"><strong><a href=\"$MainPage\" class=\"w3-text-teal\">Main Menu</a></strong></div>\n";
-print "<div class=\"w3-bar-item\"><strong><a href=\"$DocDBInstructions\" class=\"w3-text-teal\">Instructions</a></strong></div>\n";
-if ($PersonalAccountLink) {
-  print "<div class=\"w3-bar-item\"><strong>$PersonalAccountLink</strong></div>\n";
-}
-print "<div class=\"w3-bar-item\"><strong><a href=\"#customcreate\" class=\"w3-text-teal\">Customized<br/>Create/Modify</a></strong></div>\n";
-print "<div class=\"w3-bar-item\"><strong><a href=\"#addform\" class=\"w3-text-teal\">Customized<br/>Add Files</a></strong></div>\n";
+print "<div class=\"w3-bar-item\" style=\"font-weight:700;cursor:default;\">Help</div>\n";
+print "<div class=\"w3-bar-item\" style=\"padding-left:16px;\">".FormElementTitle(-helplink => "modifytypes", -helptext => "Which option do I choose?",
+                           -nobold => $TRUE, -nocolon  => $TRUE,         -nobreak  => $TRUE)."</div>\n";
+print "<div class=\"w3-bar-item\" style=\"font-weight:700;cursor:default;\">Page Navigation</div>\n";
+print "<div class=\"w3-bar-item w3-button\" style=\"padding-left:16px;\"><a href=\"#documentmanagement\" class=\"w3-text-teal\" style=\"text-decoration:none;\">Document Management</a></div>\n";
+print "<div class=\"w3-bar-item w3-button\" style=\"padding-left:16px;\"><a href=\"#eventmanagement\" class=\"w3-text-teal\" style=\"text-decoration:none;\">Event Management</a></div>\n";
+print "<div class=\"w3-bar-item w3-button\" style=\"padding-left:16px;\"><a href=\"#databasemaintenance\" class=\"w3-text-teal\" style=\"text-decoration:none;\">Database Maintenance</a></div>\n";
+print "<div class=\"w3-bar-item w3-button\" style=\"padding-left:16px;\"><a href=\"#customcreate\" class=\"w3-text-teal\" style=\"text-decoration:none;\">Customized Insert/Modify</a></div>\n";
+print "<div class=\"w3-bar-item w3-button\" style=\"padding-left:16px;\"><a href=\"#addform\" class=\"w3-text-teal\" style=\"text-decoration:none;\">Customized Add/Replace</a></div>\n";
+# COMMENTED OUT: Instructions link - no longer needed
+# print "<div class=\"w3-bar-item\"><strong><a href=\"$DocDBInstructions\" class=\"w3-text-teal\">Instructions</a></strong></div>\n";
+# COMMENTED OUT: Your Account link - no longer needed
+# if ($PersonalAccountLink) {
+#   print "<div class=\"w3-bar-item\"><strong>$PersonalAccountLink</strong></div>\n";
+# }
 foreach my $Text (@{ $ProjectMessages{Homepage}{LeftColumn} }) {
   print "<div class=\"w3-bar-item\"><strong>$Text</strong></div>\n";
 }
-print "<div class=\"w3-bar-item\"><strong><a href=\"$DocDBHome\" class=\"w3-text-teal\">About DocDB</a></strong></div>\n";
+# COMMENTED OUT: About DocDB link - no longer needed
+# print "<div class=\"w3-bar-item\"><strong><a href=\"$DocDBHome\" class=\"w3-text-teal\">About DocDB</a></strong></div>\n";
 print "</div><!-- Closing div w3-bar-block -->\n";
 
-print "</div><!-- Closing div id LeftColumn3Col -->\n";
+print "</div><!-- Closing div id LeftColumnModifyHome -->\n";
 print "</div><!-- Closing div id LeftColumn3ColWrapper -->\n";
 
-print "<div id=\"MainColumn3Col\" class=\"w3-threequarter\">\n";
-print "<strong>Document Management: ";
-print "(".FormElementTitle(-helplink => "modifytypes", -helptext => "Which option do I choose?",
-                           -nobold => $TRUE, -nocolon  => $TRUE,         -nobreak  => $TRUE).")</strong>";
+print "<div id=\"ModifyHomeMainColumn\" class=\"w3-threequarter\" style=\"padding-left:16px;\">\n";
+
+### Document Management Quick Actions Module
+
+print "<div id=\"DocumentManagementModule\" class=\"w3-paper w3-border w3-border-gray w3-round w3-margin-top\">\n";
+print "<h3 id=\"documentmanagement\" class=\"w3-center\">Document Management</h3>\n";
+
+print "<div class=\"w3-margin-bottom\">\n";
 
 ### New upload short form
 
-print "<ul>\n";
-print "<li>";
-print "\n",$query -> start_form('POST',$DocumentAddForm),"<div>\n";
-print $query -> submit (-class => "w3-button w3-blue", -value => "Create a new");
-print " document from ";
-print $query -> textfield(-name => "numfile", -size => 2, -maxlength => 2, -class => 'w3-input w3-border w3-round');
-print " file(s) on your ";
+print "<div class=\"w3-padding-small\">\n";
+print "\n",$query -> start_form('POST',$DocumentAddForm);
+print "<div class=\"w3-bar\" style=\"display:flex;align-items:center;gap:6px;flex-wrap:wrap;\">\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
+print $query -> submit (-class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small", -value => "Create a new");
+print "</div>\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;white-space:nowrap;\"> document from </div>\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
+print $query -> textfield(-name => "numfile", -size => 2, -maxlength => 2, -class => 'w3-input w3-border w3-round', -style => 'width:3.2em;padding:4px 6px;display:inline-block;');
+print "</div>\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;white-space:nowrap;\"> file(s) on your </div>\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;white-space:nowrap;\">\n";
 print FormElementTitle(-helplink => "uploadmethod", -helptext => "local computer",
                        -nocolon  => $TRUE,          -nobreak  => $TRUE);
+print "</div>\n";
 print $query -> hidden(-name => 'mode',    -default => 'add');
 print $query -> hidden(-name => 'upload',    -default => 'file');
-print "\n</div>\n",$query -> end_form,"\n\n";
-print "</li>";
+print "</div><!-- Closing div w3-bar -->\n";
+print $query -> end_form,"\n";
+print "</div><!-- Closing div w3-padding-small -->\n";
 
 ### New http short form
 
-print "<li>";
-print "\n",$query -> start_form('POST',$DocumentAddForm),"<div>\n";
-print $query -> submit (-class => "w3-button w3-blue", -value => "Create a new");
-print " document from ";
-print $query -> textfield(-name => "numfile", -size => 2, -maxlength => 2, -class => 'w3-input w3-border w3-round');
-print " file(s) on the ";
+print "<div class=\"w3-padding-small\">\n";
+print "\n",$query -> start_form('POST',$DocumentAddForm);
+print "<div class=\"w3-bar\" style=\"display:flex;align-items:center;gap:6px;flex-wrap:wrap;\">\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
+print $query -> submit (-class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small", -value => "Create a new");
+print "</div>\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;white-space:nowrap;\"> document from </div>\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
+print $query -> textfield(-name => "numfile", -size => 2, -maxlength => 2, -class => 'w3-input w3-border w3-round', -style => 'width:3.2em;padding:4px 6px;display:inline-block;');
+print "</div>\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;white-space:nowrap;\"> file(s) on the </div>\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;white-space:nowrap;\">\n";
 print FormElementTitle(-helplink => "uploadmethod", -helptext => "web",
                        -nocolon  => $TRUE,          -nobreak  => $TRUE);
+print "</div>\n";
 print $query -> hidden(-name => 'mode',    -default => 'add');
 print $query -> hidden(-name => 'upload',    -default => 'http');
-print "\n</div>\n",$query -> end_form,"\n\n";
-print "</li>";
+print "</div><!-- Closing div w3-bar -->\n";
+print $query -> end_form,"\n";
+print "</div><!-- Closing div w3-padding-small -->\n";
 
 ### Reserve form (button)
 
-print "<li>";
-print "\n",$query -> start_form('POST',$DocumentAddForm),"<div>\n";
-print $query -> submit (-class => "w3-button w3-blue", -value => "Reserve");
-print " a document number\n";
-print "(if you don't yet have a draft of your document).\n";
+print "<div class=\"w3-padding-small\">\n";
+print "\n",$query -> start_form('POST',$DocumentAddForm);
+print "<div class=\"w3-bar\" style=\"display:flex;align-items:center;gap:6px;flex-wrap:wrap;\">\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
+print $query -> submit (-class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small", -value => "Reserve");
+print "</div>\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;\"> a document number (if you don't yet have a draft of your document).</div>\n";
 print $query -> hidden(-name => 'mode',    -default => 'reserve');
-print "\n</div>\n",$query -> end_form,"\n\n";
-print "</li>";
+print "</div><!-- Closing div w3-bar -->\n";
+print $query -> end_form,"\n";
+print "</div><!-- Closing div w3-padding-small -->\n";
 
 ### Update short form
 
-print "<li>";
-print "\n",$query -> start_form('POST',$DocumentAddForm),"<div>\n";
-print $query -> submit (-class => "w3-button w3-blue", -value => "Update");
-print " document # ";
-print $query -> textfield(-name => "docid", -size => 6, -maxlength => 6, -class => 'w3-input w3-border w3-round');
+print "<div class=\"w3-padding-small\">\n";
+print "\n",$query -> start_form('POST',$DocumentAddForm);
+print "<div class=\"w3-bar\" style=\"display:flex;align-items:center;gap:6px;flex-wrap:wrap;\">\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
+print $query -> submit (-class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small", -value => "Update");
+print "</div>\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;white-space:nowrap;\"> document # </div>\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
+print $query -> textfield(-name => "docid", -size => 6, -maxlength => 6, -class => 'w3-input w3-border w3-round', -style => 'width:4.8em;padding:4px 6px;display:inline-block;');
+print "</div>\n";
 print $query -> hidden(-name => 'mode',    -default => 'update');
-print "\n</div>\n",$query -> end_form,"\n\n";
-print "</li>";
+print "</div><!-- Closing div w3-bar -->\n";
+print $query -> end_form,"\n";
+print "</div><!-- Closing div w3-padding-small -->\n";
 
 ### Update DB short form
 
-print "<li>";
-print "\n",$query -> start_form('POST',$DocumentAddForm),"<div>\n";
-print $query -> submit (-class => "w3-button w3-blue", -value => "Update Metadata");
-print " for document # ";
-print $query -> textfield(-name => "docid", -size => 6, -maxlength => 6, -class => 'w3-input w3-border w3-round');
+print "<div class=\"w3-padding-small\">\n";
+print "\n",$query -> start_form('POST',$DocumentAddForm);
+print "<div class=\"w3-bar\" style=\"display:flex;align-items:center;gap:6px;flex-wrap:wrap;\">\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
+print $query -> submit (-class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small", -value => "Update Metadata");
+print "</div>\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;white-space:nowrap;\"> for document # </div>\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
+print $query -> textfield(-name => "docid", -size => 6, -maxlength => 6, -class => 'w3-input w3-border w3-round', -style => 'width:4.8em;padding:4px 6px;display:inline-block;');
+print "</div>\n";
 print $query -> hidden(-name => 'mode',    -default => 'updatedb');
-print "\n</div>\n",$query -> end_form,"\n\n";
-print "</li>";
+print "</div><!-- Closing div w3-bar -->\n";
+print $query -> end_form,"\n";
+print "</div><!-- Closing div w3-padding-small -->\n";
 
 ### File Add short form
 
-print "<li>";
-print "\n",$query -> start_form('POST',$AddFilesForm),"<div>\n";
-print $query -> submit (-class => "w3-button w3-blue", -value => "Add");
-print " ";
-print $query -> textfield(-name => "numfile", -size => 3, -maxlength => 2, -class => 'w3-input w3-border w3-round');
-print " file(s) to document # ";
-print $query -> textfield(-name => "docid", -size => 6, -maxlength => 6, -class => 'w3-input w3-border w3-round');
+print "<div class=\"w3-padding-small\">\n";
+print "\n",$query -> start_form('POST',$AddFilesForm);
+print "<div class=\"w3-bar\" style=\"display:flex;align-items:center;gap:6px;flex-wrap:wrap;\">\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
+print $query -> submit (-class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small", -value => "Add");
+print "</div>\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
+print $query -> textfield(-name => "numfile", -size => 2, -maxlength => 2, -class => 'w3-input w3-border w3-round', -style => 'width:3.2em;padding:4px 6px;display:inline-block;');
+print "</div>\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;white-space:nowrap;\"> file(s) to document # </div>\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
+print $query -> textfield(-name => "docid", -size => 6, -maxlength => 6, -class => 'w3-input w3-border w3-round', -style => 'width:4.8em;padding:4px 6px;display:inline-block;');
+print "</div>\n";
 #print $query -> hidden(-name => 'mode',    -default => 'updatedb');
-print "\n</div>\n",$query -> end_form,"\n\n";
-print "</li>";
+print "</div><!-- Closing div w3-bar -->\n";
+print $query -> end_form,"\n";
+print "</div><!-- Closing div w3-padding-small -->\n";
 
 if (CanAdminister()) { # Delete Form
-  print "<li>";
-  print "\n",$query -> start_form('POST',$DeleteConfirm),"<div>\n";
-  print $query -> submit (-class => "w3-button w3-red", -value => "Delete");
-  print " document # ";
-  print $query -> textfield(-name => "docid", -size => 6, -maxlength => 6, -class => 'w3-input w3-border w3-round');
-  print "\n</div>\n",$query -> end_form,"\n\n";
-  print "</li>";
+  print "<div class=\"w3-padding-small\">\n";
+  print "\n",$query -> start_form('POST',$DeleteConfirm);
+  print "<div class=\"w3-bar\" style=\"display:flex;align-items:center;gap:6px;flex-wrap:wrap;\">\n";
+  print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
+  print $query -> submit (-class => "w3-button w3-red w3-round w3-border w3-border-black w3-padding-small", -value => "Delete");
+  print "</div>\n";
+  print "<div class=\"w3-bar-item\" style=\"padding:0;white-space:nowrap;\"> document # </div>\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
+print $query -> textfield(-name => "docid", -size => 6, -maxlength => 6, -class => 'w3-input w3-border w3-round', -style => 'width:4.8em;padding:4px 6px;display:inline-block;');
+print "</div>\n";
+print "</div><!-- Closing div w3-bar -->\n";
+print $query -> end_form,"\n";
+print "</div><!-- Closing div w3-padding-small -->\n";
 }
-print "</ul>\n";
+
+print "</div><!-- Closing div w3-margin-bottom -->\n";
+print "</div><!-- Closing div w3-card -->\n";
 
 if (CanCreateMeeting()) {
-  print "<strong>Event Management</strong>\n";
-  print "<ul>\n";
+  print "<div id=\"EventManagementModule\" class=\"w3-paper w3-border w3-border-gray w3-round w3-margin-top\">\n";
+  print "<h3 id=\"eventmanagement\" class=\"w3-center\">Event Management</h3>\n";
+
+  print "<div class=\"w3-margin-bottom\">\n";
 
   ### Full meeting form
 
   if ($Preferences{Components}{AgendaMaker}) {
-    print "<li>\n";
-    print $query -> start_form('POST',$MeetingModify),"<div>\n";
+    print "<div class=\"w3-padding-small\">\n";
+    print "\n",$query -> start_form('POST',$MeetingModify);
+    print "<div class=\"w3-bar\" style=\"display:flex;align-items:center;gap:6px;flex-wrap:wrap;\">\n";
+    print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
     print $query -> hidden(-name => 'dummy', -default => 1);
-    print $query -> submit (-class => "w3-button w3-blue", -value => "Create");
-    print " a new event with multiple sessions";
-    print "\n</div>\n",$query -> end_form,"\n\n";
-    print "</li>\n";
+    print $query -> submit (-class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small", -value => "Create");
+    print "</div>\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;\"> a new event with multiple sessions</div>\n";
+print "</div><!-- Closing div w3-bar -->\n";
+print $query -> end_form,"\n";
+print "</div><!-- Closing div w3-padding-small -->\n";
 
     ### Reduced meeting form
 
-    print "<li>\n";
-    print $query -> start_form('POST',$SessionModify),"<div>\n";
+    print "<div class=\"w3-padding-small\">\n";
+    print "\n",$query -> start_form('POST',$SessionModify);
+    print "<div class=\"w3-bar\" style=\"display:flex;align-items:center;gap:6px;flex-wrap:wrap;\">\n";
+    print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
     print $query -> hidden(-name => 'singlesession', -default => 1);
     print $query -> hidden(-name => 'mode', -default => "new");
-    print $query -> submit (-class => "w3-button w3-blue", -value => "Create");
-    print " a new event with only one session";
-    print "\n</div>\n",$query -> end_form,"\n\n";
-    print "</li>\n";
+    print $query -> submit (-class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small", -value => "Create");
+    print "</div>\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;\"> a new event with only one session</div>\n";
+print "</div><!-- Closing div w3-bar -->\n";
+print $query -> end_form,"\n";
+print "</div><!-- Closing div w3-padding-small -->\n";
   }
 
   ### No sessions form
 
-  print "<li>\n";
-  print $query -> start_form('POST',$MeetingModify),"<div>\n";
+  print "<div class=\"w3-padding-small\">\n";
+  print "\n",$query -> start_form('POST',$MeetingModify);
+  print "<div class=\"w3-bar\" style=\"display:flex;align-items:center;gap:6px;flex-wrap:wrap;\">\n";
+  print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
   print $query -> hidden(-name => 'nosessions',    -default => 1);
-  print $query -> submit (-class => "Action", -value => "Create");
-  print " an externally managed event (e. g. a conference)";
-  print "\n</div>\n",$query -> end_form,"\n\n";
-  print "</li>\n";
+  print $query -> submit (-class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small", -value => "Create");
+  print "</div>\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;\"> an externally managed event (e. g. a conference)</div>\n";
+print "</div><!-- Closing div w3-bar -->\n";
+print $query -> end_form,"\n";
+print "</div><!-- Closing div w3-padding-small -->\n";
 
-  print "<li>Modify an  <a href=\"$ListAllMeetings?mode=modify\" class=\"w3-text-teal\">existing
-             event</a> (choose event on next page)</li>\n";
+  print "<div class=\"w3-padding-small\">\n";
+  print "<div class=\"w3-bar\" style=\"display:flex;align-items:center;gap:6px;flex-wrap:wrap;\">\n";
+  print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
+  print "<a href=\"$ListAllMeetings?mode=modify\" class=\"w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small\" style=\"text-decoration:none;\">Modify</a>\n";
+  print "</div>\n";
+  print "<div class=\"w3-bar-item\" style=\"padding:0;\"> an existing event (choose event on next page)</div>\n";
+  print "</div><!-- Closing div w3-bar -->\n";
+  print "</div><!-- Closing div w3-padding-small -->\n";
 
-  print "</ul>\n";
+  print "</div><!-- Closing div w3-margin-bottom -->\n";
+  print "</div><!-- Closing div w3-card -->\n";
 }
 
-print "<p><strong>Database maintenance:</strong></p>\n";
+print "<div id=\"DatabaseMaintenanceModule\" class=\"w3-paper w3-border w3-border-gray w3-round w3-margin-top\">\n";
+print "<h3 id=\"databasemaintenance\" class=\"w3-center\">Database Maintenance</h3>\n";
+print "<div class=\"w3-margin-bottom\">\n";
+print "<div class=\"w3-padding-small\">\n";
+print "<div class=\"w3-bar\" style=\"display:flex;align-items:center;gap:6px;flex-wrap:wrap;\">\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
+print "<a href=\"$AuthorAddForm\" class=\"w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small\" style=\"text-decoration:none;\">Add</a>\n";
+print "</div>\n";
+print "<div class=\"w3-bar-item\" style=\"padding:0;\"> an author</div>\n";
+print "</div><!-- Closing div w3-bar -->\n";
+print "</div><!-- Closing div w3-padding-small -->\n";
 print "<ul>\n";
-print "<li>Add an <a href=\"$AuthorAddForm\" class=\"w3-text-teal\">author</a></li>\n";
 if (CanAdminister()) {
-  print "<li>Perform other <a href=\"$AdministerHome\" class=\"w3-text-teal\">administration tasks</a></li>\n";
+  print "<li>Perform other <a href=\"$AdministerHome\" class=\"w3-text-teal\" style=\"text-decoration:none;\">administration tasks</a></li>\n";
 }
+print "<li>Contact Administrator to add a Topic</li>\n";
+print "<li>Contact Administrator to add Keywords</li>\n";
 print "</ul>\n";
-
-
-print "<hr/>\n";
+print "</div><!-- Closing div w3-margin-bottom -->\n";
+print "</div><!-- Closing div w3-card -->\n";
 
 ### Customized Add/Update form creation form
 
@@ -233,54 +323,50 @@ print "<a name=\"customcreate\" />\n";
 
 print $query -> start_form('POST',$DocumentAddForm);
 #print "<div>\n";
-$modes{reserve}  = "Reserve document #";
-$modes{add}      = "New document";
-$modes{update}   = "Update existing document";
-$modes{updatedb} = "Update metadata";  # See note in ProcessDocumentAdd
+$modes{reserve}  = "&nbsp;Reserve document #";
+$modes{add}      = "&nbsp;New document";
+$modes{update}   = "&nbsp;Update existing document";
+$modes{updatedb} = "&nbsp;Update metadata";  # See note in ProcessDocumentAdd
 
 @modes = ("add","reserve","update","updatedb");
 
-$uploads{http}   = "HTTP submission";
-$uploads{file}   = "Local file upload";
+$uploads{http}   = "&nbsp;HTTP submission";
+$uploads{file}   = "&nbsp;Local file upload";
 @uploads = ("file","http");
 
-$archives{archive}    = "Archive (.tar/.zip) upload";
-$archives{single}   = "Single file";
-$archives{multi}   = "Multiple files";
+$archives{archive}    = "&nbsp;Archive (.tar/.zip) upload";
+$archives{single}   = "&nbsp;Single file";
+$archives{multi}   = "&nbsp;Multiple files";
 @archives = ("single","multi","archive");
 
-$topicmodes{multi}  = "Multiple Topic Boxes";
-$topicmodes{single} = "Single Topic List";
-$topicmodes{tree}   = "Expandable Tree";
+$topicmodes{multi}  = "&nbsp;Multiple Topic Boxes";
+$topicmodes{single} = "&nbsp;Single Topic List";
+$topicmodes{tree}   = "&nbsp;Expandable Tree";
 @topicmodes = ("tree","multi","single");
 
-$authormodes{field} = "Ordered text field";
-$authormodes{list}  = "Selectable list";
-$authormodes{active}  = "Active search";
+$authormodes{field} = "&nbsp;Ordered text field";
+$authormodes{list}  = "&nbsp;Selectable list";
+$authormodes{active}  = "&nbsp;Active search";
 @authormodes = ("list","field","active");
 
 GetPrefsCookie();
 
-print "<table id=\"CustomCreate\" class=\"GenCustomForm\">\n";
-print "<tr><th colspan=\"2\"><big>Customized Insert/Modify</big><br/>
-       Use this form to produce a
-       customized document creation or update form.<br/> Make a selection from each
-       group.</th></tr>\n";
+print "<div id=\"CustomizedInsertModifyModule\" class=\"w3-paper w3-border w3-border-gray w3-round w3-margin-top\">\n";
+print "<h3 class=\"w3-center\">Customized Insert/Modify</h3>\n";
+print "<table id=\"CustomCreate\" class=\"w3-table w3-bordered w3-paper\">\n";
+print "<tr><td colspan=\"3\" style=\"font-style:italic;\">Use this form to produce a customized document creation or update form. Make a selection from each group.</td></tr>\n";
 print "<tr><td class=\"w3-right-align\">\n";
 print FormElementTitle(-helplink => "modifytypes", -helptext => "Type of modification",
                        -nobreak  => $TRUE);
 print "</td>\n";
 
 print "<td>\n";
- print "<table class=\"CustomButtons\"><tr><td>\n";
- print $query -> radio_group(-name => "mode", -labels => \%modes, -values => \@modes, -columns => 2);
- print "</td></tr>\n";
- print "<tr><td>\n";
- print "<b>Update Doc #:</b>\n";
- print $query -> textfield(-name => "docid", -size => 6, -maxlength => 6, -class => 'w3-input w3-border w3-round');
- print "&nbsp;&nbsp;&nbsp;\n";
- print "</td></tr>\n";
- print "</table>\n";
+print $query -> radio_group(-name => "mode", -labels => \%modes, -values => \@modes, -linebreak => $TRUE);
+print "</td>\n";
+
+print "<td>\n";
+print "<b>Update Doc #:</b>\n";
+print $query -> textfield(-name => "docid", -size => 6, -maxlength => 6, -class => 'w3-input w3-border w3-round', -style => 'width:4.8em;padding:4px 6px;display:inline-block;');
 print "</td></tr>\n";
 
 print "<tr><td class=\"w3-right-align\">\n";
@@ -288,13 +374,11 @@ print FormElementTitle(-helplink => "uploadtype", -helptext => "Upload type",
                        -nobreak  => $TRUE);
 print "</td>\n";
 print "<td>\n";
- print "<table class=\"CustomButtons\"><tr><td>\n";
- print $query -> radio_group(-name => "archive", -values => \@archives, -default => $UploadTypePref, -labels
-                             => \%archives, -columns => 1);
- print "</td><td>\n";
- print $query -> textfield(-name => "numfile", -default => $NumFilesPref, -size => 2, -maxlength => 2, -class => 'w3-input w3-border w3-round');
- print "<b># of files</b>\n";
- print "</td></tr></table>\n";
+print $query -> radio_group(-name => "archive", -values => \@archives, -default => $UploadTypePref, -labels => \%archives, -linebreak => $TRUE);
+print "</td>\n";
+print "<td>\n";
+print $query -> textfield(-name => "numfile", -default => $NumFilesPref, -size => 2, -maxlength => 2, -class => 'w3-input w3-border w3-round', -style => 'width:3.2em;padding:4px 6px;display:inline-block;');
+print "<b>&nbsp;# of files</b>\n";
 print "</td></tr>\n";
 
 print "<tr><td class=\"w3-right-align\">\n";
@@ -302,7 +386,7 @@ print FormElementTitle(-helplink => "uploadmethod", -helptext => "Upload method"
                        -nobreak  => $TRUE);
 print "</td>\n";
 print "<td>\n";
-print $query -> radio_group(-name => "upload", -values => \@uploads, -default => $UploadMethodPref, -labels => \%uploads);
+print $query -> radio_group(-name => "upload", -values => \@uploads, -default => $UploadMethodPref, -labels => \%uploads, -linebreak => $TRUE);
 print "</td></tr>\n";
 
 print "<tr><td class=\"w3-right-align\">\n";
@@ -310,7 +394,7 @@ print FormElementTitle(-helplink => "topicoption", -helptext => "Topic Selection
                        -nobreak  => $TRUE);
 print "</td>\n";
 print "<td>\n";
-print $query -> radio_group(-name => "topicmode", -values => \@topicmodes, -default => $TopicModePref, -labels => \%topicmodes);
+print $query -> radio_group(-name => "topicmode", -values => \@topicmodes, -default => $TopicModePref, -labels => \%topicmodes, -linebreak => $TRUE);
 print "</td></tr>\n";
 
 print "<tr><td class=\"w3-right-align\">\n";
@@ -318,7 +402,7 @@ print FormElementTitle(-helplink => "authoroption", -helptext => "Author Selecti
                        -nobreak  => $TRUE);
 print "</td>\n";
 print "<td>\n";
-print $query -> radio_group(-name => "authormode", -values => \@authormodes, -default => $AuthorModePref, -labels => \%authormodes);
+print $query -> radio_group(-name => "authormode", -values => \@authormodes, -default => $AuthorModePref, -labels => \%authormodes, -linebreak => $TRUE);
 print "</td></tr>\n";
 
 print "<tr><td class=\"w3-right-align\">\n";
@@ -326,32 +410,33 @@ print FormElementTitle(-helplink => "dateoverride", -helptext => "Override creat
                        -nobreak  => $TRUE);
 print "</td>\n";
 print "<td>\n";
+my %overdatelabels = ('No' => "&nbsp;No", 'Yes' => "&nbsp;Yes");
 print $query -> radio_group(-name => "overdate", -values => ['No','Yes'],
-                            -default => $DateOverridePref);
+                            -default => $DateOverridePref, -labels => \%overdatelabels, -linebreak => $TRUE);
 print "</td></tr>\n";
 
-print "<tr><th colspan=\"2\">\n";
-print $query -> submit (-value => "Give me my customized form");
+print "<tr><th colspan=\"3\" class=\"w3-center\">\n";
+print $query -> submit (-value => "Give me my customized form", -class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small");
 print "</th></tr>\n";
 print "</table>\n";
 print $query -> end_form;
+print "</div><!-- Closing div w3-card -->\n";
 print "\n\n";
 
 ### File addition form
 
-$addarchives{single}   = "Single file";
-$addarchives{multi}   = "Multiple files";
+$addarchives{single}   = "&nbsp;Single file";
+$addarchives{multi}   = "&nbsp;Multiple files";
 @addarchives = ("single","multi");
 
 print "<a name=\"addform\" />\n";
 
+print "<div id=\"CustomizedAddReplaceFilesModule\" class=\"w3-paper w3-border w3-border-gray w3-round w3-margin-top w3-margin-bottom\">\n";
+print "<h3 class=\"w3-center\">Customized Add/Replace Files</h3>\n";
 print $query -> start_form('POST',$AddFilesForm);
-print "<table id=\"CustomAdd\" class=\"GenCustomForm\">\n";
+print "<table id=\"CustomAdd\" class=\"w3-table w3-bordered w3-paper\">\n";
 
-print "<tr><th colspan=\"2\">\n";
-print "<big>Customized Add/Replace Files</big><br/>\n";
-print "Use this form to produce a customized file addition form.<br/>Make a
-       selection from each group.</th></tr>\n";
+print "<tr><td colspan=\"3\" style=\"font-style:italic;\">Use this form to produce a customized file addition form. Make a selection from each group.</td></tr>\n";
 print "<tr><td class=\"w3-right-align\">\n";
 print FormElementTitle(-helplink => "docnumber", -helptext => "Update Doc #",
                        -nobreak  => $TRUE);
@@ -365,13 +450,11 @@ print FormElementTitle(-helplink => "uploadtype", -helptext => "Upload type",
                        -nobreak  => $TRUE);
 print "</td>\n";
 print "<td>\n";
-print "<table class=\"CustomButtons\"><tr><td>\n";
-print $query -> radio_group(-name => "archive", -values => \@addarchives, -labels
-                            => \%addarchives, -columns => 1);
-print "</td><td>\n";
-print $query -> textfield(-name => "numfile", -size => 2, -maxlength => 2, -class => 'w3-input w3-border w3-round');
-print "<b># of files</b>\n";
-print "</td></tr></table>\n";
+print $query -> radio_group(-name => "archive", -values => \@addarchives, -labels => \%addarchives, -linebreak => $TRUE);
+print "</td>\n";
+print "<td>\n";
+print $query -> textfield(-name => "numfile", -size => 2, -maxlength => 2, -class => 'w3-input w3-border w3-round', -style => 'width:3.2em;padding:4px 6px;display:inline-block;');
+print "<b>&nbsp;# of files</b>\n";
 print "</td></tr>\n";
 
 print "<tr><td class=\"w3-right-align\">\n";
@@ -379,15 +462,16 @@ print FormElementTitle(-helplink => "uploadmethod", -helptext => "Upload method"
                        -nobreak  => $TRUE);
 print "</td>\n";
 print "<td>\n";
-print $query -> radio_group(-name => "upload", -values => \@uploads, -labels => \%uploads);
+print $query -> radio_group(-name => "upload", -values => \@uploads, -labels => \%uploads, -linebreak => $TRUE);
 print "</td></tr>\n";
 
-print "<tr><th colspan=\"2\">\n";
-print $query -> submit (-value => "Give me my customized form");
+print "<tr><th colspan=\"3\" class=\"w3-center\">\n";
+print $query -> submit (-value => "Give me my customized form", -class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small");
 print "</th></tr>\n";
 
 print "</table>\n";
 print $query -> end_form;
+print "</div><!-- Closing div w3-card -->\n";
 print "\n\n";
 
 ### Right column (wrapped around by middle column)
