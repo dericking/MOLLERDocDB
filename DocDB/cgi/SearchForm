@@ -57,7 +57,7 @@ DocDBHeader("$Project Document Database Search","Document Database Search",
 
 my @ExternalDocDBIDs = GetAllExternalDocDBs();
 if (@ExternalDocDBIDs) {
-  print "<h5><a href=\"$XSearch\" class=\"w3-text-teal\">Search</a> other DocDB installations</h5>\n";
+  print "<h5><a href=\"$XSearch\" class=\"w3-text-docdb-color\">Search</a> other DocDB installations</h5>\n";
 }
 
 # Quick search table
@@ -71,7 +71,7 @@ print "</td><td class=\"w3-padding\" style=\"vertical-align: middle;\">\n";
 print $query -> textfield(-size => 40, -name => "simpletext", -class => "w3-input w3-border w3-round");
 print $query -> hidden(-name => "simple", -default => '1');
 print "</td><td class=\"w3-padding\" style=\"vertical-align: middle;\">\n";
-print $query -> submit (-class => "w3-button w3-teal w3-border w3-border-black w3-round", -value => "Quick Search");
+print $query -> submit (-class => "w3-button w3-docdb-color w3-border w3-border-black w3-round", -value => "Quick Search");
 print "</td></tr></table>\n";
 print $query -> end_multipart_form;
 print "</div><!-- Closing div w3-panel w3-paper w3-border w3-border-gray w3-round w3-padding -->\n";
@@ -89,7 +89,7 @@ print "<table class=\"w3-table w3-bordered no-row-lines\">\n";
 print "<tr>\n";
  print "<td colspan=\"3\" class=\"w3-padding-16 w3-center\">\n";
  print '<a name="Advanced"></a>';
- print $query -> submit (-value => "Advanced Search", -class => "w3-button w3-teal w3-border w3-border-black w3-round");
+ print $query -> submit (-value => "Advanced Search", -class => "w3-button w3-docdb-color w3-border w3-border-black w3-round");
  print "&nbsp;&nbsp;&nbsp;\n";
  print $query -> reset (-value => "Reset Search Form", -class => "w3-button w3-border w3-border-black w3-round");
  print "</td>\n";
@@ -171,7 +171,7 @@ print "</tr>\n";
   TopicScroll({ -multiple => $TRUE, -helplink => "searchtopic", });
  print "</td>\n";
  print "<td class=\"w3-padding w3-left-align\" style=\"vertical-align: middle;\">\n";
- print '<label><input type="checkbox" name="includesubtopics" class="w3-check" style="accent-color: teal;" checked="checked" value="1"> Include sub-topics</label>';
+ print '<label><input type="checkbox" name="includesubtopics" class="w3-check" style="accent-color: #004080;" checked="checked" value="1"> Include sub-topics</label>';
  print "</td>\n";
  print "</tr>\n";
  print "</table>\n";
@@ -198,7 +198,7 @@ print "</tr>\n";
 
  print "<tr>\n";
   print "<td colspan=\"3\" class=\"w3-padding-16 w3-center\">\n";
-  print $query -> submit (-value => "Advanced Search", -class => "w3-button w3-teal w3-border w3-border-black w3-round");
+  print $query -> submit (-value => "Advanced Search", -class => "w3-button w3-docdb-color w3-border w3-border-black w3-round");
   print "&nbsp;&nbsp;&nbsp;\n";
   print $query -> reset (-value => "Reset Search Form", -class => "w3-button w3-border w3-border-black w3-round");
   print "</td>\n";

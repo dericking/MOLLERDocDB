@@ -55,7 +55,7 @@ sub SmartHTML ($) {
                |                    # or else
                $                    #   then end of the string
               )
-             }{<a href="$1" class="w3-text-teal">$1</a>}igox;
+             }{<a href="$1" class="w3-text-docdb-color">$1</a>}igox;
   }
 
   # Make two line-feeds into a paragraph break and one into a line break in HTML
@@ -272,7 +272,7 @@ sub DocDBHomeHeader {
       print "<h3 class=\"Warning\">\n";
       print "You have presented a valid certificate, but are not yet authorized to access the DocDB.</h3>\n";
       print "<h2 class=\"AccessApplyLink\">\n";
-      print "<a href=\"$CertificateApplyForm\" class=\"w3-text-teal\">Apply for access or get more information.</a></h2>\n";
+      print "<a href=\"$CertificateApplyForm\" class=\"w3-text-docdb-color\">Apply for access or get more information.</a></h2>\n";
       print "<h3>You will be redirected here in 5 seconds.</h3>\n";
       print "</div>\n";
       print "\n";

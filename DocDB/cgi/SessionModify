@@ -517,9 +517,9 @@ if ($SingleSession) {
 }
 
 print "<span class=\"w3-content\" style=\"max-width:1200px; display:block; margin:0 auto; padding:16px; margin-bottom:16px; text-align:center;\">You can make more modifications, modify the agenda, or
-       <a href=\"$DisplayMeeting?conferenceid=$EventID\" class=\"w3-text-teal\">Display
+       <a href=\"$DisplayMeeting?conferenceid=$EventID\" class=\"w3-text-docdb-color\">Display
        the Event</a>. Click a <span class=\"Help\">highlighted</span> link or
-       read the <a href=\"$DocDBInstructions?set=event\" class=\"w3-text-teal\">instructions</a> for
+       read the <a href=\"$DocDBInstructions?set=event\" class=\"w3-text-docdb-color\">instructions</a> for
        help. Required fields are denoted by $RequiredMark.</span>\n";
 
 ### Display form
@@ -702,11 +702,11 @@ if ($SingleSession) {
 print "</table>\n";
 
 print "<p class=\"SubmitCell w3-center\">\n";
-print $query -> submit (-value => $ButtonTitle, -class => "w3-button w3-teal w3-border w3-border-black w3-round");
+print $query -> submit (-value => $ButtonTitle, -class => "w3-button w3-docdb-color w3-border w3-border-black w3-round");
 print "</p>\n";
 &TalkEntryForm(@SessionOrderIDs);
 print "<p class=\"SubmitCell w3-center\">\n";
-print $query -> submit (-value => $ButtonTitle, -class => "w3-button w3-teal w3-border w3-border-black w3-round");
+print $query -> submit (-value => $ButtonTitle, -class => "w3-button w3-docdb-color w3-border w3-border-black w3-round");
 print "</p>\n";
 
 print "</div>\n";

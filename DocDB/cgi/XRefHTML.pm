@@ -53,7 +53,7 @@ sub PrintXRefInfo ($) {
         if ($Version) {
           $DocumentLink .= "&amp;version=$Version";
         }
-        $DocumentLink .= "\" class=\"w3-text-teal\">".SmartHTML({-text=>$ExtProject})."-doc-".$DocumentID;
+        $DocumentLink .= "\" class=\"w3-text-docdb-color\">".SmartHTML({-text=>$ExtProject})."-doc-".$DocumentID;
         if ($Version) {
           $DocumentLink .= "-v$Version";
         }
@@ -62,7 +62,7 @@ sub PrintXRefInfo ($) {
         if ($Version) {
           $DocumentLink .= "&amp;version=$Version";
         }
-        $DocumentLink .= "\" class=\"w3-text-teal\">"."private link</a>)";
+        $DocumentLink .= "\" class=\"w3-text-docdb-color\">"."private link</a>)";
       } else {
         if ($Version) {
           $DocumentLink  = FullDocumentID($DocumentID,$Version).": ";
@@ -128,7 +128,7 @@ sub ExternalDocDBLink ($) {
   my ($ArgRef) = @_;
   my $DocDBID = exists $ArgRef->{-docdbid} ? $ArgRef->{-docdbid} : 0;
   my $Link = "<a href=\"$ExternalDocDBs{$DocDBID}{PublicURL}/DocumentDatabase\"";
-  $Link .= 'title="'.SmartHTML({-text=>$ExternalDocDBs{$DocDBID}{Description}}).'" class="w3-text-teal">';
+  $Link .= 'title="'.SmartHTML({-text=>$ExternalDocDBs{$DocDBID}{Description}}).'" class="w3-text-docdb-color">';
   $Link .= SmartHTML({-text=>$ExternalDocDBs{$DocDBID}{Project}});
   $Link .= '</a>';
   return $Link;

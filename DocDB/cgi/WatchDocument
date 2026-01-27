@@ -70,7 +70,7 @@ if ($EmailUserID) {
   push @ErrorStack,"The username/password pair or certificate you supplied is
                     invalid. Please try again or contact an administrator. If
                     you don't have a personal account, you need to
-                    <a href=\"$EmailLogin\" class=\"w3-text-teal\">set one up.</a>";
+                    <a href=\"$EmailLogin\" class=\"w3-text-docdb-color\">set one up.</a>";
 }
 
 EndPage();

@@ -364,7 +364,7 @@ if ($mode eq "add") {
 
 print "Required fields are marked with an asterisk (*). ";
 if ($Quick) {
-  print "<a href=\"Javascript:unhideQuick();\" class=\"w3-text-teal\">(Show all fields)</a>\n";
+  print "<a href=\"Javascript:unhideQuick();\" class=\"w3-text-docdb-color\">(Show all fields)</a>\n";
 }
 print "</h5>\n";
 
@@ -477,8 +477,8 @@ if ($AuthorMode eq "list" || $AuthorMode eq "active") {
 }
 
 if ($AuthorMode eq "active") {
-  $ScrollExtraText = "<a href=\"Javascript:author_method_choose_text(\'text\');\" class=\"w3-text-teal\">(Text w/ order)</a>";
-  $TextExtraText   = "<a href=\"Javascript:author_method_choose_text(\'active\');\" class=\"w3-text-teal\">(Active search)</a>";
+  $ScrollExtraText = "<a href=\"Javascript:author_method_choose_text(\'text\');\" class=\"w3-text-docdb-color\">(Text w/ order)</a>";
+  $TextExtraText   = "<a href=\"Javascript:author_method_choose_text(\'active\');\" class=\"w3-text-docdb-color\">(Active search)</a>";
 
   print "<td id=\"AuthorActiveSearch\"$AuthorScrollDisplay class=\"w3-padding\">\n";
   print $query -> hidden(-name => 'authormode', -default => $AuthorMode);
@@ -492,8 +492,8 @@ if ($AuthorMode eq "active") {
   print "</td>\n";
 
 } else {
-  $ScrollExtraText = "<a href=\"Javascript:author_method_choose(\'text\');\" class=\"w3-text-teal\">(Text w/ order)</a>";
-  $TextExtraText   = "<a href=\"Javascript:author_method_choose(\'scroll\');\" class=\"w3-text-teal\">(Select from list)</a>";
+  $ScrollExtraText = "<a href=\"Javascript:author_method_choose(\'text\');\" class=\"w3-text-docdb-color\">(Text w/ order)</a>";
+  $TextExtraText   = "<a href=\"Javascript:author_method_choose(\'scroll\');\" class=\"w3-text-docdb-color\">(Select from list)</a>";
 
   print "<td id=\"AuthorScroll\"$AuthorScrollDisplay class=\"w3-padding\">\n";
   print $query -> hidden(-name => 'authormode', -default => $AuthorMode);
@@ -535,7 +535,7 @@ print "</tr>\n";
 
 if ($UserValidation eq "certificate") {
   print '<tr class="ListUsers"><td colspan="2" class="w3-padding">&nbsp</td>';
-  print '<td colspan="2" class="w3-padding"><a href="'.$ListGroupUsers.'" class="w3-text-teal">List users in groups</a>';
+  print '<td colspan="2" class="w3-padding"><a href="'.$ListGroupUsers.'" class="w3-text-docdb-color">List users in groups</a>';
   print "</td></tr>\n";
 }
 
@@ -564,7 +564,7 @@ print "</td></tr>\n";
 if ($Preferences{Options}{SubmitAgree}) {
   print '<tr><td colspan="4" class="w3-padding">';
   print $Preferences{Options}{SubmitAgree};
-  print '<label><input type="checkbox" name="submitagree" class="w3-check" style="accent-color: teal;" value="1">';
+  print '<label><input type="checkbox" name="submitagree" class="w3-check" style="accent-color: #004080;" value="1">';
   print "</label>\n";
   print "</td></tr>\n";
 }
@@ -573,11 +573,11 @@ if ($Preferences{Options}{SubmitAgree}) {
 
 print "<tr><td colspan=\"4\" class=\"SubmitCell$QuickClass w3-padding w3-center\">\n";
 if      ($mode eq "add") {
-  print $query -> submit (-value => "Submit Document", -class => "w3-button w3-teal w3-border w3-border-black w3-round");
+  print $query -> submit (-value => "Submit Document", -class => "w3-button w3-docdb-color w3-border w3-border-black w3-round");
 } elsif ($mode eq "reserve") {
-  print $query -> submit (-value => "Request document ID", -class => "w3-button w3-teal");
+  print $query -> submit (-value => "Request document ID", -class => "w3-button w3-docdb-color");
 } elsif ($mode eq "update" || $mode eq "updatedb") {
-  print $query -> submit (-value => "Update document", -class => "w3-button w3-teal");
+  print $query -> submit (-value => "Update document", -class => "w3-button w3-docdb-color");
 }
 print "</td></tr>\n";
 
@@ -613,17 +613,17 @@ if (($mode eq "updatedb" || $mode eq "update") && $SigStatus ne "Unmanaged" &&
   print FormElementTitle(-helplink => "preservesigs",
                          -helptext => "Preserve signatures on this revision?",
                          -nocolon => $TRUE, -nobreak => $TRUE);
-  print '<label><input type="checkbox" name="preservesigs" class="w3-check" style="accent-color: teal;" value="1"> (Check for yes.)</label>';
+  print '<label><input type="checkbox" name="preservesigs" class="w3-check" style="accent-color: #004080;" value="1"> (Check for yes.)</label>';
   print "</td></tr>\n";
 }
 
 print "<tr><td colspan=\"4\" class=\"SubmitCell w3-padding w3-center\">\n";
 if      ($mode eq "add") {
-  print $query -> submit (-value => "Submit Document", -class => "w3-button w3-teal w3-border w3-border-black w3-round");
+  print $query -> submit (-value => "Submit Document", -class => "w3-button w3-docdb-color w3-border w3-border-black w3-round");
 } elsif ($mode eq "reserve") {
-  print $query -> submit (-value => "Request document ID", -class => "w3-button w3-teal");
+  print $query -> submit (-value => "Request document ID", -class => "w3-button w3-docdb-color");
 } elsif ($mode eq "update" || $mode eq "updatedb") {
-  print $query -> submit (-value => "Update document", -class => "w3-button w3-teal");
+  print $query -> submit (-value => "Update document", -class => "w3-button w3-docdb-color");
 }
 print "</td></tr>\n";
 print "</table>\n";

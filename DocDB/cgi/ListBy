@@ -156,7 +156,7 @@ if ($Days) {
 
   my %Hash = GetEventHashByTopic($TopicID);
   if (%Hash) {
-    $Message .= '<br/>(List <a href="'.$ListEventsBy.'?topicid='.$TopicID.'" class="w3-text-teal">events</a> on '.SmartHTML({-text=>$Topics{$TopicID}{Long}}).')';
+    $Message .= '<br/>(List <a href="'.$ListEventsBy.'?topicid='.$TopicID.'" class="w3-text-docdb-color">events</a> on '.SmartHTML({-text=>$Topics{$TopicID}{Long}}).')';
   }
 } elsif ($AuthorID) {
 
@@ -189,7 +189,7 @@ if ($Days) {
 
   my %Hash = GetEventHashByModerator($AuthorID);
   if (%Hash) {
-    $Message .= '<br/>(List <a href="'.$ListEventsBy.'?authorid='.$AuthorID.'" class="w3-text-teal">events</a> moderated by '.$Link.')';
+    $Message .= '<br/>(List <a href="'.$ListEventsBy.'?authorid='.$AuthorID.'" class="w3-text-docdb-color">events</a> moderated by '.$Link.')';
   }
   @DocumentIDs = GetAuthorDocuments($AuthorID, $OldDocs);
 } elsif ($EventID) {
@@ -322,7 +322,7 @@ if ($Days) { # Print out modified by form
   print "<table style=\"display: inline-table;\">\n";
   print "<tr>\n";
   print "<td style=\"vertical-align: middle;\">\n";
-  print $query -> submit(-class => "w3-button w3-teal w3-border w3-border-black w3-round", -value => "Show Documents");
+  print $query -> submit(-class => "w3-button w3-docdb-color w3-border w3-border-black w3-round", -value => "Show Documents");
   print "</td>\n";
   print "<td style=\"vertical-align: middle;\">\n";
   print "&nbsp;&nbsp;modified in the last&nbsp;&nbsp;";

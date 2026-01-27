@@ -85,7 +85,7 @@ unless ($dbh) {
 
 print "<p>";
 print "<b>Your preferences have been saved.</b>
-          You will be sent to the Document Database <a href=\"$MainPage\" class=\"w3-text-teal\">home
+          You will be sent to the Document Database <a href=\"$MainPage\" class=\"w3-text-docdb-color\">home
           page</a> in 10 seconds.<br>
           If your  preferences havn't been properly set, make sure your web
           browser is  accepting cookies.";

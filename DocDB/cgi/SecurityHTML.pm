@@ -129,14 +129,14 @@ sub ModifyListByID {
 }
 
 sub PersonalAccountLink () {
-  my $PersonalAccountLink = "<a href=\"$EmailLogin\" class=\"w3-text-teal\" style=\"text-decoration:none;\">Your Account</a>";
+  my $PersonalAccountLink = "<a href=\"$EmailLogin\" class=\"w3-text-docdb-color\" style=\"text-decoration:none;\">Your Account</a>";
   if ($UserValidation eq "shibboleth" || $UserValidation eq "FNALSSO") {
-    $PersonalAccountLink = "<a href=\"$SelectEmailPrefs\" class=\"w3-text-teal\" style=\"text-decoration:none;\">Your Account</a>";
+    $PersonalAccountLink = "<a href=\"$SelectEmailPrefs\" class=\"w3-text-docdb-color\" style=\"text-decoration:none;\">Your Account</a>";
   } elsif ($UserValidation eq "certificate") {
     require "CertificateUtilities.pm";
     my $CertificateStatus = &CertificateStatus();
     if ($CertificateStatus eq "verified") {
-      $PersonalAccountLink = "<a href=\"$SelectEmailPrefs\" class=\"w3-text-teal\" style=\"text-decoration:none;\">Your Account</a>";
+      $PersonalAccountLink = "<a href=\"$SelectEmailPrefs\" class=\"w3-text-docdb-color\" style=\"text-decoration:none;\">Your Account</a>";
     } else {
       $PersonalAccountLink = "";
     }

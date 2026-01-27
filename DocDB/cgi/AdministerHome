@@ -67,17 +67,17 @@ DocDBHomeHeader();
 print "<div id=\"LeftColumn3ColWrapper\">\n";
 print "<div id=\"LeftColumn3Col\" class=\"w3-quarter w3-paper w3-border w3-border-gray w3-round w3-margin-top\">\n";
 print "<div class=\"w3-bar-block\">\n";
-print "<div class=\"w3-bar-item\"><strong><a href=\"$MainPage\" class=\"w3-text-teal\">Main Menu</a></strong></div>\n";
-print "<div class=\"w3-bar-item\"><strong><a href=\"$ModifyHome\" class=\"w3-text-teal\">Add Documents</a></strong></div>\n";
-print "<div class=\"w3-bar-item\"><strong><a href=\"$DocDBInstructions\" class=\"w3-text-teal\">Instructions</a></strong></div>\n";
-print "<div class=\"w3-bar-item\"><strong><a href=\"$DocDBInstructions?set=admin\" class=\"w3-text-teal\">Administrator Instructions</strong></div>\n";
+print "<div class=\"w3-bar-item\"><strong><a href=\"$MainPage\" class=\"w3-text-docdb-color\">Main Menu</a></strong></div>\n";
+print "<div class=\"w3-bar-item\"><strong><a href=\"$ModifyHome\" class=\"w3-text-docdb-color\">Add Documents</a></strong></div>\n";
+print "<div class=\"w3-bar-item\"><strong><a href=\"$DocDBInstructions\" class=\"w3-text-docdb-color\">Instructions</a></strong></div>\n";
+print "<div class=\"w3-bar-item\"><strong><a href=\"$DocDBInstructions?set=admin\" class=\"w3-text-docdb-color\">Administrator Instructions</strong></div>\n";
 if ($PersonalAccountLink) {
   print "<div class=\"w3-bar-item\"><strong>$PersonalAccountLink</strong></div>\n";
 }
 foreach my $Text (@{ $ProjectMessages{Homepage}{LeftColumn} }) {
   print "<div class=\"w3-bar-item\"><strong>$Text</strong></div>\n";
 }
-print "<div class=\"w3-bar-item\"><strong><a href=\"$DocDBHome\" class=\"w3-text-teal\">About DocDB</a></strong></div>\n";
+print "<div class=\"w3-bar-item\"><strong><a href=\"$DocDBHome\" class=\"w3-text-docdb-color\">About DocDB</a></strong></div>\n";
 print "</div><!-- Closing div w3-bar-block -->\n";
 
 print "</div><!-- Closing div id LeftColumn3Col -->\n";
@@ -104,23 +104,23 @@ if (CanAdminister()) { # Delete Form
 
 print "<p><strong>Database maintenance:</strong></p>\n";
 print "<ul>\n";
-print "<li>Add an <a href=\"$AuthorAddForm\" class=\"w3-text-teal\">author</a></li>\n";
+print "<li>Add an <a href=\"$AuthorAddForm\" class=\"w3-text-docdb-color\">author</a></li>\n";
 print "</ul>\n";
 
 if (CanAdminister()) {
   print "<p><b>Administrator only functions:</b></p>\n";
   print "<ul>\n";
-  print "<li>Administer <a href=\"$GroupAdministerForm\" class=\"w3-text-teal\">groups</a> of users</li>\n";
-  print "<li>Administer <a href=\"$TopicAdminister\" class=\"w3-text-teal\">topics</a></li>\n";
-  print "<li>Administer <a href=\"$EventAdministerForm\" class=\"w3-text-teal\">events</a></li>\n";
-  print "<li>Administer <a href=\"$EmailAdministerForm\" class=\"w3-text-teal\">personal accounts</a>";
+  print "<li>Administer <a href=\"$GroupAdministerForm\" class=\"w3-text-docdb-color\">groups</a> of users</li>\n";
+  print "<li>Administer <a href=\"$TopicAdminister\" class=\"w3-text-docdb-color\">topics</a></li>\n";
+  print "<li>Administer <a href=\"$EventAdministerForm\" class=\"w3-text-docdb-color\">events</a></li>\n";
+  print "<li>Administer <a href=\"$EmailAdministerForm\" class=\"w3-text-docdb-color\">personal accounts</a>";
   if ($UserValidation eq "certificate") {
-    print " or <a href=\"$BulkCertificateInsert\" class=\"w3-text-teal\">create new accounts</a>";
+    print " or <a href=\"$BulkCertificateInsert\" class=\"w3-text-docdb-color\">create new accounts</a>";
   }
   print "</li>\n";
-  print "<li>Administer <a href=\"$KeywordAdministerForm\" class=\"w3-text-teal\">keywords and keyword groups</a></li>\n";
-  print "<li>Administer <a href=\"$AdministerForm\" class=\"w3-text-teal\">authors, institutions, types, and journals</a></li>\n";
-  print "<li>Administer <a href=\"$ExternalDocDBAdministerForm\" class=\"w3-text-teal\">external DocDB</a> information</li>\n";
+  print "<li>Administer <a href=\"$KeywordAdministerForm\" class=\"w3-text-docdb-color\">keywords and keyword groups</a></li>\n";
+  print "<li>Administer <a href=\"$AdministerForm\" class=\"w3-text-docdb-color\">authors, institutions, types, and journals</a></li>\n";
+  print "<li>Administer <a href=\"$ExternalDocDBAdministerForm\" class=\"w3-text-docdb-color\">external DocDB</a> information</li>\n";
   print "</ul>\n";
 }
 

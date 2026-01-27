@@ -106,9 +106,9 @@ if (!$Public or $UserValidation eq "FNALSSO") {  # Public set if not in any grou
   if ($PersonalAccountLink) {
     print "<div id=\"LeftBarPersonalAccountLink\" class=\"w3-bar-item w3-button\">$PersonalAccountLink</div><!-- Closing div id LeftBarPersonalAccountLink -->\n";
   }
-  print "<div id=\"LeftBarPreferencesLink\" class=\"w3-bar-item w3-button\"><a href=\"$SelectPrefs\" class=\"w3-text-teal\" style=\"text-decoration:none;\">Preferences</a></div><!-- Closing div id LeftBarPreferencesLink -->\n";
+  print "<div id=\"LeftBarPreferencesLink\" class=\"w3-bar-item w3-button\"><a href=\"$SelectPrefs\" class=\"w3-text-docdb-color\" style=\"text-decoration:none;\">Preferences</a></div><!-- Closing div id LeftBarPreferencesLink -->\n";
   if ($UserValidation eq "FNALSSO") {
-    print "<div id=\"LeftBarApplyToGroupsLink\" class=\"w3-bar-item w3-button\"><a href=\"$CertificateApplyForm\" class=\"w3-text-teal\" style=\"text-decoration:none;\">Apply to Groups</a></div><!-- Closing div id LeftBarApplyToGroupsLink -->\n";
+    print "<div id=\"LeftBarApplyToGroupsLink\" class=\"w3-bar-item w3-button\"><a href=\"$CertificateApplyForm\" class=\"w3-text-docdb-color\" style=\"text-decoration:none;\">Apply to Groups</a></div><!-- Closing div id LeftBarApplyToGroupsLink -->\n";
   }
   if ($UserValidation eq "certificate" || $UserValidation eq "shibboleth" || $UserValidation eq "FNALSSO") {
     print "<div id=\"LeftBarGroupLimitLink\" class=\"w3-bar-item w3-button\"><strong>",&GroupLimitLink(),"</strong></div><!-- Closing div id LeftBarGroupLimitLink -->\n";
@@ -155,13 +155,13 @@ print "<div id=\"HomepageNavigationChoices\" class=\"w3-card w3-paper w3-border 
 print "<div class=\"w3-center\" style=\"font-weight:700;margin-top:4px;\"><span style=\"text-decoration:underline;\">Navigation</span></div>\n";
 print "<div class=\"w3-bar-block\">\n";
 if (CanCreate()) {
-  print "<div class=\"w3-bar-item w3-button\"><a href=\"$ModifyHome\" class=\"w3-text-teal\" style=\"text-decoration:none;\">Modify Homepage</a></div>\n";
+  print "<div class=\"w3-bar-item w3-button\"><a href=\"$ModifyHome\" class=\"w3-text-docdb-color\" style=\"text-decoration:none;\">Modify Homepage</a></div>\n";
 }
 if ($Preferences{Components}{Calendar}) {
-  print "<div class=\"w3-bar-item w3-button\"><a href=\"$ShowCalendar\" class=\"w3-text-teal\" style=\"text-decoration:none;\">Show Calendar</a></div>\n";
+  print "<div class=\"w3-bar-item w3-button\"><a href=\"$ShowCalendar\" class=\"w3-text-docdb-color\" style=\"text-decoration:none;\">Show Calendar</a></div>\n";
 }
-print "<div class=\"w3-bar-item w3-button\"><a href=\"$ListAuthors\" class=\"w3-text-teal\" style=\"text-decoration:none;\">Author List</a></div>\n";
-print "<div class=\"w3-bar-item w3-button\"><a href=\"$ListBy?days=30\" class=\"w3-text-teal\" style=\"text-decoration:none;\">Recent Documents</a></div>\n";
+print "<div class=\"w3-bar-item w3-button\"><a href=\"$ListAuthors\" class=\"w3-text-docdb-color\" style=\"text-decoration:none;\">Author List</a></div>\n";
+print "<div class=\"w3-bar-item w3-button\"><a href=\"$ListBy?days=30\" class=\"w3-text-docdb-color\" style=\"text-decoration:none;\">Recent Documents</a></div>\n";
 print "</div><!-- Closing div w3-bar-block -->\n";
 print "</div><!-- Closing div id HomepageNavigationChoices -->\n";
 
@@ -178,7 +178,7 @@ my $SearchDiv  = $query -> start_form('POST',$Search);
    $SearchDiv .= $query -> textfield(-name => "simpletext", -maxlength => 300, -class => "w3-input w3-border w3-round w3-padding-small", -style => "min-width:120px;", -placeholder => "Enter search terms...");
    $SearchDiv .= "</div>\n";
    $SearchDiv .= "<div class=\"w3-col s12 m2 l2 w3-center\">\n";
-   $SearchDiv .= "<button type=\"submit\" class=\"w3-button w3-teal w3-border w3-border-black w3-round\" style=\"padding:8px;\"><i class=\"fa-solid fa-magnifying-glass w3-text-white\"></i></button>\n";
+   $SearchDiv .= "<button type=\"submit\" class=\"w3-button w3-docdb-color w3-border w3-border-black w3-round\" style=\"padding:8px;\"><i class=\"fa-solid fa-magnifying-glass w3-text-white\"></i></button>\n";
    $SearchDiv .= "</div>\n";
    $SearchDiv .= $query -> hidden(-name => "simple", -default => '1');
    $SearchDiv .= "</div><!-- Closing div id SearchFormContainer -->\n";
@@ -197,7 +197,7 @@ my $ShowForm  = $query -> start_form('POST',$ShowDocument);
    $ShowForm .= $query -> textfield(-name => "version", -maxlength => 3, -class => "w3-input w3-border w3-round w3-padding-small", -style => "min-width:50px;", -placeholder => "Version");
    $ShowForm .= "</div>\n";
    $ShowForm .= "<div class=\"w3-col s12 m2 l2 w3-center\">\n";
-   $ShowForm .= "<button type=\"submit\" class=\"w3-button w3-teal w3-border w3-border-black w3-round\" style=\"padding:8px;\"><i class=\"fa-solid fa-eye w3-text-white\"></i></button>\n";
+   $ShowForm .= "<button type=\"submit\" class=\"w3-button w3-docdb-color w3-border w3-border-black w3-round\" style=\"padding:8px;\"><i class=\"fa-solid fa-eye w3-text-white\"></i></button>\n";
    $ShowForm .= "</div>\n";
    $ShowForm .= "</div><!-- Closing div id ShowFormContainer -->\n";
    $ShowForm .= $query -> end_form;
@@ -205,7 +205,7 @@ print "$ShowForm";
 print "</div><!-- Closing div id HomepageShowChoice -->\n";
 
 print "<div id=\"HomepageAdvancedLink\" class=\"w3-bar-item w3-button w3-center\">\n";
-print "<a href=\"$SearchForm#Advanced\" class=\"w3-text-teal\" style=\"text-decoration:none;\">Advanced Search</a>\n";
+print "<a href=\"$SearchForm#Advanced\" class=\"w3-text-docdb-color\" style=\"text-decoration:none;\">Advanced Search</a>\n";
 print "</div><!-- Closing div id HomepageAdvancedLink -->\n";
 
 print "</div><!-- Closing div w3-bar-block -->\n";
@@ -218,7 +218,7 @@ print "</div><!-- Closing div id LeftColumn3ColWrapper -->\n";
 print "<div id=\"MainColumn3Col\" class=\"w3-threequarter\">\n";
 
 if (CanAdminister()) {
-  print "<div id=\"HomepageAdminChoice\" class=\"w3-padding\"><strong><a href=\"$AdministerHome\" class=\"w3-text-teal\">Administer DocDB</a></strong></div><!-- Closing div id HomepageAdminChoice -->\n";
+  print "<div id=\"HomepageAdminChoice\" class=\"w3-padding\"><strong><a href=\"$AdministerHome\" class=\"w3-text-docdb-color\">Administer DocDB</a></strong></div><!-- Closing div id HomepageAdminChoice -->\n";
 }
 
 # Last modified pulldown
@@ -228,7 +228,7 @@ if (CanAdminister()) {
 #   print "<div id=\"HomepageLastModifiedChoice\" class=\"w3-margin-top\">\n";
 #   print $query -> start_form('POST',$ListBy);
 #   print "<div id=\"LastModifiedFormContainer\" class=\"w3-bar\">\n";
-#   print $query -> submit (-value => "Show", -class => "w3-bar-item w3-button w3-teal w3-border w3-border-black w3-round", -style => "width:100px;");
+#   print $query -> submit (-value => "Show", -class => "w3-bar-item w3-button w3-docdb-color w3-border w3-border-black w3-round", -style => "width:100px;");
 #   print "<span class=\"w3-bar-item\"><strong> documents modified in the last </strong></span>";
 #   print "<span class=\"w3-bar-item\" style=\"padding:0!important;\">";
 #   DaysPulldown($LastDays);
@@ -246,24 +246,24 @@ if (CanAdminister()) {
 # my @OtherColumns = ();
 # my @Spanners     = ();
 # 
-# push @FirstColumn,"<a href=\"$ListAuthors\" class=\"w3-text-teal\">Authors</a>";
-# push @FirstColumn,"<a href=\"$ListTopics\" class=\"w3-text-teal\">Topics</a>";
-# push @FirstColumn,"<a href=\"$ListGroups\" class=\"w3-text-teal\">Groups</a>";
-# push @FirstColumn,"<a href=\"$ListKeywords\" class=\"w3-text-teal\">Keywords</a>";
+# push @FirstColumn,"<a href=\"$ListAuthors\" class=\"w3-text-docdb-color\">Authors</a>";
+# push @FirstColumn,"<a href=\"$ListTopics\" class=\"w3-text-docdb-color\">Topics</a>";
+# push @FirstColumn,"<a href=\"$ListGroups\" class=\"w3-text-docdb-color\">Groups</a>";
+# push @FirstColumn,"<a href=\"$ListKeywords\" class=\"w3-text-docdb-color\">Keywords</a>";
 # unless ($Public && !$PublicAccess{MeetingList}) {
-#   push @FirstColumn,"<a href=\"$ListAllMeetings\" class=\"w3-text-teal\">Events</a>";
+#   push @FirstColumn,"<a href=\"$ListAllMeetings\" class=\"w3-text-docdb-color\">Events</a>";
 # }
 # if ($UserValidation eq "certificate" || $UserValidation eq "shibboleth" || $UserValidation eq "FNALSSO" ||
 #     (!$Public && $Preferences{Options}{DynamicFullList}{Private}) ||
 #     ( $Public && $Preferences{Options}{DynamicFullList}{Public})) {
-#   push @FirstColumn,"<a href=\"$ListBy?alldocs=1\" class=\"w3-text-teal\">All documents</a>";
+#   push @FirstColumn,"<a href=\"$ListBy?alldocs=1\" class=\"w3-text-docdb-color\">All documents</a>";
 # } else {
-#   push @FirstColumn,"<a href=\"$web_root/Static/Lists/$remote_user/FullList.html\" class=\"w3-text-teal\">All documents</a>";
+#   push @FirstColumn,"<a href=\"$web_root/Static/Lists/$remote_user/FullList.html\" class=\"w3-text-docdb-color\">All documents</a>";
 # }
 
 # COMMENTED OUT: List section moved to header navigation dropdown
 # if ($UseSignoffs && (!$Public || $PublicAccess{MeetingList})) {
-#   push @OtherColumns,"<a href=\"$ListManagedDocuments\" class=\"w3-text-teal\">Managed documents</a>";
+#   push @OtherColumns,"<a href=\"$ListManagedDocuments\" class=\"w3-text-docdb-color\">Managed documents</a>";
 # }
 # push @OtherColumns,@{ $ProjectMessages{Homepage}{DocumentLists} };
 # push @Spanners,@MultiColumnDocumentLists;
@@ -331,7 +331,7 @@ if (CanAdminister()) {
     print "</div><!-- Closing div id MainRecentDocs -->\n";
   } else {
     print "<div id=\"MainRecentDocs\" class=\"w3-margin-left\">\n";
-    print "<i>No documents have been modified in the past $HomeLastDays days, see more documents <a href=\"$ListBy?days=30\" class=\"w3-text-teal\" style=\"text-decoration:none;\">here</a>.</i>\n";
+    print "<i>No documents have been modified in the past $HomeLastDays days, see more documents <a href=\"$ListBy?days=30\" class=\"w3-text-docdb-color\" style=\"text-decoration:none;\">here</a>.</i>\n";
     print "</div><!-- Closing div id MainRecentDocs -->\n";
   }
 }

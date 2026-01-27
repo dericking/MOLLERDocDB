@@ -135,7 +135,7 @@ sub TopicLink ($) {
       $Link .= $Separator;
     }
   }
-  $Link .= "<a href=\"$URL\" title=\"$Tooltip\" class=\"w3-text-teal\">$Text</a>";
+  $Link .= "<a href=\"$URL\" title=\"$Tooltip\" class=\"w3-text-docdb-color\">$Text</a>";
 
   return $Link;
 }
@@ -307,9 +307,9 @@ sub TopicListWithChildren { # Recursive routine
         }
         my $DisabledAttr = ($Booleans =~ /-disabled/) ? ' disabled' : '';
         if (defined IndexOf($TopicID,@DefaultTopicIDs)) {
-          $HTML.= '<label><input type="checkbox" name="topics" class="w3-check" style="accent-color: teal;" value="'.$TopicID.'" checked="checked"'.$DisabledAttr.'> '.$TopicName.'</label>';
+          $HTML.= '<label><input type="checkbox" name="topics" class="w3-check" style="accent-color: #004080;" value="'.$TopicID.'" checked="checked"'.$DisabledAttr.'> '.$TopicName.'</label>';
         } else {
-          $HTML.= '<label><input type="checkbox" name="topics" class="w3-check" style="accent-color: teal;" value="'.$TopicID.'"'.$DisabledAttr.'> '.$TopicName.'</label>';
+          $HTML.= '<label><input type="checkbox" name="topics" class="w3-check" style="accent-color: #004080;" value="'.$TopicID.'"'.$DisabledAttr.'> '.$TopicName.'</label>';
         }
         # Note: TreeChooser.js will insert a <span class="bullet"> before the label for expand/collapse functionality
       } else {

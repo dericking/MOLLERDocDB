@@ -98,9 +98,9 @@ sub ConferenceShowAllTalks {
   require "FormElements.pm";
   print &FormElementTitle(-helplink  => "meetshowall", -helptext  => "Show All Talks?", -nobreak => $TRUE, -nocolon => $TRUE);
   if ($MeetingDefaultShowAllTalks) {
-    print '<label><input type="checkbox" name="meetshowall" class="w3-check" style="accent-color: teal;" value="1" checked="checked"> Yes</label>';
+    print '<label><input type="checkbox" name="meetshowall" class="w3-check" style="accent-color: #004080;" value="1" checked="checked"> Yes</label>';
   } else {
-    print '<label><input type="checkbox" name="meetshowall" class="w3-check" style="accent-color: teal;" value="1"> Yes</label>';
+    print '<label><input type="checkbox" name="meetshowall" class="w3-check" style="accent-color: #004080;" value="1"> Yes</label>';
   }
 }
 
@@ -256,9 +256,9 @@ sub SessionEntryForm (%) {
       print "</div><div>\n";
       print FormElementTitle(-helplink  => "meetshowall", -helptext  => "Show All Talks?", -nobreak => $TRUE, -nocolon => $TRUE);
       if ($SessionDefaultShowAllTalks) {
-        print '<label><input type="checkbox" name="sessionshowall" class="w3-check" style="accent-color: teal;" value="'.$MeetingOrderID.'" checked="checked"></label>';
+        print '<label><input type="checkbox" name="sessionshowall" class="w3-check" style="accent-color: #004080;" value="'.$MeetingOrderID.'" checked="checked"></label>';
       } else {
-        print '<label><input type="checkbox" name="sessionshowall" class="w3-check" style="accent-color: teal;" value="'.$MeetingOrderID.'"></label>';
+        print '<label><input type="checkbox" name="sessionshowall" class="w3-check" style="accent-color: #004080;" value="'.$MeetingOrderID.'"></label>';
       }
     }
     print "</div></td>\n";
@@ -284,14 +284,14 @@ sub SessionSeparator ($) {
   } elsif ($SessionSeparatorDefault eq "No") {
     print "\n";
   } else {
-    print '<label><input type="checkbox" name="sessionseparator" class="w3-check" style="accent-color: teal;" value="'.$MeetingOrderID.'"> Break</label>';
+    print '<label><input type="checkbox" name="sessionseparator" class="w3-check" style="accent-color: #004080;" value="'.$MeetingOrderID.'"> Break</label>';
   }
 }
 
 sub SessionDelete ($) {
   my ($MeetingOrderID) = @_;
   if ($SessionSeparatorDefault eq "Yes" || $SessionSeparatorDefault eq "No") {
-    print '<label><input type="checkbox" name="sessiondelete" class="w3-check" style="accent-color: teal;" value="'.$MeetingOrderID.'"> Delete</label>';
+    print '<label><input type="checkbox" name="sessiondelete" class="w3-check" style="accent-color: #004080;" value="'.$MeetingOrderID.'"> Delete</label>';
   } else {
     print "&nbsp;\n";
   }
@@ -301,7 +301,7 @@ sub SessionModifyLink ($) {
   my ($MeetingOrderID) = @_;
   if ($SessionSeparatorDefault eq "No") {
     my $SessionID = $MeetingOrders{$MeetingOrderID}{SessionID};
-    print "<a href=\"$SessionModify?sessionid=$SessionID\" class=\"w3-text-teal\">Modify session<br/>agenda</a>\n";
+    print "<a href=\"$SessionModify?sessionid=$SessionID\" class=\"w3-text-docdb-color\">Modify session<br/>agenda</a>\n";
   } else {
     print "&nbsp;\n";
   }
@@ -371,7 +371,7 @@ sub SessionLink (%) {
     }
   }
 
-  my $Link = "<a href=\"$URL\" title=\"$ToolTip\" class=\"w3-text-teal\">$Text</a>";
+  my $Link = "<a href=\"$URL\" title=\"$ToolTip\" class=\"w3-text-docdb-color\">$Text</a>";
 
   return $Link;
 }
@@ -410,7 +410,7 @@ sub SessionSeparatorLink ($) {
     $Text = $SeparatorTitle;
   }
 
-  my $Link = "<i class=\"fa-solid fa-mug-hot fa-fade\"></i>&nbsp;<i class=\"fa-regular fa-comments fa-fade\"></i>&nbsp;&nbsp;<a href=\"$URL\" title=\"$ToolTip\" class=\"w3-text-teal\">$Text</a>";
+  my $Link = "<i class=\"fa-solid fa-mug-hot fa-fade\"></i>&nbsp;<i class=\"fa-regular fa-comments fa-fade\"></i>&nbsp;&nbsp;<a href=\"$URL\" title=\"$ToolTip\" class=\"w3-text-docdb-color\">$Text</a>";
 
   return $Link;
 }
@@ -510,7 +510,7 @@ sub PrintSessionHeader ($) {
   my $ConferenceID = $Sessions{$SessionID}{ConferenceID};
 
   print "<h4><a name=\"sess$SessionID\" />Session: ".
-        "<a href=\"$DisplayMeeting?sessionid=$SessionID\" class=\"w3-text-teal\">$Sessions{$SessionID}{Title}</a> begins \n";
+        "<a href=\"$DisplayMeeting?sessionid=$SessionID\" class=\"w3-text-docdb-color\">$Sessions{$SessionID}{Title}</a> begins \n";
   print &EuroDate($Sessions{$SessionID}{StartTime});
   print " at ";
   print &EuroTimeHM($Sessions{$SessionID}{StartTime});
@@ -596,7 +596,7 @@ sub PrintEventLeftSidebar ($) {
   print "<div style=\"flex:1 1 auto;\">\n";
   print $query -> start_form('GET',$ListBy);
   print $query -> hidden(-name => "eventid", -default => $EventID);
-  print $query -> submit (-value => "Document List", -class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small w3-block");
+  print $query -> submit (-value => "Document List", -class => "w3-button w3-docdb-color w3-round w3-border w3-border-black w3-padding-small w3-block");
   print $query -> end_form,"\n";
   print "</div>\n";
   print "</div><!-- Closing div for Row 2 -->\n";
@@ -806,7 +806,7 @@ sub EventHeader ($) {
   }
   # FIXME: May need to HTML::decode folowed by URI::encode
   if ($Conferences{$EventID}{URL}) {
-    $Fields{"External URL"} = "<a href=\"$Conferences{$EventID}{URL}\" class=\"w3-text-teal\">".
+    $Fields{"External URL"} = "<a href=\"$Conferences{$EventID}{URL}\" class=\"w3-text-docdb-color\">".
                               SmartHTML({-text=>$Conferences{$EventID}{Title}})."</a>";
   }
 
@@ -883,7 +883,7 @@ sub SessionInfo ($) {
   my $HTML = "";
   $HTML .= "<tr>";
   $HTML .= '<td>'.EuroDate($Sessions{$SessionID}{StartTime}).'<br/>'.EuroTimeHM($Sessions{$SessionID}{StartTime}).'</td>';
-  $HTML .= "<td><a href=\"$DisplayMeeting?sessionid=$SessionID\" class=\"w3-text-teal\">";
+  $HTML .= "<td><a href=\"$DisplayMeeting?sessionid=$SessionID\" class=\"w3-text-docdb-color\">";
   $HTML .=     "$Title</a></td>";
   $HTML .= '<td>'.$Description.'</td>';
   $HTML .= '<td>'.$Location.'</td>';
@@ -931,7 +931,7 @@ sub EventGroupLink (%) {
 
   my $Link = "<a href=\"";
   $Link .= $ListAllMeetings."?eventgroupid=".$EventGroupID;
-  $Link .= "\" class=\"w3-text-teal\">";
+  $Link .= "\" class=\"w3-text-docdb-color\">";
   if ($Format eq "short")  {
     $Link .= SmartHTML( {-text => $EventGroups{$EventGroupID}{ShortDescription}, } );
   } else {
@@ -972,7 +972,7 @@ sub EventLink (%) {
     $ToolTip = SmartHTML( {-text => $Conferences{$EventID}{Full}, } );
   }
 
-  my $Link  = "<a href=\"$URL\" class=\"$Class w3-text-teal\" title=\"$ToolTip\">";
+  my $Link  = "<a href=\"$URL\" class=\"$Class w3-text-docdb-color\" title=\"$ToolTip\">";
   if ($Format eq "long") {
     $Link .= SmartHTML( {-text => $Conferences{$EventID}{LongDescription}, } );
   } else {
@@ -1005,7 +1005,7 @@ sub ModifyEventLink ($) {
   my $Title = SmartHTML( {-text => $Conferences{$EventID}{Title}, } );
   my $ToolTip = SmartHTML( {-text => $Conferences{$EventID}{Full}, } );
 
-  my $Link  = "<a href=\"$URL\" class=\"w3-text-teal\">";
+  my $Link  = "<a href=\"$URL\" class=\"w3-text-docdb-color\">";
      $Link .= $Title;
      $Link .= "</a>";
 
@@ -1130,9 +1130,9 @@ sub EventsByGroup (%) {
       my $Colspan = $SingleGroup ? "3" : "2";
       print "<th colspan=\"$Colspan\" class=\"w3-padding\" style=\"vertical-align: middle;\">";
       if ($Mode eq "display") {
-        print "<li style=\"margin:0!important;\"><a href=\"$ListAllMeetings?eventgroupid=$EventGroupID\" class=\"w3-text-teal\">Click here</a> to see a complete listing of events.</li>\n";
+        print "<li style=\"margin:0!important;\"><a href=\"$ListAllMeetings?eventgroupid=$EventGroupID\" class=\"w3-text-docdb-color\">Click here</a> to see a complete listing of events.</li>\n";
       } else {
-        print "<li style=\"margin:0!important;\"><a href=\"$ListAllMeetings?eventgroupid=$EventGroupID&amp;mode=modify\" class=\"w3-text-teal\">Click here</a> to see a complete listing of events.</li>\n";
+        print "<li style=\"margin:0!important;\"><a href=\"$ListAllMeetings?eventgroupid=$EventGroupID&amp;mode=modify\" class=\"w3-text-docdb-color\">Click here</a> to see a complete listing of events.</li>\n";
       }
       print "</th>";
       last;
@@ -1152,9 +1152,9 @@ sub EventsByGroup (%) {
   if (!$Truncated && !$SingleGroup) {
     print '<tr><th colspan="2" class="w3-padding" style="vertical-align: middle;">';
     if ($Mode eq "display") {
-      print "<li style=\"margin:0!important;\"><a href=\"$ListAllMeetings?eventgroupid=$EventGroupID\" class=\"w3-text-teal\">Click here</a> to see a complete listing of events.</li>\n";
+      print "<li style=\"margin:0!important;\"><a href=\"$ListAllMeetings?eventgroupid=$EventGroupID\" class=\"w3-text-docdb-color\">Click here</a> to see a complete listing of events.</li>\n";
     } else {
-      print "<li style=\"margin:0!important;\"><a href=\"$ListAllMeetings?eventgroupid=$EventGroupID&amp;mode=modify\" class=\"w3-text-teal\">Click here</a> to see a complete listing of events.</li>\n";
+      print "<li style=\"margin:0!important;\"><a href=\"$ListAllMeetings?eventgroupid=$EventGroupID&amp;mode=modify\" class=\"w3-text-docdb-color\">Click here</a> to see a complete listing of events.</li>\n";
     }
     print "</th></tr>";
   }
@@ -1162,7 +1162,7 @@ sub EventsByGroup (%) {
   # Add row for documents link (always show for non-SingleGroup mode)
   unless ($SingleGroup) {
     print '<tr><th colspan="2" class="w3-padding" style="vertical-align: middle;">';
-    print "<li style=\"margin:0!important;\"><a href=\"$ListBy?eventgroupid=$EventGroupID\" class=\"w3-text-teal\">Click here</a> for a list of event group documents.</li>\n";
+    print "<li style=\"margin:0!important;\"><a href=\"$ListBy?eventgroupid=$EventGroupID\" class=\"w3-text-docdb-color\">Click here</a> for a list of event group documents.</li>\n";
     print "</th></tr>";
   }
   
@@ -1174,7 +1174,7 @@ sub EventsByGroup (%) {
   # Add documents link for SingleGroup mode (after the table)
   if ($SingleGroup) {
     print "<div class=\"w3-center w3-margin-top\">\n";
-    print "<li style=\"margin:0!important;\"><a href=\"$ListBy?eventgroupid=$EventGroupID\" class=\"w3-text-teal\">Click here</a> for a list of event group documents.</li>\n";
+    print "<li style=\"margin:0!important;\"><a href=\"$ListBy?eventgroupid=$EventGroupID\" class=\"w3-text-docdb-color\">Click here</a> for a list of event group documents.</li>\n";
     print "</div>\n";
   }
   
@@ -1281,7 +1281,7 @@ sub TalkUploadButton (%) {
   my $SessionID = $Params{-sessionid};
 
   print $query -> start_form('POST',$DocumentAddForm);
-  print $query -> submit (-value => "Upload Document", -class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small w3-block");
+  print $query -> submit (-value => "Upload Document", -class => "w3-button w3-docdb-color w3-round w3-border w3-border-black w3-padding-small w3-block");
   if ($EventID) {
     print $query -> hidden(-name => 'conferenceid', -default => $EventID);
   } elsif ($SessionID) {
@@ -1299,7 +1299,7 @@ sub SessionModifyButton (%) {
   my $ButtonText = $Params{-buttontext} || "Modify";
 
   print $query -> start_form('POST',$SessionModify);
-  print $query -> submit (-value => $ButtonText, -class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small");
+  print $query -> submit (-value => $ButtonText, -class => "w3-button w3-docdb-color w3-round w3-border w3-border-black w3-padding-small");
   print $LabelText;
   if ($EventID) {
     print $query -> hidden(-name => 'eventid',    -default => $EventID);
@@ -1318,7 +1318,7 @@ sub EventModifyButton (%) {
   my $LabelText  = $Params{-labeltext}  || "";
 
   print $query -> start_form('POST',$MeetingModify);
-  print $query -> submit (-value => $ButtonText, -class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small w3-block");
+  print $query -> submit (-value => $ButtonText, -class => "w3-button w3-docdb-color w3-round w3-border w3-border-black w3-padding-small w3-block");
   print $LabelText;
   print $query -> hidden(-name => 'conferenceid',    -default => $EventID);
   print $query -> end_form,"\n";
@@ -1342,7 +1342,7 @@ sub EventCopyButton (%) {
   print $query -> hidden(-name => "conferenceid", -default => $EventID);
   print "<div class=\"w3-cell-row\">\n";
   print "<div class=\"w3-cell\" style=\"\">\n";
-  print $query -> submit (-value => "Schedule Similar", -class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small w3-block");
+  print $query -> submit (-value => "Schedule Similar", -class => "w3-button w3-docdb-color w3-round w3-border w3-border-black w3-padding-small w3-block");
   print "</div>\n";
   print "<div class=\"w3-cell w3-cell-middle w3-center\" style=\"white-space:nowrap;\">\n";
   print "&nbsp;in&nbsp;\n";
@@ -1360,7 +1360,7 @@ sub EventDisplayButton ($) {
   my $EventID = exists $ArgRef->{-eventid} ? $ArgRef->{-eventid} : 0;
   print $query -> start_form('POST',$CustomListForm);
   print $query -> hidden(-name => "eventid", -default => $EventID);
-  print $query -> submit (-value => "Change Display", -class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small w3-block");
+  print $query -> submit (-value => "Change Display", -class => "w3-button w3-docdb-color w3-round w3-border w3-border-black w3-padding-small w3-block");
   print $query -> end_form,"\n";
 }
 
@@ -1374,9 +1374,9 @@ sub ListByEventLink {
 
   my $Link;
   if ($AuthorID) {
-    $Link .= '<a href="'.$ListEventsBy.'?authorid='.$AuthorID.'" class="w3-text-teal" ';
+    $Link .= '<a href="'.$ListEventsBy.'?authorid='.$AuthorID.'" class="w3-text-docdb-color" ';
   } elsif ($TopicID) {
-    $Link .= '<a href="'.$ListEventsBy.'?topicid='.$TopicID.'" class="w3-text-teal" ';
+    $Link .= '<a href="'.$ListEventsBy.'?topicid='.$TopicID.'" class="w3-text-docdb-color" ';
   }
   $Link .= 'title="List events"> ';
   $Link .= ImageSrc({ -alt => "Event", -image => "EventIcon" });
@@ -1412,7 +1412,7 @@ sub ICalLink ($) {
   if ($AllEvents) {
     $Link .= 'allevents=1';
   }
-  $Link .= '" class="w3-text-teal"><img class="icon" src="'.$ImgURLPath.'/ical_small.png" alt="iCal list of events" /></a>';
+  $Link .= '" class="w3-text-docdb-color"><img class="icon" src="'.$ImgURLPath.'/ical_small.png" alt="iCal list of events" /></a>';
 
   return $Link;
 }

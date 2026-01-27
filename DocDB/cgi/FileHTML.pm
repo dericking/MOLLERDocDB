@@ -177,15 +177,15 @@ sub FileLink ($) {
 
   if ($Format eq "short") {
     if ($Description) {
-      return "<a href=\"$URL\" title=\"$ShortName\" class=\"w3-text-teal\">$Description</a>";
+      return "<a href=\"$URL\" title=\"$ShortName\" class=\"w3-text-docdb-color\">$Description</a>";
     } else {
-      return "<a href=\"$URL\" title=\"$ShortName\" class=\"w3-text-teal\">$PrintedName</a>";
+      return "<a href=\"$URL\" title=\"$ShortName\" class=\"w3-text-docdb-color\">$PrintedName</a>";
     }
   } else {
     if ($Description) {
-      return "<a href=\"$URL\" title=\"$ShortName\" class=\"w3-text-teal\">$Description</a> ($PrintedName, $FileSize)";
+      return "<a href=\"$URL\" title=\"$ShortName\" class=\"w3-text-docdb-color\">$Description</a> ($PrintedName, $FileSize)";
     } else {
-      return "<a href=\"$URL\" title=\"$ShortName\" class=\"w3-text-teal\">$PrintedName</a> ($FileSize)";
+      return "<a href=\"$URL\" title=\"$ShortName\" class=\"w3-text-docdb-color\">$PrintedName</a> ($FileSize)";
     }
   }
 }
@@ -201,7 +201,7 @@ sub ArchiveLink {
   my $link  = "Get all files as \n";
   @LinkParts = ();
   foreach my $Type (@Types) {
-    push @LinkParts,"<a href=\"$RetrieveArchive?docid=$DocumentID\&amp;version=$Version\&amp;type=$Type\" class=\"w3-text-teal\">$Type</a>";
+    push @LinkParts,"<a href=\"$RetrieveArchive?docid=$DocumentID\&amp;version=$Version\&amp;type=$Type\" class=\"w3-text-docdb-color\">$Type</a>";
   }
   $link .= join ', ',@LinkParts;
   $link .= ".";
@@ -311,7 +311,7 @@ sub FileUploadBox (%) {
     
     if ($AllowCopy) {
       print '<div>';
-      print '&nbsp;<label><input type="checkbox" name="checkall" class="w3-check" style="accent-color: teal;" onclick="checkUncheckAll(this,\'copyfile\');" /> ';
+      print '&nbsp;<label><input type="checkbox" name="checkall" class="w3-check" style="accent-color: #004080;" onclick="checkUncheckAll(this,\'copyfile\');" /> ';
       print 'Copy all files from previous version (at least one file must be added or updated)</label>';
       print "</div>\n";
     }
@@ -323,7 +323,7 @@ sub FileUploadBox (%) {
 
     if ($AllowCopy && !$DescOnly) {
       print '<tr><td>&nbsp;</td><td colspan="2">';
-      print '&nbsp;<label><input type="checkbox" name="checkall" class="w3-check" style="accent-color: teal;" onclick="checkUncheckAll(this,\'copyfile\');" /> ';
+      print '&nbsp;<label><input type="checkbox" name="checkall" class="w3-check" style="accent-color: #004080;" onclick="checkUncheckAll(this,\'copyfile\');" /> ';
       print 'Copy all files from previous version (at least one file must be added or updated)</label></td></tr>'."\n";
     }
   }
@@ -372,7 +372,7 @@ sub FileUploadBox (%) {
         print "      </span>\n";
         print '    </div>'."\n";
         print '    <div class="w3-cell w3-right">'."\n";
-        print "      <input class=\"w3-button w3-border w3-teal w3-round\" type=\"button\" value=\"Clear\" onclick=\"clearFileInputField('$DivName')\" />\n";
+        print "      <input class=\"w3-button w3-border w3-docdb-color w3-round\" type=\"button\" value=\"Clear\" onclick=\"clearFileInputField('$DivName')\" />\n";
         print '    </div>'."\n";
         print '  </div>'."\n";
         print "\n";
@@ -387,9 +387,9 @@ sub FileUploadBox (%) {
         print '    <div class="w3-cell w3-right">'."\n";
         print '      <label>'."\n";
         if ($i == 1) {
-          print "        <input type=\"checkbox\" name=\"$MainName\" class=\"w3-check\" style=\"accent-color: teal;\" checked=\"checked\" value=\"1\">&nbsp;&nbsp;Is Main File\n";
+          print "        <input type=\"checkbox\" name=\"$MainName\" class=\"w3-check\" style=\"accent-color: #004080;\" checked=\"checked\" value=\"1\">&nbsp;&nbsp;Is Main File\n";
         } else {
-          print "        <input type=\"checkbox\" name=\"$MainName\" class=\"w3-check\" style=\"accent-color: teal;\" value=\"1\">&nbsp;&nbsp;Is Main File\n";
+          print "        <input type=\"checkbox\" name=\"$MainName\" class=\"w3-check\" style=\"accent-color: #004080;\" value=\"1\">&nbsp;&nbsp;Is Main File\n";
         }
         print '      </label>'."\n";
         print '    </div>'."\n";
@@ -433,9 +433,9 @@ sub FileUploadBox (%) {
                                    -maxlength => 128,       -default => $DefaultDesc, -class => "w3-input w3-border w3-round");
 
         if ($i == 1) {
-          print '&nbsp;<label><input type="checkbox" name="'.$MainName.'" class="w3-check" style="accent-color: teal;" checked="checked" value="1"></label>';
+          print '&nbsp;<label><input type="checkbox" name="'.$MainName.'" class="w3-check" style="accent-color: #004080;" checked="checked" value="1"></label>';
         } else {
-          print '&nbsp;<label><input type="checkbox" name="'.$MainName.'" class="w3-check" style="accent-color: teal;" value="1"></label>';
+          print '&nbsp;<label><input type="checkbox" name="'.$MainName.'" class="w3-check" style="accent-color: #004080;" value="1"></label>';
         }
 
         print $MainHelp;
@@ -445,7 +445,7 @@ sub FileUploadBox (%) {
     if ($FileID && $AllowCopy && !$DescOnly) {
       print "<tr><td>&nbsp;</td><td colspan=\"2\" class=\"FileCopyRow\">\n";
       print $query -> hidden(-name => $FileIDName, -value => $FileID);
-      print '&nbsp;<label><input type="checkbox" name="'.$CopyName.'" class="w3-check" style="accent-color: teal;" value="1"></label>';
+      print '&nbsp;<label><input type="checkbox" name="'.$CopyName.'" class="w3-check" style="accent-color: #004080;" value="1"></label>';
       print "Copy <tt>$DocFiles{$FileID}{NAME}</tt> from previous version:";
       print "</td></tr>\n";
     }
@@ -453,7 +453,7 @@ sub FileUploadBox (%) {
   }
   if ($AllowCopy && $NOrigFiles) {
     print '<tr><td colspan="2">';
-    print '<label><input type="checkbox" name="LessFiles" class="w3-check" style="accent-color: teal;" value="1"></label>';
+    print '<label><input type="checkbox" name="LessFiles" class="w3-check" style="accent-color: #004080;" value="1"></label>';
     print FormElementTitle(-helplink => "LessFiles", -helptext => "New version has fewer files",
                            -nocolon  => $TRUE,       -nobold   => $TRUE);;
     print "</td></tr>\n";

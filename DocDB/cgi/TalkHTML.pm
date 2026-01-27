@@ -151,7 +151,7 @@ sub TalkNote {
 sub TalkDelete ($) {
   my ($SessionOrderID) = @_;
   if ($TalkSeparatorDefault eq "Yes" || $TalkSeparatorDefault eq "No") {
-    print '<label><input type="checkbox" name="talkdelete" class="w3-check" style="accent-color: teal;" value="'.$SessionOrderID.'"> Delete</label>';
+    print '<label><input type="checkbox" name="talkdelete" class="w3-check" style="accent-color: #004080;" value="'.$SessionOrderID.'"> Delete</label>';
     print "<br/>\n";
   }
 }
@@ -162,10 +162,10 @@ sub TalkConfirm ($) {
   if ($TalkSeparatorDefault eq "Yes") {
 #    print "&nbsp;\n";
   } elsif ($TalkDefaultConfirmed) {
-    print '<label><input type="checkbox" name="talkconfirm" class="w3-check" style="accent-color: teal;" value="'.$SessionOrderID.'" checked="checked"> Confirm</label>';
+    print '<label><input type="checkbox" name="talkconfirm" class="w3-check" style="accent-color: #004080;" value="'.$SessionOrderID.'" checked="checked"> Confirm</label>';
     print "<br/>\n";
   } else {
-    print '<label><input type="checkbox" name="talkconfirm" class="w3-check" style="accent-color: teal;" value="'.$SessionOrderID.'"> Confirm</label>';
+    print '<label><input type="checkbox" name="talkconfirm" class="w3-check" style="accent-color: #004080;" value="'.$SessionOrderID.'"> Confirm</label>';
     print "<br/>\n";
   }
 }
@@ -178,7 +178,7 @@ sub TalkReserve ($) {
   } elsif ($TalkDefaultConfirmed) {
 #    print "&nbsp;\n";
   } else {
-    print '<label><input type="checkbox" name="talkreserve" class="w3-check" style="accent-color: teal;" value="'.$SessionOrderID.'"> Reserve</label>';
+    print '<label><input type="checkbox" name="talkreserve" class="w3-check" style="accent-color: #004080;" value="'.$SessionOrderID.'"> Reserve</label>';
     print "<br/>\n";
   }
 }
@@ -200,7 +200,7 @@ sub TalkSeparator ($) {
 #    print "<br/>\n";
   } else {
     $query -> param('talkseparator', "");
-    print '<label><input type="checkbox" name="talkseparator" class="w3-check" style="accent-color: teal;" value="'.$SessionOrderID.'"> Break</label>';
+    print '<label><input type="checkbox" name="talkseparator" class="w3-check" style="accent-color: #004080;" value="'.$SessionOrderID.'"> Break</label>';
     print "<br/>\n";
   }
 }

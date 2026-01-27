@@ -48,7 +48,7 @@ sub DocNotifySignup (%) {
     print "</div>\n";
   }
   print "<div id=\"DocActionSubmitCell\" class=\"w3-padding w3-center\">\n";
-  print $query -> submit (-value => "Watch Document", -class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small");
+  print $query -> submit (-value => "Watch Document", -class => "w3-button w3-docdb-color w3-round w3-border w3-border-black w3-padding-small");
   print "</div>\n";
   print "</div>\n";
   print $query -> end_multipart_form;

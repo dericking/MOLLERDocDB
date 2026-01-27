@@ -37,9 +37,9 @@ sub CalendarLink (%) {
 
   my $Link = "<a ";
   if ($Class) {
-    $Link .= "class=\"w3-text-teal\" ";
+    $Link .= "class=\"w3-text-docdb-color\" ";
   } else {
-    $Link .= "class=\"w3-text-teal\" ";
+    $Link .= "class=\"w3-text-docdb-color\" ";
   }
   $Link .= "href=\"".$ShowCalendar;
 
@@ -92,15 +92,15 @@ sub PrintCalendar {
     my $YearLink = CalendarLink(-year => $Year, -text => $Year);
     my $CurrLink = "$MonthName $YearLink";
     print "<div class=\"w3-cell w3-cell-middle\">\n";
-    print "<i class=\"fa-solid fa-chevron-left w3-text-teal\"></i>&nbsp;";
-    print "<a href=\"".$ShowCalendar."?year=$PrevYear&amp;month=$PrevMNum\" class=\"w3-large w3-text-teal\"><span class=\"\">$PrevName $PrevYear</span></a>\n";
+    print "<i class=\"fa-solid fa-chevron-left w3-text-docdb-color\"></i>&nbsp;";
+    print "<a href=\"".$ShowCalendar."?year=$PrevYear&amp;month=$PrevMNum\" class=\"w3-large w3-text-docdb-color\"><span class=\"\">$PrevName $PrevYear</span></a>\n";
     print "</div><!-- Closing div w3-cell -->\n";
     print "<div class=\"w3-cell w3-cell-middle\" style=\"padding-left:2em; padding-right:2em;\">\n";
     print "<span class=\"w3-large\">$CurrLink</span>\n";
     print "</div><!-- Closing div w3-cell -->\n";
     print "<div class=\"w3-cell w3-cell-middle\">\n";
-    print "<a href=\"".$ShowCalendar."?year=$NextYear&amp;month=$NextMNum\" class=\"w3-large w3-text-teal\"><span class=\"\">$NextName $NextYear</span></a>&nbsp;";
-    print "<i class=\"fa-solid fa-chevron-right w3-text-teal\"></i>\n";
+    print "<a href=\"".$ShowCalendar."?year=$NextYear&amp;month=$NextMNum\" class=\"w3-large w3-text-docdb-color\"><span class=\"\">$NextName $NextYear</span></a>&nbsp;";
+    print "<i class=\"fa-solid fa-chevron-right w3-text-docdb-color\"></i>\n";
     print "</div><!-- Closing div w3-cell -->\n";
     print "</div><!-- Closing div id CalendarNavigator -->\n";
     print "</div><!-- Closing div id CalNavWrap -->\n";
@@ -128,7 +128,7 @@ sub PrintCalendar {
     if ($Type eq "year") {
       print "<th class=\"w3-center w3-paper\">",substr($DayName,0,1),"</th>\n";
     } else {
-      print "<th class=\"w3-center w3-teal\">$DayName</th>\n";
+      print "<th class=\"w3-center w3-docdb-color\">$DayName</th>\n";
     }
   }
   print "</tr>\n";
@@ -165,9 +165,8 @@ sub PrintCalendar {
     }
 
     my $CellClass = "";
-    my $TodayStyle = "";
     if ($DateTime == $Today) {
-      $TodayStyle = " border: 3px solid teal;";
+      $CellClass = "CalendarToday";
     } elsif ($DOW == 1 || $DOW == 7) {  # Sunday or Saturday
       $CellClass = "w3-light-gray";
     }
@@ -175,13 +174,13 @@ sub PrintCalendar {
     # Format IDs: CalCellDay{year}{month}{day}, etc.
     my $CellID = sprintf("%04d%02d%02d", $Year, $Month, $Day);
     
-    print "<td class=\"CalendarCell w3-padding-small $CellClass\" style=\"vertical-align: top;$TodayStyle\">\n";
+    print "<td class=\"CalendarCell w3-padding-small $CellClass\" style=\"vertical-align: top;\">\n";
     
     if ($Type eq "year") {
       my @EventIDs   = GetEventsByDate({-on => $SQLDate});
       my @SessionIDs = FetchSessionsByDate($SQLDate);
       if (@EventIDs || @SessionIDs) {
-        my $DayLink = "<a class=\"w3-text-teal\" href=\"".$ShowCalendar."?year=$Year&amp;month=$Month&amp;day=$Day\">".
+        my $DayLink = "<a class=\"w3-text-docdb-color\" href=\"".$ShowCalendar."?year=$Year&amp;month=$Month&amp;day=$Day\">".
                       "<span class=\"u-fw700\">".$DateTime -> day()."</span></a>";
         print "$DayLink\n";
       } else {
@@ -193,11 +192,11 @@ sub PrintCalendar {
       print "<div id=\"CalCellWrap$CellID\" style=\"min-height:10em; width:100%;\">\n";
       
       print "<div id=\"CalCellHead$CellID\" class=\"w3-bar\">\n";
-      print "<a id=\"CalCellDay$CellID\" class=\"w3-bar-item w3-text-teal w3-medium\" style=\"padding:0;\" href=\"".$ShowCalendar."?year=$Year&amp;month=$Month&amp;day=$Day\">";
+      print "<a id=\"CalCellDay$CellID\" class=\"w3-bar-item w3-text-docdb-color w3-medium\" style=\"padding:0;\" href=\"".$ShowCalendar."?year=$Year&amp;month=$Month&amp;day=$Day\">";
       print "<span class=\"u-fw700\">".$DateTime -> day()."</span></a>\n";
       
       if (CanCreateMeeting()) {
-        print "<a id=\"CalCellAdd$CellID\" class=\"w3-bar-item w3-right w3-tag w3-tiny w3-teal w3-round u-pad4\" style=\"margin-top:1px;\" href=\"".$SessionModify."?mode=new&amp;singlesession=1&amp;sessionyear=$Year&amp;sessionmonth=$Month&amp;sessionday=$Day\" title=\"Add event\">";
+        print "<a id=\"CalCellAdd$CellID\" class=\"w3-bar-item w3-right w3-tag w3-tiny w3-docdb-color w3-round u-pad4\" style=\"margin-top:1px;\" href=\"".$SessionModify."?mode=new&amp;singlesession=1&amp;sessionyear=$Year&amp;sessionmonth=$Month&amp;sessionday=$Day\" title=\"Add event\">";
         print "<i class=\"fa-solid fa-plus\"></i></a>\n";
       }
       print "</div><!-- Closing div id CalCellHead$CellID -->\n";

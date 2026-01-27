@@ -384,7 +384,7 @@ sub DocumentLink (%) {
     }
     $Link .= "\"";
     $Link .= " title=\"$FullDocID\"";
-    $Link .= " class=\"w3-text-teal\"";
+    $Link .= " class=\"w3-text-docdb-color\"";
     $Link .= ">";
   } else {
     $Link .= '<span class="PrivateDocument">';

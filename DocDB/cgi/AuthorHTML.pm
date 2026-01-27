@@ -163,9 +163,9 @@ sub AuthorLink ($;%) {
 
   my $Link;
   if ($OldDocs) {
-    $Link = "<a href=\"$Script?authorid=$AuthorID&amp;old=1\" title=\"$InstitutionName\" class=\"w3-text-teal\">";
+    $Link = "<a href=\"$Script?authorid=$AuthorID&amp;old=1\" title=\"$InstitutionName\" class=\"w3-text-docdb-color\">";
   } else {
-    $Link = "<a href=\"$Script?authorid=$AuthorID\" title=\"$InstitutionName\" class=\"w3-text-teal\">";
+    $Link = "<a href=\"$Script?authorid=$AuthorID\" title=\"$InstitutionName\" class=\"w3-text-docdb-color\">";
   }
 
   if ($Format eq "full") {
@@ -225,7 +225,7 @@ sub AuthorsTable {
   if ($UseAnchors ) {
     print "<div class=\"w3-center w3-padding w3-margin-bottom\">\n";
     foreach my $Letter (A..Z) {
-      print "<a href=\"#$Letter\" class=\"w3-text-teal w3-large\"><strong>$Letter</strong></a>\n";
+      print "<a href=\"#$Letter\" class=\"w3-text-docdb-color w3-large\"><strong>$Letter</strong></a>\n";
     }
     print "</div><!-- Closing div w3-center w3-padding w3-margin-bottom -->\n";
   }
@@ -264,7 +264,7 @@ sub AuthorsTable {
       }
       $FirstPass = 0;
       print "<a id=\"$FirstLetter\"></a>\n";
-      print "<div class=\"w3-large w3-teal w3-round w3-panel w3-leftbar w3-border w3-border-black\" style=\"font-weight:700;\">$FirstLetter</div>\n";
+      print "<div class=\"w3-large w3-docdb-color w3-round w3-panel w3-leftbar w3-border w3-border-black\" style=\"font-weight:700;\">$FirstLetter</div>\n";
       print "<ul>\n";
     }
     my $AuthorLink = AuthorLink($AuthorID, -format => "formal");

@@ -89,7 +89,7 @@ sub RevisionNoteBox {
     $JSInsert =~ s/\&#x22;/\\\&#x27;/g;  # Double quote with single quote
     $JSInsert =~ s/\"/\\\'/g; # FIXME: See if there is a way to insert double quotes
                               #        Bad HTML/JS interaction, I think. Try breaking string at $JSInsert
-    $ExtraText = "<a href=\"#RevisionNote\" onclick=\"InsertRevisionNote('$JSInsert');\" class=\"w3-text-teal\">(Insert notes from previous version)</a>";
+    $ExtraText = "<a href=\"#RevisionNote\" onclick=\"InsertRevisionNote('$JSInsert');\" class=\"w3-text-docdb-color\">(Insert notes from previous version)</a>";
   }
 
   my $ElementTitle = &FormElementTitle(-helplink  => "revisionnote",
@@ -361,7 +361,7 @@ sub PrintReferenceInfo ($;$) {
       }
       my ($ReferenceLink,$ReferenceText) = &ReferenceLink($ReferenceID);
       if ($ReferenceLink) {
-        print "<a href=\"$ReferenceLink\" class=\"w3-text-teal\">";
+        print "<a href=\"$ReferenceLink\" class=\"w3-text-docdb-color\">";
       }
       if ($ReferenceText) {
         print "$ReferenceText";
@@ -508,7 +508,7 @@ sub OtherVersionLinks {
   #   my @GroupIDs     = GetRevisionSecurityGroups($DocRevID);
   #   unless (@GroupIDs) {
   #     my $PublicURL = $Preferences{Security}{Instances}{Public}.'/ShowDocument?docid='.$DocumentID;
-  #     $HTML .= '<br/><a href="'.$PublicURL.'" class="w3-text-teal">Public Version</a>'."\n";
+  #     $HTML .= '<br/><a href="'.$PublicURL.'" class="w3-text-docdb-color">Public Version</a>'."\n";
   #   }
   # }
   # 

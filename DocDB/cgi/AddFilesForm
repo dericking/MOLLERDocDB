@@ -148,7 +148,7 @@ print "</td></tr>";
 
 print "<tr><td>\n";
 print FormElementTitle(-helplink => "replacefiles", -helptext => "Replace duplicate files?", -nocolon => $TRUE, -nobreak => $TRUE);
-print '<label><input type="checkbox" name="replace" class="w3-check" style="accent-color: teal;" value="1" onclick="helppopupwindow(\'DocDBHelp?term=replacefiles\');"> (Check for yes.)</label>';
+print '<label><input type="checkbox" name="replace" class="w3-check" style="accent-color: #004080;" value="1" onclick="helppopupwindow(\'DocDBHelp?term=replacefiles\');"> (Check for yes.)</label>';
 print "</td></tr>";
 
 if ($SigStatus ne "Unmanaged" && CanPreserveSigs("update")) {
@@ -156,14 +156,14 @@ if ($SigStatus ne "Unmanaged" && CanPreserveSigs("update")) {
   print FormElementTitle(-helplink => "preservesigs",
                          -helptext => "Preserve signatures on this revision?",
                          -nocolon => $TRUE, -nobreak => $TRUE);
-  print '<label><input type="checkbox" name="preservesigs" class="w3-check" style="accent-color: teal;" value="1"> (Check for yes.)</label>';
+  print '<label><input type="checkbox" name="preservesigs" class="w3-check" style="accent-color: #004080;" value="1"> (Check for yes.)</label>';
   print "</td></tr>\n";
 }
 
 if ($Preferences{Options}{SubmitAgree}) {
   print '<tr><td>';
   print $Preferences{Options}{SubmitAgree};
-  print '<label><input type="checkbox" name="submitagree" class="w3-check" style="accent-color: teal;" value="1"></label>';
+  print '<label><input type="checkbox" name="submitagree" class="w3-check" style="accent-color: #004080;" value="1"></label>';
   print "</td></tr>\n";
 }
 

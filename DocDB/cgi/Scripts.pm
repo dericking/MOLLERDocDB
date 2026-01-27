@@ -28,11 +28,11 @@ use HTML::Entities;
 
 sub TalkNoteLink {
   my ($SessionOrderID) = @_;
-  return "<a href=\"Javascript:notepopupwindow(\'$ShowTalkNote?sessionorderid=$SessionOrderID\');\" class=\"w3-text-teal\">Edit</a>";
+  return "<a href=\"Javascript:notepopupwindow(\'$ShowTalkNote?sessionorderid=$SessionOrderID\');\" class=\"w3-text-docdb-color\">Edit</a>";
 }
 
 sub GroupLimitLink {
-  return "<a href=\"Javascript:grouplimitpopupwindow(\'$SelectGroups\');\" class=\"w3-text-teal\">Limit Groups</a>";
+  return "<a href=\"Javascript:grouplimitpopupwindow(\'$SelectGroups\');\" class=\"w3-text-docdb-color\">Limit Groups</a>";
 }
 
 sub EventSearchScript {

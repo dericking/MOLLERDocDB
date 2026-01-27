@@ -69,13 +69,13 @@ print "<div class=\"w3-bar-item\" style=\"font-weight:700;cursor:default;\">Help
 print "<div class=\"w3-bar-item\" style=\"padding-left:16px;\">".FormElementTitle(-helplink => "modifytypes", -helptext => "Which option do I choose?",
                            -nobold => $TRUE, -nocolon  => $TRUE,         -nobreak  => $TRUE)."</div>\n";
 print "<div class=\"w3-bar-item\" style=\"font-weight:700;cursor:default;\">Page Navigation</div>\n";
-print "<div class=\"w3-bar-item w3-button\" style=\"padding-left:16px;\"><a href=\"#documentmanagement\" class=\"w3-text-teal\" style=\"text-decoration:none;\">Document Management</a></div>\n";
-print "<div class=\"w3-bar-item w3-button\" style=\"padding-left:16px;\"><a href=\"#eventmanagement\" class=\"w3-text-teal\" style=\"text-decoration:none;\">Event Management</a></div>\n";
-print "<div class=\"w3-bar-item w3-button\" style=\"padding-left:16px;\"><a href=\"#databasemaintenance\" class=\"w3-text-teal\" style=\"text-decoration:none;\">Database Maintenance</a></div>\n";
-print "<div class=\"w3-bar-item w3-button\" style=\"padding-left:16px;\"><a href=\"#customcreate\" class=\"w3-text-teal\" style=\"text-decoration:none;\">Customized Insert/Modify</a></div>\n";
-print "<div class=\"w3-bar-item w3-button\" style=\"padding-left:16px;\"><a href=\"#addform\" class=\"w3-text-teal\" style=\"text-decoration:none;\">Customized Add/Replace</a></div>\n";
+print "<div class=\"w3-bar-item w3-button\" style=\"padding-left:16px;\"><a href=\"#documentmanagement\" class=\"w3-text-docdb-color\" style=\"text-decoration:none;\">Document Management</a></div>\n";
+print "<div class=\"w3-bar-item w3-button\" style=\"padding-left:16px;\"><a href=\"#eventmanagement\" class=\"w3-text-docdb-color\" style=\"text-decoration:none;\">Event Management</a></div>\n";
+print "<div class=\"w3-bar-item w3-button\" style=\"padding-left:16px;\"><a href=\"#databasemaintenance\" class=\"w3-text-docdb-color\" style=\"text-decoration:none;\">Database Maintenance</a></div>\n";
+print "<div class=\"w3-bar-item w3-button\" style=\"padding-left:16px;\"><a href=\"#customcreate\" class=\"w3-text-docdb-color\" style=\"text-decoration:none;\">Customized Insert/Modify</a></div>\n";
+print "<div class=\"w3-bar-item w3-button\" style=\"padding-left:16px;\"><a href=\"#addform\" class=\"w3-text-docdb-color\" style=\"text-decoration:none;\">Customized Add/Replace</a></div>\n";
 # COMMENTED OUT: Instructions link - no longer needed
-# print "<div class=\"w3-bar-item\"><strong><a href=\"$DocDBInstructions\" class=\"w3-text-teal\">Instructions</a></strong></div>\n";
+# print "<div class=\"w3-bar-item\"><strong><a href=\"$DocDBInstructions\" class=\"w3-text-docdb-color\">Instructions</a></strong></div>\n";
 # COMMENTED OUT: Your Account link - no longer needed
 # if ($PersonalAccountLink) {
 #   print "<div class=\"w3-bar-item\"><strong>$PersonalAccountLink</strong></div>\n";
@@ -84,7 +84,7 @@ foreach my $Text (@{ $ProjectMessages{Homepage}{LeftColumn} }) {
   print "<div class=\"w3-bar-item\"><strong>$Text</strong></div>\n";
 }
 # COMMENTED OUT: About DocDB link - no longer needed
-# print "<div class=\"w3-bar-item\"><strong><a href=\"$DocDBHome\" class=\"w3-text-teal\">About DocDB</a></strong></div>\n";
+# print "<div class=\"w3-bar-item\"><strong><a href=\"$DocDBHome\" class=\"w3-text-docdb-color\">About DocDB</a></strong></div>\n";
 print "</div><!-- Closing div w3-bar-block -->\n";
 
 print "</div><!-- Closing div id LeftColumnModifyHome -->\n";
@@ -105,7 +105,7 @@ print "<div class=\"w3-padding-small\">\n";
 print "\n",$query -> start_form('POST',$DocumentAddForm);
 print "<div class=\"w3-bar\" style=\"display:flex;align-items:center;gap:6px;flex-wrap:wrap;\">\n";
 print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
-print $query -> submit (-class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small", -value => "Create a new");
+print $query -> submit (-class => "w3-button w3-docdb-color w3-round w3-border w3-border-black w3-padding-small", -value => "Create a new");
 print "</div>\n";
 print "<div class=\"w3-bar-item\" style=\"padding:0;white-space:nowrap;\"> document from </div>\n";
 print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
@@ -128,7 +128,7 @@ print "<div class=\"w3-padding-small\">\n";
 print "\n",$query -> start_form('POST',$DocumentAddForm);
 print "<div class=\"w3-bar\" style=\"display:flex;align-items:center;gap:6px;flex-wrap:wrap;\">\n";
 print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
-print $query -> submit (-class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small", -value => "Create a new");
+print $query -> submit (-class => "w3-button w3-docdb-color w3-round w3-border w3-border-black w3-padding-small", -value => "Create a new");
 print "</div>\n";
 print "<div class=\"w3-bar-item\" style=\"padding:0;white-space:nowrap;\"> document from </div>\n";
 print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
@@ -151,7 +151,7 @@ print "<div class=\"w3-padding-small\">\n";
 print "\n",$query -> start_form('POST',$DocumentAddForm);
 print "<div class=\"w3-bar\" style=\"display:flex;align-items:center;gap:6px;flex-wrap:wrap;\">\n";
 print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
-print $query -> submit (-class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small", -value => "Reserve");
+print $query -> submit (-class => "w3-button w3-docdb-color w3-round w3-border w3-border-black w3-padding-small", -value => "Reserve");
 print "</div>\n";
 print "<div class=\"w3-bar-item\" style=\"padding:0;\"> a document number (if you don't yet have a draft of your document).</div>\n";
 print $query -> hidden(-name => 'mode',    -default => 'reserve');
@@ -165,7 +165,7 @@ print "<div class=\"w3-padding-small\">\n";
 print "\n",$query -> start_form('POST',$DocumentAddForm);
 print "<div class=\"w3-bar\" style=\"display:flex;align-items:center;gap:6px;flex-wrap:wrap;\">\n";
 print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
-print $query -> submit (-class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small", -value => "Update");
+print $query -> submit (-class => "w3-button w3-docdb-color w3-round w3-border w3-border-black w3-padding-small", -value => "Update");
 print "</div>\n";
 print "<div class=\"w3-bar-item\" style=\"padding:0;white-space:nowrap;\"> document # </div>\n";
 print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
@@ -182,7 +182,7 @@ print "<div class=\"w3-padding-small\">\n";
 print "\n",$query -> start_form('POST',$DocumentAddForm);
 print "<div class=\"w3-bar\" style=\"display:flex;align-items:center;gap:6px;flex-wrap:wrap;\">\n";
 print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
-print $query -> submit (-class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small", -value => "Update Metadata");
+print $query -> submit (-class => "w3-button w3-docdb-color w3-round w3-border w3-border-black w3-padding-small", -value => "Update Metadata");
 print "</div>\n";
 print "<div class=\"w3-bar-item\" style=\"padding:0;white-space:nowrap;\"> for document # </div>\n";
 print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
@@ -199,7 +199,7 @@ print "<div class=\"w3-padding-small\">\n";
 print "\n",$query -> start_form('POST',$AddFilesForm);
 print "<div class=\"w3-bar\" style=\"display:flex;align-items:center;gap:6px;flex-wrap:wrap;\">\n";
 print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
-print $query -> submit (-class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small", -value => "Add");
+print $query -> submit (-class => "w3-button w3-docdb-color w3-round w3-border w3-border-black w3-padding-small", -value => "Add");
 print "</div>\n";
 print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
 print $query -> textfield(-name => "numfile", -size => 2, -maxlength => 2, -class => 'w3-input w3-border w3-round', -style => 'width:3.2em;padding:4px 6px;display:inline-block;');
@@ -246,7 +246,7 @@ if (CanCreateMeeting()) {
     print "<div class=\"w3-bar\" style=\"display:flex;align-items:center;gap:6px;flex-wrap:wrap;\">\n";
     print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
     print $query -> hidden(-name => 'dummy', -default => 1);
-    print $query -> submit (-class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small", -value => "Create");
+    print $query -> submit (-class => "w3-button w3-docdb-color w3-round w3-border w3-border-black w3-padding-small", -value => "Create");
     print "</div>\n";
 print "<div class=\"w3-bar-item\" style=\"padding:0;\"> a new event with multiple sessions</div>\n";
 print "</div><!-- Closing div w3-bar -->\n";
@@ -261,7 +261,7 @@ print "</div><!-- Closing div w3-padding-small -->\n";
     print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
     print $query -> hidden(-name => 'singlesession', -default => 1);
     print $query -> hidden(-name => 'mode', -default => "new");
-    print $query -> submit (-class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small", -value => "Create");
+    print $query -> submit (-class => "w3-button w3-docdb-color w3-round w3-border w3-border-black w3-padding-small", -value => "Create");
     print "</div>\n";
 print "<div class=\"w3-bar-item\" style=\"padding:0;\"> a new event with only one session</div>\n";
 print "</div><!-- Closing div w3-bar -->\n";
@@ -276,7 +276,7 @@ print "</div><!-- Closing div w3-padding-small -->\n";
   print "<div class=\"w3-bar\" style=\"display:flex;align-items:center;gap:6px;flex-wrap:wrap;\">\n";
   print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
   print $query -> hidden(-name => 'nosessions',    -default => 1);
-  print $query -> submit (-class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small", -value => "Create");
+  print $query -> submit (-class => "w3-button w3-docdb-color w3-round w3-border w3-border-black w3-padding-small", -value => "Create");
   print "</div>\n";
 print "<div class=\"w3-bar-item\" style=\"padding:0;\"> an externally managed event (e. g. a conference)</div>\n";
 print "</div><!-- Closing div w3-bar -->\n";
@@ -286,7 +286,7 @@ print "</div><!-- Closing div w3-padding-small -->\n";
   print "<div class=\"w3-padding-small\">\n";
   print "<div class=\"w3-bar\" style=\"display:flex;align-items:center;gap:6px;flex-wrap:wrap;\">\n";
   print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
-  print "<a href=\"$ListAllMeetings?mode=modify\" class=\"w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small\" style=\"text-decoration:none;\">Modify</a>\n";
+  print "<a href=\"$ListAllMeetings?mode=modify\" class=\"w3-button w3-docdb-color w3-round w3-border w3-border-black w3-padding-small\" style=\"text-decoration:none;\">Modify</a>\n";
   print "</div>\n";
   print "<div class=\"w3-bar-item\" style=\"padding:0;\"> an existing event (choose event on next page)</div>\n";
   print "</div><!-- Closing div w3-bar -->\n";
@@ -302,14 +302,14 @@ print "<div class=\"w3-margin-bottom\">\n";
 print "<div class=\"w3-padding-small\">\n";
 print "<div class=\"w3-bar\" style=\"display:flex;align-items:center;gap:6px;flex-wrap:wrap;\">\n";
 print "<div class=\"w3-bar-item\" style=\"padding:0;\">\n";
-print "<a href=\"$AuthorAddForm\" class=\"w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small\" style=\"text-decoration:none;\">Add</a>\n";
+print "<a href=\"$AuthorAddForm\" class=\"w3-button w3-docdb-color w3-round w3-border w3-border-black w3-padding-small\" style=\"text-decoration:none;\">Add</a>\n";
 print "</div>\n";
 print "<div class=\"w3-bar-item\" style=\"padding:0;\"> an author</div>\n";
 print "</div><!-- Closing div w3-bar -->\n";
 print "</div><!-- Closing div w3-padding-small -->\n";
 print "<ul>\n";
 if (CanAdminister()) {
-  print "<li>Perform other <a href=\"$AdministerHome\" class=\"w3-text-teal\" style=\"text-decoration:none;\">administration tasks</a></li>\n";
+  print "<li>Perform other <a href=\"$AdministerHome\" class=\"w3-text-docdb-color\" style=\"text-decoration:none;\">administration tasks</a></li>\n";
 }
 print "<li>Contact Administrator to add a Topic</li>\n";
 print "<li>Contact Administrator to add Keywords</li>\n";
@@ -416,7 +416,7 @@ print $query -> radio_group(-name => "overdate", -values => ['No','Yes'],
 print "</td></tr>\n";
 
 print "<tr><th colspan=\"3\" class=\"w3-center\">\n";
-print $query -> submit (-value => "Give me my customized form", -class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small");
+print $query -> submit (-value => "Give me my customized form", -class => "w3-button w3-docdb-color w3-round w3-border w3-border-black w3-padding-small");
 print "</th></tr>\n";
 print "</table>\n";
 print $query -> end_form;
@@ -466,7 +466,7 @@ print $query -> radio_group(-name => "upload", -values => \@uploads, -labels => 
 print "</td></tr>\n";
 
 print "<tr><th colspan=\"3\" class=\"w3-center\">\n";
-print $query -> submit (-value => "Give me my customized form", -class => "w3-button w3-teal w3-round w3-border w3-border-black w3-padding-small");
+print $query -> submit (-value => "Give me my customized form", -class => "w3-button w3-docdb-color w3-round w3-border w3-border-black w3-padding-small");
 print "</th></tr>\n";
 
 print "</table>\n";

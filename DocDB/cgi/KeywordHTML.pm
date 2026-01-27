@@ -69,7 +69,7 @@ sub KeywordsbyKeywordGroup ($;$) {
       $SafeKeyword =~ s/\"//g;       # FIXME: Just remove double quotes for now
       $SafeKeyword =~ s/\&#x22;//g;  # FIXME: Just remove double quotes for now
       $KeyLink = "<a href=\"$ListKeywords?mode=chooser\" ".
-                 "onclick=\"InsertKeyword('$SafeKeyword');\" class=\"w3-text-teal\">$SafeKeyword</a>";
+                 "onclick=\"InsertKeyword('$SafeKeyword');\" class=\"w3-text-docdb-color\">$SafeKeyword</a>";
     } else {
       $KeyLink = &KeywordLinkByID($KeywordID,-format => "short");
     }
@@ -119,7 +119,7 @@ sub KeywordDetailedList {
     $Label =~ s/\s+//;
 
     print "  <td>\n";
-    print "  <a href=\"#$Label\" class=\"w3-text-teal\"><b>$KeywordGroup</b>\n";
+    print "  <a href=\"#$Label\" class=\"w3-text-docdb-color\"><b>$KeywordGroup</b>\n";
     print "  </td>\n";
   }
   print "</tr>\n";
@@ -249,7 +249,7 @@ sub KeywordLinkByID ($;%) {
   # FIXME_XSS: Check to make sure this kind of search still works.
   # May need to remove special characters or adapt search atoms
   unless ($NoLink) {
-    $Link .= "<a href=\"$Search\?keywordsearchmode=anyword&amp;keywordsearch=$SafeURI\" class=\"w3-text-teal\">";
+    $Link .= "<a href=\"$Search\?keywordsearchmode=anyword&amp;keywordsearch=$SafeURI\" class=\"w3-text-docdb-color\">";
   }
 
   if ($Format eq "short") {
@@ -272,7 +272,7 @@ sub KeywordLink ($;%) { # FIXME: Allow parameters of short, long, full a la Lynn
   my $SafeKeyword = SmartHTML( {-text => $Keyword} );
   my $UnsafeURI = decode_entities($Keyword);
   my $SafeURI = uri_escape($UnsafeURI);
-  my $ret = "<a href=\"$Search\?keywordsearchmode=anyword&amp;keywordsearch=$SafeURI\" class=\"w3-text-teal\">";
+  my $ret = "<a href=\"$Search\?keywordsearchmode=anyword&amp;keywordsearch=$SafeURI\" class=\"w3-text-docdb-color\">";
   $ret .= "$SafeKeyword";
   $ret .=  "</a>";
   return $ret;
@@ -286,7 +286,7 @@ sub KeywordsBox (%) {
 
   my $ElementTitle = &FormElementTitle(-helplink  => "keywords" ,
                                        -helptext  => "Keywords" ,
-                                       -extratext => "(space separated) - <a href=\"Javascript:keywordchooserwindow(\'$ListKeywords?mode=chooser\');\" class=\"w3-text-teal\"><b>Keyword
+                                       -extratext => "(space separated) - <a href=\"Javascript:keywordchooserwindow(\'$ListKeywords?mode=chooser\');\" class=\"w3-text-docdb-color\"><b>Keyword
   Chooser</b></a>",
                                        -required  => $Required );
   print $ElementTitle,"\n";

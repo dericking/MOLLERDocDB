@@ -118,17 +118,17 @@ print "</div><!-- Closing div w3-round-large w3-margin-right -->\n";
 print "<div id=\"hr\" class=\"w3-panel w3-black\"></div>\n";
 print "<h3 class=\"w3-margin-left\">All Instructions</h3>\n";
 print "<div class=\"w3-padding\">\n";
-print "<strong><a href=\"$DocDBInstructions?set=general\" class=\"w3-text-teal\">General Instructions</a></strong><br/>\n";
+print "<strong><a href=\"$DocDBInstructions?set=general\" class=\"w3-text-docdb-color\">General Instructions</a></strong><br/>\n";
 unless ($Public) {
-  print "<strong><a href=\"$DocDBInstructions?set=event\" class=\"w3-text-teal\">Event Organizer and Calendar</a></strong><br/>\n";
-  print "<strong><a href=\"$DocDBInstructions?set=advanced\" class=\"w3-text-teal\">Advanced Users &amp; XML</a></strong><br/>\n";
+  print "<strong><a href=\"$DocDBInstructions?set=event\" class=\"w3-text-docdb-color\">Event Organizer and Calendar</a></strong><br/>\n";
+  print "<strong><a href=\"$DocDBInstructions?set=advanced\" class=\"w3-text-docdb-color\">Advanced Users &amp; XML</a></strong><br/>\n";
   if ($Preferences{Security}{Certificates}{ShowCertInstructions} || $UserValidation eq "certificate") {
-    print "<strong><a href=\"$DocDBInstructions?set=cert\" class=\"w3-text-teal\">Certificate Instructions</a></strong><br/>\n";
+    print "<strong><a href=\"$DocDBInstructions?set=cert\" class=\"w3-text-docdb-color\">Certificate Instructions</a></strong><br/>\n";
   }
 }
 
 if (CanAdminister()) {
-  print "<strong><a href=\"$DocDBInstructions?set=admin\" class=\"w3-text-teal\">Administrator Instructions</a></strong><br/>\n";
+  print "<strong><a href=\"$DocDBInstructions?set=admin\" class=\"w3-text-docdb-color\">Administrator Instructions</a></strong><br/>\n";
 }
 print "</div><!-- Closing div w3-padding -->\n";
 print "</div><!-- Closing div w3-bar-block -->\n";
