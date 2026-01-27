@@ -114,6 +114,20 @@ PREAMBLE
 sub JQueryReadyScript {
   print '<script type="text/javascript">'."\n";
   print "jQuery().ready(function() {\n";
+  # Prevent TreeChooser from running on window.onload, run it here instead to avoid double processing
+  print "  if (typeof window.treesConverted === 'undefined' && typeof convertTrees === 'function') {\n";
+  print "    window.treesConverted = true;\n";
+  print "    // Store original convertTrees to remove the event listener\n";
+  print "    var originalConvertTrees = convertTrees;\n";
+  print "    // Remove the window.onload handler to prevent double processing\n";
+  print "    if (window.removeEventListener) {\n";
+  print "      window.removeEventListener('load', originalConvertTrees, false);\n";
+  print "    } else if (window.detachEvent) {\n";
+  print "      window.detachEvent('onload', originalConvertTrees);\n";
+  print "    }\n";
+  print "    // Run convertTrees now after a short delay to ensure DOM is ready\n";
+  print "    setTimeout(function() { convertTrees(); }, 100);\n";
+  print "  }\n";
   foreach my $Element (@JQueryElements) {
     if ($Element eq "elastic") {
       print "  jQuery('textarea').elastic();\n";

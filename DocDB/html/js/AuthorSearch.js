@@ -42,6 +42,31 @@ jQuery().ready(function() {
 
 	jQuery('#sel_authors_box').hide();
 
+	// Function to force autocomplete dropdown styling
+	function styleAutocompleteDropdowns() {
+		jQuery('.ac_results').each(function() {
+			var acDiv = jQuery(this);
+			acDiv.css({'background-color': '#fff', 'border': '1px solid #000'});
+			acDiv.find('ul').css({'background-color': '#fff', 'border': '1px solid #000'});
+			acDiv.find('li').css('background-color', '#fff');
+		});
+	}
+
+	// Style any existing dropdowns
+	styleAutocompleteDropdowns();
+
+	// Watch for new dropdowns using MutationObserver
+	if (typeof MutationObserver !== 'undefined') {
+		var observer = new MutationObserver(function(mutations) {
+			mutations.forEach(function(mutation) {
+				jQuery(mutation.addedNodes).find('.ac_results').addBack('.ac_results').each(function() {
+					styleAutocompleteDropdowns();
+				});
+			});
+		});
+		observer.observe(document.body, { childList: true, subtree: true });
+	}
+
 
     /* Modify the search behaviour so that matching of different parts of name would be assigned different priorities:
             o) matches the beginning of complete string [same as "last name, first name"]

@@ -138,8 +138,9 @@ sub DocDBHeader {
   print '<meta http-equiv="Content-Type" content="text/html; charset='.$HTTP_ENCODING.'" />',"\n";
   print "<title>$Title</title>\n";
 
-  # Include W3CSS v5
-  print '<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">',"\n";
+  # Include W3CSS v5 (local version)
+  my $W3CSS = $CSSURLPath."/w3.css";
+  print "<link rel=\"stylesheet\" href=\"$W3CSS\" type=\"text/css\" />\n";
   
   # Include MOLLERDocDB.css
   my $MOLLERDocDBCSS = $CSSURLPath."/MOLLERDocDB.css";

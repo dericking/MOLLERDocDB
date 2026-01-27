@@ -131,9 +131,29 @@ function processList(ul) {
 	for (var itemi=0;itemi<childNodesLength;itemi++) {
 		var item = ul.childNodes[itemi];
 		if (item.nodeName == "LI") {
+			// Check if this LI already has a bullet span (to prevent duplicates)
+			var hasBullet = false;
+			var itemChildNodesLength = item.childNodes.length;
+			for (var checki=0;checki<itemChildNodesLength;checki++) {
+				var checkNode = item.childNodes[checki];
+				if (checkNode.nodeName == "SPAN" && checkNode.className == nodeLinkClass) {
+					hasBullet = true;
+					break;
+				}
+			}
+			// Skip if already processed
+			if (hasBullet) {
+				// Still process nested lists
+				for (var sitemi=0;sitemi<itemChildNodesLength;sitemi++) {
+					var sitem = item.childNodes[sitemi];
+					if (sitem.nodeName=="UL") {
+						processList(sitem);
+					}
+				}
+				continue;
+			}
 			// Iterate things in this LI
 			var subLists = false;
-			var itemChildNodesLength = item.childNodes.length;
 			for (var sitemi=0;sitemi<itemChildNodesLength;sitemi++) {
 				var sitem = item.childNodes[sitemi];
 				if (sitem.nodeName=="UL") {

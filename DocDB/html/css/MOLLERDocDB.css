@@ -50,8 +50,7 @@
 
 /* Topics list styling - replace native DocDB CSS */
 /* Root topic headings */
-#TopicsTable strong,
-table strong {
+#TopicsTable strong {
     font-size: 1.1em;
     font-weight: 600;
     display: block;
@@ -60,14 +59,12 @@ table strong {
 }
 
 /* First root topic shouldn't have top margin */
-#TopicsTable strong:first-child,
-table td:first-child strong:first-child {
+#TopicsTable strong:first-child {
     margin-top: 0;
 }
 
-/* List styling for topics */
-#TopicsTable ul,
-table ul {
+/* List styling for topics - scoped to #TopicsTable only */
+#TopicsTable ul {
     margin-top: 0;
     margin-bottom: 16px;
     margin-left: 1em;
@@ -76,15 +73,13 @@ table ul {
 }
 
 /* Nested lists */
-#TopicsTable ul ul,
-table ul ul {
+#TopicsTable ul ul {
     margin-bottom: 8px;
     margin-top: 4px;
 }
 
 /* List items */
-#TopicsTable li,
-table li {
+#TopicsTable li {
     margin-bottom: 4px;
     line-height: 1.5;
 }
@@ -93,4 +88,122 @@ table li {
 br.EmptyTopic {
     display: block;
     margin-bottom: 8px;
+}
+
+/* Autocomplete dropdown styling - W3CSS compatible */
+/* Override jQuery autocomplete plugin styles to match W3CSS */
+.ac_results,
+div.ac_results {
+    background-color: #fff !important; /* w3-white */
+    border: 1px solid #000 !important; /* w3-border-black */
+    padding: 0px !important;
+    overflow: hidden;
+    z-index: 99999;
+}
+
+.ac_results ul,
+div.ac_results ul {
+    width: 100% !important;
+    list-style-position: outside;
+    list-style: none;
+    padding: 0 !important;
+    margin: 0 !important;
+    background-color: #fff !important; /* w3-white */
+    border: 1px solid #000 !important; /* w3-border-black */
+}
+
+.ac_results li,
+div.ac_results li {
+    margin: 0px !important;
+    padding: 2px 5px !important;
+    cursor: default;
+    display: block;
+    font: menu;
+    font-size: 12px;
+    line-height: 16px;
+    overflow: hidden;
+    background-color: #fff !important; /* w3-white */
+}
+
+/* Ensure TreeChooser expandable tree works properly */
+/* Disable native list markers for TreeChooser tree */
+ul.mktree,
+ul.mktree ul {
+    list-style: none !important;
+    margin: 0 !important;
+    padding-left: 0 !important;
+}
+
+ul.mktree li {
+    list-style: none !important;
+    padding-left: 10px !important; /* Indent for nesting without native markers */
+}
+
+/* Make sure nested ULs in closed nodes are hidden */
+ul.mktree li.liClosed ul {
+    display: none !important;
+}
+
+ul.mktree li.liOpen ul {
+    display: block !important;
+}
+
+/* Make bullet spans visible and clickable with Font Awesome icons */
+ul.mktree li .bullet {
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding: 0 !important;
+    margin-right: 4px !important;
+    cursor: pointer !important;
+    text-align: center !important;
+    line-height: 16px !important;
+    vertical-align: middle !important;
+    font-size: 12px !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+}
+
+/* Show expand/collapse indicators using Font Awesome icons */
+ul.mktree li.liOpen .bullet {
+    cursor: pointer !important;
+    background: none !important;
+    color: #009688 !important; /* w3-teal color */
+}
+
+ul.mktree li.liOpen .bullet::before {
+    content: "\f078" !important; /* Font Awesome chevron-down */
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+    display: inline-block !important;
+}
+
+ul.mktree li.liClosed .bullet {
+    cursor: pointer !important;
+    background: none !important;
+    color: #009688 !important; /* w3-teal color */
+}
+
+ul.mktree li.liClosed .bullet::before {
+    content: "\f054" !important; /* Font Awesome chevron-right */
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+    display: inline-block !important;
+}
+
+ul.mktree li.liBullet .bullet {
+    cursor: default !important;
+    background: none !important;
+    color: #666 !important;
+}
+
+ul.mktree li.liBullet .bullet::before {
+    content: "\f111" !important; /* Font Awesome circle */
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 400 !important;
+    font-size: 6px !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
 }
