@@ -56,6 +56,9 @@ sub ProjectBodyStart {
   my @TitleParts = split /\s+/, $PageTitle;
   $PageTitle = join '&nbsp;',@TitleParts;
 
+  # Open page width constraint wrapper
+  print "<div class=\"w3-content w3-medium\">\n";
+
   # Top navigation bar with title
   if ($dbh) {
      &DocDBNavBar();
@@ -63,6 +66,16 @@ sub ProjectBodyStart {
   print "<div id=\"SectionTitle\" class=\"w3-container\">\n";
   print "<h2 class=\"w3-center\">$PageTitle</h2>\n";
   print "</div><!-- Closing div id SectionTitle -->\n";
+  
+  # Header Messages (certificate warnings and welcome messages)
+  my $CertificateStatus = "";
+  if ($UserValidation eq "certificate") {
+    require "CertificateUtilities.pm";
+    $CertificateStatus = CertificateStatus();
+  }
+  &PrintHeader3Col($CertificateStatus);
+  
+  # Note: w3-content div will be closed in ProjectFooter
 }
 
 sub ProjectFooter {
@@ -71,6 +84,9 @@ sub ProjectFooter {
   my ($WebMasterEmail,$WebMasterName) = @_;
 
 # Footer removed - credit given in About DocDB dropdown
+
+  # Close page width constraint wrapper
+  print "</div><!-- Closing div w3-content -->\n";
 
 # Do not print the </body> and </html> tags, DocDB does that now.
 }
@@ -87,7 +103,7 @@ sub DocDBNavBar {
 
   require "Security.pm";
 
-  print "<div id=\"TopNavBar\" class=\"w3-bar w3-border-bottom w3-border-gray w3-paper\">\n";
+  print "<div id=\"TopNavBar\" class=\"w3-bar w3-border-bottom w3-border-left w3-border-right w3-border-gray w3-paper\">\n";
   print "<div id=\"NavBarTitle\" class=\"w3-bar-item\"><strong>$Project Document Database</strong></div><!-- Closing div id NavBarTitle -->\n";
   if ($ExtraDesc && $ExtraURL) {
     print "<a href=\"$ExtraURL\" class=\"w3-bar-item w3-button\">$ExtraDesc</a>\n";
@@ -127,7 +143,7 @@ sub DocDBNavBar {
   print "</div><!-- Closing div w3-dropdown-hover -->\n";
   print "<div class=\"w3-dropdown-hover w3-right\">\n";
   print "<button class=\"w3-button\"><i class=\"fa-solid fa-circle-info w3-text-docdb-color\"></i>&nbsp; About <i class=\"fa-solid fa-caret-down w3-text-docdb-color\"></i></button>\n";
-  print "<div class=\"w3-dropdown-content w3-bar-block w3-border w3-border-gray w3-card-4\" style=\"right:0; left:auto;\">\n";
+  print "<div class=\"w3-dropdown-content w3-bar-block w3-border w3-border-gray w3-card-4\">\n";
   print "<a href=\"https://github.com/dericking/DocDB\" class=\"w3-bar-item w3-button\">MOLLER DocDB</a>\n";
   print "<a href=\"https://github.com/ericvaandering/DocDB\" class=\"w3-bar-item w3-button\">Original DocDB</a>\n";
   print "</div><!-- Closing div w3-dropdown-content -->\n";
@@ -160,7 +176,7 @@ sub PrintHeader3Col {
   print "<div id=\"HeaderMessages\" class=\"w3-container\">\n";
 
   if ($UserValidation eq "certificate" && $CertificateStatus ne "verified") {
-    print "<div class=\"w3-panel w3-red\">\n";
+    print "<div class=\"w3-red w3-padding\">\n";
     print "<h3 class=\"Warning\">\n";
     print "You have presented a valid certificate, but are not yet authorized to access the DocDB.</h3>\n";
     print "<h2 class=\"AccessApplyLink\">\n";
@@ -171,11 +187,10 @@ sub PrintHeader3Col {
   }
 
   if (defined $WelcomeMessage && $WelcomeMessage ne "" && $WelcomeMessage =~ /\S/) {
-    print "<div class=\"w3-panel\">\n";
-    print "<h4>\n";
-    print "$WelcomeMessage\n";
-    print "</h4>\n";
-    print "</div>\n";
+    # Remove w3-content class from welcome message to prevent nesting issues
+    my $CleanWelcomeMessage = $WelcomeMessage;
+    $CleanWelcomeMessage =~ s/\bw3-content\b//g;
+    print "$CleanWelcomeMessage\n";
   }
 
   print "</div><!-- Closing div id HeaderMessages -->\n";
