@@ -70,7 +70,7 @@ print "</td></tr></table>\n";
 print "</div><!-- Closing div w3-panel -->\n";
 print $query -> end_multipart_form;
 
-print "<h3>Existing Authors:</h3>\n";
+print "<h3 style=\"margin-bottom:0px!important\">Existing Authors:</h3>\n";
 
 AuthorsTable();
 

@@ -223,13 +223,13 @@ sub AuthorsTable {
   if (scalar(@AuthorIDs) % $NCols) {++$NPerCol;}
 
   if ($UseAnchors ) {
-    print "<div class=\"w3-center w3-padding w3-margin-bottom\">\n";
+    print "<div id=\"AuthorNavigation\" class=\"w3-center w3-padding w3-margin-top\">\n";
     foreach my $Letter (A..Z) {
       print "<a href=\"#$Letter\" class=\"w3-text-docdb-color w3-large\"><strong>$Letter</strong></a>\n";
     }
-    print "</div><!-- Closing div w3-center w3-padding w3-margin-bottom -->\n";
+    print "</div><!-- Closing div id AuthorNavigation -->\n";
   }
-  print "<div class=\"w3-container w3-margin\">\n";
+  print "<div class=\"w3-container\">\n";
   print "<table class=\"w3-table w3-bordered no-row-lines\" style=\"margin-left: auto; margin-right: auto;\">\n";
   print "<tr>\n";
 
@@ -284,7 +284,7 @@ sub AuthorsTable {
   }
   print "</ul></td></tr>";
   print "</table>\n";
-  print "</div><!-- Closing div w3-container w3-margin -->\n";
+  print "</div><!-- Closing div w3-container -->\n";
 }
 
 
