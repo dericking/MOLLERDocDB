@@ -3,6 +3,29 @@
    Add project-specific CSS rules here
 */
 
+/* Override w3-content max-width to 1200px for consistent page width constraint */
+.w3-content {
+    max-width: 1200px !important;
+}
+
+/* Round bottom corners of TopNavBar to match w3-round-large (8px) */
+#TopNavBar {
+    border-bottom-left-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
+}
+
+/* HeaderMessages: 90% width of content box and centered */
+#HeaderMessages {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Center block-level content within HeaderMessages */
+#HeaderMessages > div {
+    margin-left: auto;
+    margin-right: auto;
+}
 
 /* DocDB accent color for text, background, buttons, etc. */
 .w3-docdb-color,.w3-hover-docdb-color:hover{color:#fff!important;background-color:#004080!important}
